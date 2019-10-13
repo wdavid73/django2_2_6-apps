@@ -2,15 +2,12 @@ from django.db import models
 
 # Create your models here.
 class User(models.Model):
-    name        = models.CharField(),
-    lastname    = models.CharField(),
-    address     = models.CharField(),
-    phone       = models.IntegerField(),
-    cellphone   = models.IntegerField(),
-    state       = models.BinaryField(),
-    ##########################################3
-    created_at  = models.DateTimeField(auto_now_add=True),
+    name        = models.CharField(max_length = 100 , null = False)
+    lastname    = models.CharField(max_length = 200 , null = False)
+    address     = models.CharField(max_length = 100 , null = False)
+    phone       = models.BigIntegerField(null = False)
+    cellphone   = models.IntegerField(null = False)
+    state       = models.SmallIntegerField(default = 1 , null = False)
+    ##########################################
+    created_at  = models.DateTimeField(auto_now_add=True)
     updated_at  = models.DateTimeField(auto_now = True)
-
-    class Meta:
-        db_table = 'confma_users'
