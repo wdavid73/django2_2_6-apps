@@ -1,0 +1,25 @@
+{% extends 'layouts/base.html' %}
+
+{% block title%}
+    User Create
+{% endblock %}
+
+{% block content %}
+
+    <div class="container form-group">
+        <h2> Registered Users</h2>
+        <form action="." method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input type="submit" class="btn btn-primary" value="Submit">
+            <a href="../" class="btn btn-success">Back</a>
+        </form>
+    </div>
+
+    <style>
+        ul {
+            color : red
+        }
+    </style>
+
+{% endblock%}
