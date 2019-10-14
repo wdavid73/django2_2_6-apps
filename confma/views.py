@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render ,redirect , get_object_or_404
 
 # Models
+
 from .models import User
 
 #Forms
@@ -30,7 +31,8 @@ def user_create_view(request):
             #ingreso a la base de datos
             print(form.cleaned_data)
             User.objects.create(**form.cleaned_data)
-            form = UserForm()
+            # form = UserForm()
+            return redirect('../')
         else:
             print(form.errors)
             # error = form.errors
@@ -46,3 +48,16 @@ def user_details_view(request):
         "user" : obj
     }
     return render(request , "users/details.html" , context)
+
+def user_delete_view(request , id):
+    obj = get_object_or_404(User , id = id)
+    if request.method == "POST":
+        obj.delete()
+        print("listo pa borrar")
+        return redirect('../../')
+    context = {
+        'user' : obj
+    }
+
+    return render(request , "users/delete.html" , context)
+
