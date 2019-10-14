@@ -61,3 +61,27 @@ def user_delete_view(request , id):
 
     return render(request , "users/delete.html" , context)
 
+
+def user_update_view (request, id):
+    obj = User.objects.get(id=id)
+    print(obj)
+    form = UserForm(request.GET)
+    if request.method == "POST":
+        form = UserForm(request.POST)
+        if form.is_valid():
+            print(form.cleaned_data)
+            #User.objects.create(**form.cleaned_data)
+    else:
+        print(form.errors)
+    #if form.is_valid():
+    #    print("listo para actualizar")
+        #form.save()
+        #return redirec('../../')
+
+    context = {
+        'user' : obj,
+    #    'form' : form
+    }
+
+    return render(request , "users/update.html" , context)
+

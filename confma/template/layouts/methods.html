@@ -1,6 +1,7 @@
 <div class="container">
   <div class="row">
-    <button class="btn btn-primary col-5 mb-2 mr-2 ml-2"><a href="update/"></a>Update {{ model }}</button>
+  	<a href="{{u.id}}/update/" class="btn btn-primary col-5 mb-2 mr-2 ml-2">Update {{ model }}</a>-
+    	<!--<a href="update/" class="btn btn-primary col-5 mb-2 mr-2 ml-2">Update {{ model }}</a>-->
     <!-- <button class="btn btn-primary col-4 mb-2 mr-2 ml-2"><a href="details/"></a>Register {{ model }}</button> -->
      <a href="{{u.id}}/delete/" class="btn btn-danger col-5 mb-2 mr-2 ml-2">Delete {{ model }}</a>
     <button class="btn btn-warning col-5 mb-2 mr-2 ml-2"> <a href="delete_log/"></a>Delete {{ model }} L</button>
