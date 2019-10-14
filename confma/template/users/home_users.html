@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html' %} 
+
+{% block title%} Home Confma App {% endblock%} 
+
+{% block content %}    
+<div class="container">
+    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">account_circle</i> Users</h2>
+    <div class="row">
+        <div class="col-sm">
+                <div class="float-left">
+                        <div class=" table-responsive">
+                            <table class="table table-dark">
+                                <thead>
+                                     <tr>
+                                        <th scope="col">#</th>
+                                        <!-- <th scope="col">#</th> -->
+                                        <th scope="col">Name</th>
+                                        <th scope="col">LastName</th>
+                                        <th scope="col">Address</th>
+                                        <th scope="col">Phone</th>
+                                        <th scope="col">Cellphone</th>
+                                        <!-- <th scope="col">Methods</th> -->
+                                    </tr>
+                                </thead>
+                            <tbody>
+                                {% for u in user %}
+                                <tr>
+                                    <td class="p-3"> {{forloop.counter}}</td>
+                                    <!-- <td> {{u.id}}</td> -->
+                                    <td class="p-3"> {{u.name}}</td>
+                                    <td class="p-3"> {{u.lastname}}</td>
+                                    <td class="p-3"> {{u.address}}</td>
+                                    <td class="p-3"> {{u.phone}}</td>
+                                    <td class="p-3"> {{u.cellphone}}</td>
+                                    <!-- {% include '../layouts/methods.html'%} -->
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+        </div>
+        <div class="col-sm">
+                {% include '../layouts/methods.html'%}
+        </div> 
+        
+    </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html' %}
+
+{% block title%}
+    User Details
+{% endblock %}
+
+{% block content %}
+
+    <ul>
+        {% for u in user %}
+            <li>
+                {{forloop.counter}} => {{u.name}} - {{u.lastname}}
+            </li>
+        {%endfor%}
+    </ul>
+
+
+{% endblock %}
