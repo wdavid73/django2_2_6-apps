@@ -1,19 +1,9 @@
-<div class="container mb-2 mt-2 " style="width: 75%;">
-  <ul class="list-group">
-    <li class="list-group-item list-group-item-primary">
-      <a href="create/">Registered {{ model }}</a>
-    </li>
-    <li class="list-group-item list-group-item-primary">
-      <a href="details/">Register {{ model }}</a>
-    </li>
-    <li class="list-group-item list-group-item-success">
-      <a href="update/">Update {{ model }}</a>
-    </li>
-    <li class="list-group-item list-group-item-danger">
-      <a href="delete/">Delete {{ model }}</a>
-    </li>
-    <li class="list-group-item list-group-item-danger">
-      <a href="delete_log/">Delete {{ model }} Log</a>
-    </li>
-  </ul>
+<div class="container">
+  <div class="row">
+  	<a href="{{u.id}}/update/" class="btn btn-primary col-5 mb-2 mr-2 ml-2">Update {{ model }}</a>-
+    	<!--<a href="update/" class="btn btn-primary col-5 mb-2 mr-2 ml-2">Update {{ model }}</a>-->
+    <!-- <button class="btn btn-primary col-4 mb-2 mr-2 ml-2"><a href="details/"></a>Register {{ model }}</button> -->
+     <a href="{{u.id}}/delete/" class="btn btn-danger col-5 mb-2 mr-2 ml-2">Delete {{ model }}</a>
+    <button class="btn btn-warning col-5 mb-2 mr-2 ml-2"> <a href="delete_log/"></a>Delete {{ model }} L</button>
+  </div>
 </div>
