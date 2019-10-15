@@ -1,3 +1,4 @@
+
 {% extends 'layouts/base.html' %}
 
 {% block title%} Home Confma App {% endblock%} 
@@ -11,18 +12,15 @@
 
 {% block content %}
 
-{{user}}
-	<div class="form-group">
+	<div class="container w-60">
 		<form action="" method="POST">
-			<input type="text" name="name" id="name" value="{{user.name}}" class="form-control">
-			<input type="text" name="lastname" id="lastname" value="{{user.lastname}}" class="form-control">
-			<input type="text" name="address" id="address" value="{{user.address}}" class="form-control">
-			<input type="number" name="phone" id="phone" value="{{user.phone}}" class="form-control">
-			<input type="number" name="cellpone" id="cellphone" value="{{user.cellphone}}" class="form-control">
-			<input type="submit" value="Update" class="btn btn-primary">
-			<a href="../../" class="btn btn-info"> Back </a>
+			{% csrf_token %}
+			{{form.as_p}}
+			<div class="row">
+				<input type="submit" value="Update" class="btn btn-info col-6 p-2">
+				<a href="../../" class="btn btn-success col-6 p-2">Back</a>
+			</div>
 		</form>
 	</div>
-
 
 {% endblock %}
