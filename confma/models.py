@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 # Create your models here.
 class User(models.Model):
@@ -11,3 +12,6 @@ class User(models.Model):
     ##########################################
     created_at  = models.DateTimeField(auto_now_add=True)
     updated_at  = models.DateTimeField(auto_now = True)
+
+    def get_absolute_url(self):
+    	return reverse("users:user_update" , kwargs={"id" : self.id})

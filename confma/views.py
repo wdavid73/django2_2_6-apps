@@ -1,14 +1,13 @@
 from django.shortcuts import render ,redirect , get_object_or_404
 
 # Models
-
 from .models import User
 
 #Forms
-
-from .forms import UserForm
+from .forms import UserForm , UserFormModel
 
 # Create your views here.
+from django.views.generic import (UpdateView)
 
 def home_view(request , *args, **kwargs):
     context = {}
@@ -62,26 +61,49 @@ def user_delete_view(request , id):
     return render(request , "users/delete.html" , context)
 
 
-def user_update_view (request, id):
-    obj = User.objects.get(id=id)
-    print(obj)
-    form = UserForm(request.GET)
-    if request.method == "POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            print(form.cleaned_data)
-            #User.objects.create(**form.cleaned_data)
-    else:
-        print(form.errors)
-    #if form.is_valid():
-    #    print("listo para actualizar")
-        #form.save()
-        #return redirec('../../')
+class UserUpdateView(UpdateView):
+    template_name = "users/update.html"
+    form_class = UserFormModel
 
-    context = {
-        'user' : obj,
-    #    'form' : form
-    }
+    def get_object(self):
+        id_ = self.kwargs.get("id")
+        return get_object_or_404(User , id=id_)
 
-    return render(request , "users/update.html" , context)
+    def form_valid(self , form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
 
+    def get_success_url(self):
+        return '../../'
+
+
+
+# def user_update_view(request , *args , **kwargs):
+#     obj = User.objects.get(id=27)
+#     form = UserForm(request.POST or None , instance=obj)
+
+#     if form.is_valid():
+#         print("actu")
+
+#     context = {
+#         'form' : form
+#     }
+
+#     return render(request , "users/update.html" , context)
+
+
+# Update base method
+# def product_create_view (request):
+#     #form = ProductForm(request.POST or None)
+
+#     #forma para traer un registro de la base de datos y mostrar en un formulario para su edicion
+#     obj = Product.objects.get(id=1)
+#     form = ProductForm(request.POST or None , instance = obj)
+#     if form.is_valid():
+#         form.save()
+#         form = ProductForm()
+#     context = {
+#         'form' : form
+#     }
+
+#     return render(request, "product/product_create.html" ,context)
