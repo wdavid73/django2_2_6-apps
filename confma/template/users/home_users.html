@@ -18,7 +18,7 @@
                                 <thead>
                                      <tr>
                                         <th scope="col">#</th>
-                                        <!-- <th scope="col">#</th> -->
+                                        <!-- <th scope="col">id</th> -->
                                         <th scope="col">Name</th>
                                         <th scope="col">LastName</th>
                                         <th scope="col">Address</th>
@@ -29,18 +29,20 @@
                                 </thead>
                             <tbody>
                                 {% for u in user %}
-                                <tr>
-                                    <td class="p-3"> {{forloop.counter}}</td>
-                                    <!-- <td> {{u.id}}</td> -->
-                                    <td class="align-middle text-center"> {{u.name}}</td>
-                                    <td class="align-middle text-center"> {{u.lastname}}</td>
-                                    <td class="align-middle text-center"> {{u.address}}</td>
-                                    <td class="align-middle text-center"> {{u.phone}}</td>
-                                    <td class="align-middle text-center"> {{u.cellphone}}</td>
-                                    <td class="align-middle text-center">
-                                    {% include '../layouts/methods.html'%}
-                                </td>
-                                </tr>
+                                    {% if u.state == 1%}
+                                        <tr>
+                                            <td class="p-3"> {{forloop.counter}}</td>
+                                            <!-- <td> {{u.id}}</td> -->
+                                            <td class="align-middle text-center"> {{u.name}}</td>
+                                            <td class="align-middle text-center"> {{u.lastname}}</td>
+                                            <td class="align-middle text-center"> {{u.address}}</td>
+                                            <td class="align-middle text-center"> {{u.phone}}</td>
+                                            <td class="align-middle text-center"> {{u.cellphone}}</td>
+                                            <td class="align-middle text-center">
+                                            {% include '../layouts/methods.html'%}
+                                        </td>
+                                        </tr>
+                                    {%endif%}
                                 {% endfor %}
                             </tbody>
                         </table>

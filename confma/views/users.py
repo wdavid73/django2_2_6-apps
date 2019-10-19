@@ -1,19 +1,15 @@
 from django.shortcuts import render ,redirect , get_object_or_404
-
+from django.http import Http404
 # Models
-from .models import User
+from ..models import User
 
 #Forms
-from .forms import UserForm , UserFormModel
+from ..forms import UserForm , UserFormModel
 
 # Create your views here.
 from django.views.generic import (UpdateView)
 
-def home_view(request , *args, **kwargs):
-    context = {}
-    return render(request , "home.html" , context)
-
-def user_view(request , *args, **kwargs):
+def home(request , *args, **kwargs):
     obj = User.objects.all()
     context = {
         "user" : obj,
@@ -21,8 +17,8 @@ def user_view(request , *args, **kwargs):
      }
     return render(request , "users/home_users.html" , context)
 
-
-def user_create_view(request):
+  
+def create(request):
     form = UserForm(request.GET)
     if request.method == "POST":
         form = UserForm(request.POST)
@@ -41,14 +37,14 @@ def user_create_view(request):
     }
     return render(request , "users/create.html" , context)
 
-def user_details_view(request):
+def details(request):
     obj = User.objects.all()
     context = {
         "user" : obj
     }
     return render(request , "users/details.html" , context)
 
-def user_delete_view(request , id):
+def delete(request , id):
     obj = get_object_or_404(User , id = id)
     if request.method == "POST":
         obj.delete()
@@ -76,34 +72,29 @@ class UserUpdateView(UpdateView):
     def get_success_url(self):
         return '../../'
 
+def deletelog(request , id):
+    obj = get_object_or_404 (User , id=id)
+
+    if request.method == 'POST':
+        obj.state = 0
+        obj.save()
+        return redirect('../../')
+
+    context = {
+        'user' : obj
+    }
+    return render(request , 'users/deletel.html', context)
 
 
-# def user_update_view(request , *args , **kwargs):
-#     obj = User.objects.get(id=27)
-#     form = UserForm(request.POST or None , instance=obj)
+# def restore(request , id):
+#     obj = get_object_or_404 (User , id=id)
 
-#     if form.is_valid():
-#         print("actu")
+#     if request.method == 'POST':
+#         obj.state = 1
+#         obj.save()
+#         return redirect('../../')
 
 #     context = {
-#         'form' : form
+#         'user' : obj
 #     }
-
-#     return render(request , "users/update.html" , context)
-
-
-# Update base method
-# def product_create_view (request):
-#     #form = ProductForm(request.POST or None)
-
-#     #forma para traer un registro de la base de datos y mostrar en un formulario para su edicion
-#     obj = Product.objects.get(id=1)
-#     form = ProductForm(request.POST or None , instance = obj)
-#     if form.is_valid():
-#         form.save()
-#         form = ProductForm()
-#     context = {
-#         'form' : form
-#     }
-
-#     return render(request, "product/product_create.html" ,context)
+#     return render(request , 'users/template_name.html', context)
