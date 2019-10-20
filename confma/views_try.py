@@ -110,14 +110,3 @@ class UserUpdateView(UpdateView):
 #     }
 
 #     return render(request, "product/product_create.html" ,context)
-
-
-
-def coti_view(request , *args, **kwargs):
-    obj = Cotizacion.objects.all()
-    context = {
-        "coti" : obj,
-        "model" : "Cotizacion"
-     }
-    return render(request , "cotizacion/home.html" , context)
->>>>>>> confma:confma/views.py

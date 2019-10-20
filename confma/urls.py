@@ -3,7 +3,7 @@ from django.urls import path
 # from . import views2
 # from .views2 import (UserUpdateView)
 
-from .views import users , general
+from .views import users , general , cotizacion
 from .views.users import (UserUpdateView)
 
 app_name = 'users'
@@ -17,15 +17,13 @@ urlpatterns = [
     path('users/details/' , users.details , name="user_details"),
     path('users/create/' , users.create , name="user_create"),
     path('users/<int:id>/update/' , UserUpdateView.as_view() , name="user_update"),
-<<<<<<< HEAD
     path('users/<int:id>/deletelog/' , users.deletelog, name="user_deletelog"),
     path('users/<int:id>/delete/' , users.delete, name="user_delete"),
-=======
-    path('users/<int:id>/delete/' , views.user_delete_view, name="user_delete"),
+
+    path('cotizacion/' , cotizacion.coti_view , name ="coti_home")
 
     #cotizacion
-    path('coti/' , views.coti_view, name = "coti_home")
+    # path('coti/' , cotizacion.coti_view, name = "coti_home")
     
->>>>>>> confma
 ]
 
