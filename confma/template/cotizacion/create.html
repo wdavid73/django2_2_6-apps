@@ -1,0 +1,19 @@
+{% extends 'layouts/base.html' %}
+
+{% block title%}
+    Cotizacion Create
+{% endblock %}
+
+{% block principal_options%}
+{% endblock%}
+
+{% block content %}
+
+<div class="form-group">
+	{{form.as_p}}
+	<input type="number" name="" id="" value={{user.id}} readonly>
+	<input type="submit" value="Save" class="btn btn-primary">
+</div>
+{{user}}
+
+{% endblock%}

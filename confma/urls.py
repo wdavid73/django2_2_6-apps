@@ -12,7 +12,7 @@ urlpatterns = [
 	###ROUTES GENERAL###
 	path('' , general.home_view , name="home"),
 
-	### ROUTES USERS###    
+	### ROUTES USERS###
     path('users/' , users.home , name="users_home"),
     path('users/details/' , users.details , name="user_details"),
     path('users/create/' , users.create , name="user_create"),
@@ -20,10 +20,9 @@ urlpatterns = [
     path('users/<int:id>/deletelog/' , users.deletelog, name="user_deletelog"),
     path('users/<int:id>/delete/' , users.delete, name="user_delete"),
 
-    path('cotizacion/' , cotizacion.coti_view , name ="coti_home")
-
-    #cotizacion
+    ### ROUTES COTIZACION
+	path('users/cotizacion/' , cotizacion.home , name ="coti_home"),
+	path('users/<int:id>/cotizacion/create' , cotizacion.create , name ="coti_create")
     # path('coti/' , cotizacion.coti_view, name = "coti_home")
-    
-]
 
+]

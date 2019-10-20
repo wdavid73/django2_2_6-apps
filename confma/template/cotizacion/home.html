@@ -10,23 +10,41 @@
 {% block content %}    
 
 
-<ul>
-    {% for c in coti%}
-        <li>{{forloop.counter}}</li>
-        <li>{{c.value_cloth}}</li>
-        <li>{{c.value_work}}</li>
-        <li>{{c.value_threads}}</li>
-        <li>{{c.value_buttons}}</li>
-        <li>{{c.value_necks}}</li>
-        <li>{{c.value_embroidery}}</li>
-        <li>{{c.value_prints}}</li>
-        <li>{{c.fashion}}</li>
-        <li>{{c.subtotal}}</li>
-        <li>{{c.total}}</li>
-        <li>{{c.user_id}}</li>
-        <li>######################</li>
-    {%endfor%}
-</ul>
 
+<div class="row">       
+    {% for c in coti%}
+        <div class="col-sm-2">
+            <div class="card text-white bg-dark border-info mt-2 mb-2" style="width: 17rem;">
+              <div class="card-body">
+                <h5 class="card-title">Cotizacion # {{forloop.counter}}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">User # {{c.user_id}}</h6>
+                <p class="card-text">
+                <ul class="list-group list-group-flush">
+                    <div class="row"> 
+                        <div class="col-sm-6">
+                            <li class="list-group-item bg-dark">{{c.value_cloth}}</li>
+                            <li class="list-group-item bg-dark">{{c.value_work}}</li>
+                            <li class="list-group-item bg-dark">{{c.value_threads}}</li>
+                            <li class="list-group-item bg-dark">{{c.value_buttons}}</li>
+                            <li class="list-group-item bg-dark">{{c.value_necks}}</li>
+                        </div>
+                        <div class="col-sm-6">
+                            <li class="list-group-item bg-dark">{{c.value_embroidery}}</li>
+                            <li class="list-group-item bg-dark">{{c.value_prints}}</li>
+                            <li class="list-group-item bg-dark">{{c.fashion}}</li>
+                            <li class="list-group-item bg-dark">{{c.subtotal}}</li>
+                            <li class="list-group-item bg-dark">{{c.total}}</li>
+                        </div>
+                    </div>
+
+                </ul>         
+                </p>
+                <a href="#" class="card-link">Card link</a>
+                <a href="#" class="card-link">Another link</a>
+              </div>
+            </div>
+        </div>
+    {%endfor%}
+</div>
 
 {% endblock %}
