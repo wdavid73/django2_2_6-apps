@@ -1,7 +1,7 @@
 from django.shortcuts import render ,redirect , get_object_or_404
 
 # Models
-from .models import User
+from .models import User , Cotizacion
 
 #Forms
 from .forms import UserForm , UserFormModel
@@ -74,4 +74,50 @@ class UserUpdateView(UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
+<<<<<<< HEAD:confma/views_try.py
         return '../../'
+=======
+        return '../../'
+
+
+
+# def user_update_view(request , *args , **kwargs):
+#     obj = User.objects.get(id=27)
+#     form = UserForm(request.POST or None , instance=obj)
+
+#     if form.is_valid():
+#         print("actu")
+
+#     context = {
+#         'form' : form
+#     }
+
+#     return render(request , "users/update.html" , context)
+
+
+# Update base method
+# def product_create_view (request):
+#     #form = ProductForm(request.POST or None)
+
+#     #forma para traer un registro de la base de datos y mostrar en un formulario para su edicion
+#     obj = Product.objects.get(id=1)
+#     form = ProductForm(request.POST or None , instance = obj)
+#     if form.is_valid():
+#         form.save()
+#         form = ProductForm()
+#     context = {
+#         'form' : form
+#     }
+
+#     return render(request, "product/product_create.html" ,context)
+
+
+
+def coti_view(request , *args, **kwargs):
+    obj = Cotizacion.objects.all()
+    context = {
+        "coti" : obj,
+        "model" : "Cotizacion"
+     }
+    return render(request , "cotizacion/home.html" , context)
+>>>>>>> confma:confma/views.py
