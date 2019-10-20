@@ -12,6 +12,9 @@ urlpatterns = [
     path('users/details/' , views.user_details_view , name="user_details"),
     path('users/create/' , views.user_create_view , name="user_create"),
     path('users/<int:id>/update/' , UserUpdateView.as_view() , name="user_update"),
-    path('users/<int:id>/delete/' , views.user_delete_view, name="user_delete")
+    path('users/<int:id>/delete/' , views.user_delete_view, name="user_delete"),
+
+    #cotizacion
+    path('coti/' , views.coti_view, name = "coti_home")
     
 ]

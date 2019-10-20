@@ -1,7 +1,7 @@
 from django.shortcuts import render ,redirect , get_object_or_404
 
 # Models
-from .models import User
+from .models import User , Cotizacion
 
 #Forms
 from .forms import UserForm , UserFormModel
@@ -107,3 +107,13 @@ class UserUpdateView(UpdateView):
 #     }
 
 #     return render(request, "product/product_create.html" ,context)
+
+
+
+def coti_view(request , *args, **kwargs):
+    obj = Cotizacion.objects.all()
+    context = {
+        "coti" : obj,
+        "model" : "Cotizacion"
+     }
+    return render(request , "cotizacion/home.html" , context)

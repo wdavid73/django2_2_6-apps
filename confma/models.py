@@ -15,3 +15,23 @@ class User(models.Model):
 
     def get_absolute_url(self):
     	return reverse("users:user_update" , kwargs={"id" : self.id})
+
+
+class Cotizacion(models.Model):
+    value_cloth         = models.DecimalField(max_digits = 9 ,decimal_places = 2,null = False)
+    value_work          = models.DecimalField(max_digits = 9 ,decimal_places = 2,null = False)
+    value_threads       = models.DecimalField(max_digits = 8 ,decimal_places = 2,null = False)
+    value_buttons       = models.DecimalField(max_digits = 8 ,decimal_places = 2,null = False)
+    value_necks         = models.DecimalField(max_digits = 8 ,decimal_places = 2,null = True)
+    value_embroidery    = models.DecimalField(max_digits = 8 ,decimal_places = 2,null = True)
+    value_prints        = models.DecimalField(max_digits = 8 ,decimal_places = 2,null = True)
+    fashion             = models.CharField(max_length = 50 , null = False)
+    subtotal            = models.DecimalField(max_digits = 10 ,decimal_places = 2,null = False)
+    total               = models.DecimalField(max_digits = 10 ,decimal_places = 2,null = False)
+    state               = models.SmallIntegerField(default = 1 , null = False)
+    user                = models.ForeignKey('User' , on_delete=models.CASCADE)
+    ####################
+    created_at          = models.DateTimeField(auto_now_add=True)
+    updated_at          = models.DateTimeField(auto_now = True)
+
+

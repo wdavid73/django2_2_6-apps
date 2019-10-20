@@ -1,0 +1,32 @@
+{% extends 'layouts/base.html' %} 
+
+{% block title%} Home Confma App {% endblock%} 
+
+{% block name%}
+    
+{% endblock %}
+
+
+{% block content %}    
+
+
+<ul>
+    {% for c in coti%}
+        <li>{{forloop.counter}}</li>
+        <li>{{c.value_cloth}}</li>
+        <li>{{c.value_work}}</li>
+        <li>{{c.value_threads}}</li>
+        <li>{{c.value_buttons}}</li>
+        <li>{{c.value_necks}}</li>
+        <li>{{c.value_embroidery}}</li>
+        <li>{{c.value_prints}}</li>
+        <li>{{c.fashion}}</li>
+        <li>{{c.subtotal}}</li>
+        <li>{{c.total}}</li>
+        <li>{{c.user_id}}</li>
+        <li>######################</li>
+    {%endfor%}
+</ul>
+
+
+{% endblock %}
