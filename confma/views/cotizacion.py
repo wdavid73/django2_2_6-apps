@@ -17,7 +17,17 @@ def home(request , *args, **kwargs):
 
 def create(request , id):
 	obj = get_object_or_404(User , id=id)
-	form = CotizacionFormModel()
+	form = CotizacionFormModel(request.GET)
+	print("paso")
+	if request.method == "POST":
+		print("paso")
+		form = CotizacionFormModel(request.POST)
+		if form.is_valid():
+			print("paso")
+			print(form.cleaned_data)
+			Cotizacion.objects.create(**form.cleaned_data)
+		else:
+			print(form.errors)
 	context = {
 
 		'form' : form,

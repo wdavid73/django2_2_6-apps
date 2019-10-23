@@ -9,10 +9,38 @@
 
 {% block content %}
 
-<div class="form-group">
-	{{form.as_p}}
-	<input type="number" name="" id="" value={{user.id}} readonly>
-	<input type="submit" value="Save" class="btn btn-primary">
+<div class="container">
+
+	<div class="row">
+		<div class="col-6">
+			<div class="card mt-3">
+				<div class="card-body">
+					<h2 class="card-title"> {{user.name}} {{user.lastname}}</h2>
+					<p class="card-text">
+						<ul class="list-group">
+							  <li class="list-group-item list-group-item-info">Direccion : {{user.address}}</li>
+							  <li class="list-group-item list-group-item-info">Celular : {{user.cellphone}}</li>
+							  <li class="list-group-item list-group-item-info">Telefono : {{user.phone}}</li>
+						</ul>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-6">
+			<div class="form-group mt-3">
+				<div class="card border-primary mb-3" >
+				  <div class="card-header">Form</div>
+					    <form method="POST">
+				            {% csrf_token %}
+				            {{ form.as_p}}
+							<!-- <input type="text" name="user_id" id="" class="form-control" value={{user.id}} readonly> -->
+							<input type="submit" value="Save" class="btn btn-primary">
+				        </form>
+				  </div>
+			</div>		
+		</div>
+	</div>
+	
 </div>
 {{user}}
 
