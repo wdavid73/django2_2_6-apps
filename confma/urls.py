@@ -5,6 +5,7 @@ from django.urls import path
 
 from .views import users , general , cotizacion
 from .views.users import (UserUpdateView)
+from .views.cotizacion import (CotiUpdateView)
 
 app_name = 'users'
 urlpatterns = [
@@ -23,6 +24,7 @@ urlpatterns = [
     ### ROUTES COTIZACION
     path('cotizacion/' , cotizacion.home , name ="coti_home"),
 	path('cotizacion/create/' , cotizacion.create , name ="coti_create"),
+    path('cotizacion/<int:id>/update/' , CotiUpdateView.as_view() , name="coti_update"),
 	# path('users/<int:id>/cotizacion/create' , cotizacion.create , name ="coti_create")
     # path('coti/' , cotizacion.coti_view, name = "coti_home")
 

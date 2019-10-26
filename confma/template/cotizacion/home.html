@@ -13,35 +13,43 @@
 
 <div class="row">       
     {% for c in coti%}
-        <div class="col-sm-2">
-            <div class="card text-white bg-dark border-info mt-2 mb-2" style="width: 17rem;">
+        <div class="col-sm-3">
+            <div class="card text-white bg-dark border-info mt-2 mb-2" style="width: 28rem;">
               <div class="card-body">
-                <h5 class="card-title">Cotizacion # {{forloop.counter}}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">User # {{c.user_id}}</h6>
+                <h5 class="card-title">Cotizacion <span class="badge badge-primary badge-pill"># {{forloop.counter}}</span>  
+                    <div class="row" style="margin : 0 auto">
+                        <div class="col mt-2 mb-2">
+                            <a href="{{c.id}}/update/" class="btn btn-info badge badge-info badge-pill">Update</a> 
+                            <a href="#" class="btn btn-danger badge badge-danger badge-pill">Delete</a>   
+                            <a href="#" class="btn btn-warning badge badge-warning badge-pill">Delete L</a> 
+                        </div>
+                    </div>
+                </h5>
                 <p class="card-text">
                 <ul class="list-group list-group-flush">
                     <div class="row"> 
                         <div class="col-sm-6">
-                            <li class="list-group-item bg-dark">{{c.value_cloth}}</li>
-                            <li class="list-group-item bg-dark">{{c.value_work}}</li>
-                            <li class="list-group-item bg-dark">{{c.value_threads}}</li>
-                            <li class="list-group-item bg-dark">{{c.value_buttons}}</li>
-                            <li class="list-group-item bg-dark">{{c.value_necks}}</li>
+                            <li class="list-group-item bg-dark">Valor de la Tela : {{c.value_cloth}}</li>
+                            <li class="list-group-item bg-dark">Valor del Trabajo : {{c.value_work}}</li>
+                            <li class="list-group-item bg-dark">Valor de los Hilos : {{c.value_threads}}</li>
+                            <li class="list-group-item bg-dark">Valor de los Botones : {{c.value_buttons}}</li>
                         </div>
                         <div class="col-sm-6">
-                            <li class="list-group-item bg-dark">{{c.value_embroidery}}</li>
-                            <li class="list-group-item bg-dark">{{c.value_prints}}</li>
-                            <li class="list-group-item bg-dark">{{c.fashion}}</li>
-                            <li class="list-group-item bg-dark">{{c.subtotal}}</li>
-                            <li class="list-group-item bg-dark">{{c.total}}</li>
-                            <li class="list-group-item bg-dark">{{value}}</li>
+                            <li class="list-group-item bg-dark">Valor de los Cuellos : {{c.value_necks}}</li>
+                            <li class="list-group-item bg-dark">Valor de los Bordados : {{c.value_embroidery}}</li>
+                            <li class="list-group-item bg-dark">Valor del Estampado : {{c.value_prints}}</li>
+                            <li class="list-group-item bg-dark">Tipo de Moda : {{c.fashion}}</li>
                         </div>
                     </div>
 
                 </ul>         
                 </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
+                <div class="container">    
+                    <div class="row">
+                        <a href="#" class="card-link btn btn-info col-sm-5">For Client</a>
+                        <a href="#" class="card-link btn btn-secondary col-sm-5">For Cloth</a>
+                    </div>
+                </div>
               </div>
             </div>
         </div>

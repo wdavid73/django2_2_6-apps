@@ -1,10 +1,11 @@
 from django.shortcuts import render ,redirect , get_object_or_404
 from django.http import Http404
+
 # Models
 from ..models import User
 
 #Forms
-from ..forms import UserForm , UserFormModel
+from ..forms.user import UserFormModel , UserForm
 
 # Create your views here.
 from django.views.generic import (UpdateView)

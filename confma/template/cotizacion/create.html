@@ -19,16 +19,7 @@
 					    <form method="POST">
 				            {% csrf_token %}
 				            {{ form.as_p}}
-							<!-- <input type="text" name="user_id" id="" class="form-control" value={{user.id}} readonly> -->
-							<div class="row">
-								<div class="col-6">
-									<input type="submit" value="Client" class="btn btn-primary btn-block"
-									id="client"  name ="client" >
-								</div>
-								<div class="col-6">
-									<input type="submit" value="Cloth" class="btn btn-success btn-block" id="cloth"  name ="cloth" >
-								</div>
-							</div>
+							<input type="submit" value="Enviar" class="btn btn-primary btn-block" id="client"  name ="client">
 				        </form>
 				  </div>
 			</div>		

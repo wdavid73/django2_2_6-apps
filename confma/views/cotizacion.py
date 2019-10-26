@@ -2,8 +2,10 @@ from django.shortcuts import render ,redirect , get_object_or_404
 from django.http import Http404
 
 # Models
-from ..models import User , Cotizacion
-from ..forms import CotizacionFormModel
+from ..models import Cotizacion
+from ..forms.cotizacion import CotizacionFormModel
+
+from django.views.generic import (UpdateView)
 
 # Create your views here.
 
@@ -31,6 +33,21 @@ def create(request):
 		'form' : form
 	}
 	return render(request, "cotizacion/create.html" , context)
+
+class CotiUpdateView(UpdateView):
+    template_name = "cotizacion/update.html"
+    form_class = CotizacionFormModel
+
+    def get_object(self):
+        id_ = self.kwargs.get("id")
+        return get_object_or_404(Cotizacion , id=id_)
+
+    def form_valid(self , form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return '../../'
 
 # def deletelog(request , id):
 #     obj = get_object_or_404 (User , id=id)
