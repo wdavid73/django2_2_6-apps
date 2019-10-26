@@ -21,8 +21,9 @@ urlpatterns = [
     path('users/<int:id>/delete/' , users.delete, name="user_delete"),
 
     ### ROUTES COTIZACION
-	path('users/cotizacion/' , cotizacion.home , name ="coti_home"),
-	path('users/<int:id>/cotizacion/create' , cotizacion.create , name ="coti_create")
+    path('cotizacion/' , cotizacion.home , name ="coti_home"),
+	path('cotizacion/create/' , cotizacion.create , name ="coti_create"),
+	# path('users/<int:id>/cotizacion/create' , cotizacion.create , name ="coti_create")
     # path('coti/' , cotizacion.coti_view, name = "coti_home")
 
 ]

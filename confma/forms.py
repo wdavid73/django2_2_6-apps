@@ -89,28 +89,17 @@ class CotizacionFormModel(forms.ModelForm):
             'value_embroidery',
             'value_prints',
             'fashion',
-            'subtotal',
-            'total',
-            'user'
-            
-            
             ]
             
         widgets = {
-            'name'              : forms.TextInput(attrs = {'placeholder' : 'Your Name' , 'class' : 'form-control'}),
-            'lastname'          : forms.TextInput(attrs = {'placeholder' : 'Your LastName' , 'class' : 'form-control'}),
-            'address'           : forms.TextInput(attrs = {'placeholder' : 'Your Address' , 'class' : 'form-control'}),
-            'phone'             : forms.NumberInput(attrs = {'placeholder' : 'Your Phone' , 'class' : 'form-control'}),
-            'cellphone'         : forms.NumberInput(attrs = {'placeholder' : 'Your CellPhone' , 'class' : 'form-control'}),
             'value_cloth'       : forms.NumberInput(attrs = {'placeholder' : 'Valor de la tela , Ejemplo : 150.00' , 'class' : 'form-control'}),
-            'value_work'        : forms.NumberInput(attrs = {'placeholder' : 'Valor de la Tela  , Ejemplo : 150.00' , 'class' : 'form-control'}),
-            'value_threads'     : forms.NumberInput(attrs = {'placeholder' : 'Valor de la Tela  , Ejemplo : 150.00' , 'class' : 'form-control'}),
-            'value_buttons'     : forms.NumberInput(attrs = {'placeholder' : 'Valor de la Tela  , Ejemplo : 150.00' , 'class' : 'form-control'}),
-            'value_necks'       : forms.NumberInput(attrs = {'placeholder' : 'Valor de la Tela  , Ejemplo : 150.00' , 'class' : 'form-control'}),
-            'value_embroidery'  : forms.NumberInput(attrs = {'placeholder' : 'Valor de la Tela  , Ejemplo : 150.00' , 'class' : 'form-control'}),
-            'value_prints'      : forms.NumberInput(attrs = {'placeholder' : 'Valor de la Tela  , Ejemplo : 150.00' , 'class' : 'form-control'}),
+            'value_work'        : forms.NumberInput(attrs = {'placeholder' : 'Valor del Trabajo  , Ejemplo : 150.00' , 'class' : 'form-control'}),
+            'value_threads'     : forms.NumberInput(attrs = {'placeholder' : 'Valor de los Hilos  , Ejemplo : 150.00' , 'class' : 'form-control'}),
+            'value_buttons'     : forms.NumberInput(attrs = {'placeholder' : 'Valor de los botones  , Ejemplo : 150.00' , 'class' : 'form-control'}),
+            'value_necks'       : forms.NumberInput(attrs = {'placeholder' : 'Valor de los cuello  , Ejemplo : 150.00' , 'class' : 'form-control'}),
+            'value_embroidery'  : forms.NumberInput(attrs = {'placeholder' : 'Valor del bordado  , Ejemplo : 150.00' , 'class' : 'form-control'}),
+            'value_prints'      : forms.NumberInput(attrs = {'placeholder' : 'Valor del estanpado  , Ejemplo : 150.00' , 'class' : 'form-control'}),
             'fashion'           : forms.Select(choices = FASHION_CHOICE , attrs ={'class' : 'form-control'}),
-            'subtotal'          : forms.NumberInput(attrs = {'placeholder' : 'Valor de la Tela' , 'class' : 'form-control'}),
-            'total'             : forms.NumberInput(attrs = {'placeholder' : 'Valor de la Tela' , 'class' : 'form-control'}),
+            
         }
 

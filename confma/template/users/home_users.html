@@ -8,7 +8,6 @@
 
 
 {% block content %}    
-
 <div class="container">
     <div class="row">
         <div class="col-sm">
@@ -43,6 +42,8 @@
                                         </td>
                                         </tr>
                                     {%endif%}
+                                {% empty %}
+                                    <p> NO HAY USUARIOS REGISTRADOS</p>
                                 {% endfor %}
                             </tbody>
                         </table>
