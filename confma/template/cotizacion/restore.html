@@ -3,28 +3,20 @@
 {% block title%} Home Confma App {% endblock%} 
 
 {% block name%}
-    
+    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">account_circle</i> User Restoration</h2>
 {% endblock %}
-
+{% block principal_options%}
+{% endblock%}
 
 {% block content %}    
 
-
-
 <div class="row">       
     {% for c in coti%}
-        {% if c.state == 1%}
+        {% if c.state == 0%}
             <div class="col-sm-3">
                 <div class="card text-white bg-dark border-info mt-2 mb-2" style="width: 28rem;">
                   <div class="card-body">
                     <h5 class="card-title">Cotizacion <span class="badge badge-primary badge-pill float-right"># {{forloop.counter}}</span> 
-                        <div class="row" style="margin : 0 auto">
-                            <div class="col mt-2 mb-2">
-                                <a href="{{c.id}}/update/" class="btn btn-info badge badge-info badge-pill">Update</a> 
-                                <a href="{{c.id}}/delete/" class="btn btn-danger badge badge-danger badge-pill">Delete</a>   
-                                <a href="{{c.id}}/deletelog/" class="btn btn-warning badge badge-warning badge-pill">Delete L</a> 
-                            </div>
-                        </div>
                     </h5>
                     <p class="card-text">
                     <ul class="list-group list-group-flush">
@@ -46,10 +38,10 @@
                     </ul>         
                     </p>
                     <div class="container">    
-                        <div class="row">
-                            <a href="#" class="card-link btn btn-info col-sm-5">For Client</a>
-                            <a href="#" class="card-link btn btn-secondary col-sm-5">For Cloth</a>
-                        </div>
+                        <form action="/confma/cotizacion/restored/{{c.id}}/" method = "POST">
+                            {% csrf_token %}
+                            <input type="submit"  value = "Restore" class="btn btn-primary btn-block">
+                        </form>
                     </div>
                   </div>
                 </div>

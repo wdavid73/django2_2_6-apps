@@ -1,0 +1,48 @@
+{% extends 'layouts/base.html' %} 
+
+{% block title%} Home Confma App {% endblock%} 
+
+{% block name%}
+    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">account_circle</i> User Restoration</h2>
+{% endblock %}
+{% block principal_options%}
+{% endblock%}
+
+{% block content %}    
+
+<div class="row">
+{% for u in users %}
+    {% if u.state == 0%}
+        <div class="col-sm-3">
+                <div class="card text-white bg-dark border-info mt-2 mb-2" style="width: 28rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Informacion <span class="badge badge-primary badge-pill float-right"># {{forloop.counter}}</span> 
+                    </h5>
+                    <p class="card-text">
+                    <ul class="list-group list-group-flush">
+                        <div class="row"> 
+                            <div class="col">
+                                <li class="list-group-item bg-dark">Nombre: {{u.name}}</li>
+                                <li class="list-group-item bg-dark">Apellido : {{u.lastname}}</li>
+                                <li class="list-group-item bg-dark">Dirreccion : {{u.address}}</li>
+                                <li class="list-group-item bg-dark">Telefono : {{u.phone}}</li>
+                                <li class="list-group-item bg-dark">Celular : {{u.cellphone}}</li>
+                            </div>
+                        </div>
+
+                    </ul>         
+                    </p>
+                    <div class="container">    
+                        <form action="/confma/users/restored/{{u.id}}/" method = "POST">
+                            {% csrf_token %}
+                            <input type="submit" class="btn btn-primary btn-block" value="Restore">    
+                        </form>
+                    </div>
+                  </div>
+                </div>
+            </div>
+    {%endif%}
+{%endfor%}
+</div>
+
+{% endblock %}

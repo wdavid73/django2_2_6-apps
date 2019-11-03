@@ -1,5 +1,5 @@
 from django.shortcuts import render ,redirect , get_object_or_404
-from django.http import Http404
+from django.http import Http404 , HttpResponse
 
 # Models
 from ..models import User
@@ -87,15 +87,20 @@ def deletelog(request , id):
     return render(request , 'users/deletel.html', context)
 
 
-# def restore(request , id):
-#     obj = get_object_or_404 (User , id=id)
+def restoreview(request):
+    obj = User.objects.all()
+    context = {
+        'users' : obj
+    }
+    return render(request , 'users/restore.html', context)
 
-#     if request.method == 'POST':
-#         obj.state = 1
-#         obj.save()
-#         return redirect('../../')
-
-#     context = {
-#         'user' : obj
-#     }
-#     return render(request , 'users/template_name.html', context)
+def restore(request, id):
+    obj = get_object_or_404(User , id=id)
+    if request.method == 'POST':
+        obj.state = 1
+        obj.save()
+        return redirect('../../')
+        
+    response = 'I Dont Know <a href = "/confma/users/"> BACK </a>'
+    return HttpResponse(response)
+    

@@ -1,0 +1,54 @@
+
+{% extends 'layouts/base.html' %}
+
+{% block title%} Home Confma App {% endblock%} 
+
+{% block name%}
+    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">delete</i>Delete Cotizacion ? </h2>
+{% endblock %}
+
+{% block principal_options%}
+{% endblock%}
+
+
+{% block content %}
+<form action="" method="POST">
+	{% csrf_token %}
+	<div class="container">
+		<div class="card">
+			<div class="card-header"> User <span class="badge badge-primary badge-pill">#{{c.id}}</span> </div>
+			<div class="card-body">
+	    		<h5 class="card-title">Do you want to delete the cotizacion " {{c.id}} "
+	    			{% if c.state == 1%} <span class="text-success"> Activo </span> {%else%} <span class="text-danger"> Inactivo </span> {%endif%}
+	    		</h5>
+	    		<p class="card-text"> information :
+		    		<ul class="list-group list-group-flush">
+	                    <div class="row"> 
+	                        <div class="col-sm-6">
+	                            <li class="list-group-item ">Valor de la Tela : {{c.value_cloth}}</li>
+	                            <li class="list-group-item ">Valor del Trabajo : {{c.value_work}}</li>
+	                            <li class="list-group-item ">Valor de los Hilos : {{c.value_threads}}</li>
+	                            <li class="list-group-item ">Valor de los Botones : {{c.value_buttons}}</li>
+	                        </div>
+	                        <div class="col-sm-6">
+	                            <li class="list-group-item ">Valor de los Cuellos : {{c.value_necks}}</li>
+	                            <li class="list-group-item ">Valor de los Bordados : {{c.value_embroidery}}</li>
+	                            <li class="list-group-item ">Valor del Estampado : {{c.value_prints}}</li>
+	                            <li class="list-group-item ">Tipo de Moda : {{c.fashion}}</li>
+	                        </div>
+	                    </div>
+                	</ul>    
+	    		</p>
+				<input type="submit" class="btn btn-warning btn-block" value="Yes">
+				<a href="../../" class="btn btn-success btn-block">No</a>	
+	  		</div>
+		</div>
+	</div>
+
+
+
+	{{form.as_p}}
+
+</form>
+
+{% endblock %}
