@@ -1,5 +1,6 @@
 from django.shortcuts import render ,redirect , get_object_or_404
 from django.http import Http404 , HttpResponse
+from django.urls import reverse
 
 # Models
 from ..models import User
@@ -8,7 +9,7 @@ from ..models import User
 from ..forms.user import UserFormModel , UserForm
 
 # Create your views here.
-from django.views.generic import (UpdateView)
+from django.views.generic import (CreateView ,UpdateView , ListView ,DeleteView)
 
 def home(request , *args, **kwargs):
     obj = User.objects.all()
@@ -18,25 +19,17 @@ def home(request , *args, **kwargs):
      }
     return render(request , "users/home_users.html" , context)
 
-  
-def create(request):
-    form = UserForm(request.GET)
-    if request.method == "POST":
-        form = UserForm(request.POST)
-        if form.is_valid():
-            #ingreso a la base de datos
-            print(form.cleaned_data)
-            User.objects.create(**form.cleaned_data)
-            # form = UserForm()
-            return redirect('../')
-        else:
-            print(form.errors)
-            # error = form.errors
+class UserCreateView(CreateView):
+    template_name = "users/create.html"
+    form_class = UserFormModel
+    queryset = User.objects.all()
 
-    context = {
-        'form' : form
-    }
-    return render(request , "users/create.html" , context)
+    def form_valid(self , form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return '../'
 
 def details(request):
     obj = User.objects.all()
@@ -45,17 +38,21 @@ def details(request):
     }
     return render(request , "users/details.html" , context)
 
-def delete(request , id):
-    obj = get_object_or_404(User , id = id)
-    if request.method == "POST":
-        obj.delete()
-        print("listo pa borrar")
-        return redirect('../../')
-    context = {
-        'user' : obj
-    }
+class UserListView(ListView):
+    template_name = 'users/details.html'
+    queryset = User.objects.all()
 
-    return render(request , "users/delete.html" , context)
+
+
+class UserDeleteView(DeleteView):
+    template_name = 'users/delete.html'
+
+    def get_object(self):
+        id_ = self.kwargs.get("id")
+        return get_object_or_404(User , id=id_)
+
+    def get_success_url(self):
+        return reverse('users:users_home')
 
 
 class UserUpdateView(UpdateView):

@@ -9,12 +9,12 @@ class User(models.Model):
     phone       = models.IntegerField(null = True)
     cellphone   = models.BigIntegerField(null = False)
     state       = models.SmallIntegerField(default = 1 , null = False)
-    ##########################################
+    #############
     created_at  = models.DateTimeField(auto_now_add=True)
     updated_at  = models.DateTimeField(auto_now = True)
 
     def get_absolute_url(self):
-    	return reverse("users:user_update" , kwargs={"id" : self.id})
+    	return reverse("users:users_home" , kwargs={"id" : self.id})
 
 
 class Cotizacion(models.Model):
@@ -26,21 +26,23 @@ class Cotizacion(models.Model):
     value_embroidery    = models.DecimalField(max_digits = 8 ,decimal_places = 2,null = True , default = 0.00)
     value_prints        = models.DecimalField(max_digits = 8 ,decimal_places = 2,null = True , default = 0.00)
     fashion             = models.CharField(max_length = 50 , null = False)
-    # subtotal            = models.DecimalField(max_digits = 10 ,decimal_places = 2,null = False)
-    # total               = models.DecimalField(max_digits = 10 ,decimal_places = 2,null = False)
     state               = models.SmallIntegerField(default = 1 , null = False)
-    ####################
+    user = models.ManyToManyField(User , through="Cotizacion_User")
+    #####################
     created_at          = models.DateTimeField(auto_now_add=True)
     updated_at          = models.DateTimeField(auto_now = True)
-
-class User_Cotizacion(models.Model):
-    cotizacion          = models.ForeignKey("Cotizacion" , on_delete = models.CASCADE)
-    user                = models.ForeignKey("User" , on_delete = models.CASCADE)
-    total               = models.DecimalField(max_digits = 10 ,decimal_places = 2,null = False)
-    state               = models.SmallIntegerField(default = 1 , null = False)
-    created_at          = models.DateTimeField(auto_now_add=True)
-    updated_at          = models.DateTimeField(auto_now = True)
-
+    
     def get_absolute_url(self):
-        return reverse("cotizacion:coti_update" , kwargs={"id" : self.id})
+        return reverse("cotizacion:coti_home" , kwargs={"id" : self.id})
+
+class Cotizacion_User(models.Model):
+    cotizacion = models.ForeignKey(Cotizacion , on_delete=models.CASCADE)
+    user = models.ForeignKey(User , on_delete=models.CASCADE)
+    total = models.BigIntegerField()
+    state = models.SmallIntegerField(default = 1 , null = False)
+    #####################
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now = True)
+
+    
 

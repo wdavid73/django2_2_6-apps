@@ -1,28 +1,19 @@
 {% extends 'layouts/base.html' %} 
-
 {% block title%} Home Confma App {% endblock%} 
-
-{% block name%}
-    
-{% endblock %}
-
-
+{% block name%}{% endblock %}
 {% block content %}    
-
-
-
 <div class="row">       
-    {% for c in coti%}
-        {% if c.state == 1%}
+    {% for instance in object_list %}
+        {% if instance.state == 1%}
             <div class="col-sm-3">
                 <div class="card text-white bg-dark border-info mt-2 mb-2" style="width: 28rem;">
                   <div class="card-body">
                     <h5 class="card-title">Cotizacion <span class="badge badge-primary badge-pill float-right"># {{forloop.counter}}</span> 
                         <div class="row" style="margin : 0 auto">
                             <div class="col mt-2 mb-2">
-                                <a href="{{c.id}}/update/" class="btn btn-info badge badge-info badge-pill">Update</a> 
-                                <a href="{{c.id}}/delete/" class="btn btn-danger badge badge-danger badge-pill">Delete</a>   
-                                <a href="{{c.id}}/deletelog/" class="btn btn-warning badge badge-warning badge-pill">Delete L</a> 
+                                <a href="{{instance.id}}/update/" class="btn btn-info badge badge-info badge-pill">Update</a> 
+                                <a href="{{instance.id}}/delete/" class="btn btn-warning badge badge-warning badge-pill">Delete</a>   
+                                <!-- <a href="{{instance.id}}/deletelog/" class="btn btn-warning badge badge-warning badge-pill">Delete L</a>  -->
                             </div>
                         </div>
                     </h5>
@@ -30,16 +21,16 @@
                     <ul class="list-group list-group-flush">
                         <div class="row"> 
                             <div class="col-sm-6">
-                                <li class="list-group-item bg-dark">Valor de la Tela : {{c.value_cloth}}</li>
-                                <li class="list-group-item bg-dark">Valor del Trabajo : {{c.value_work}}</li>
-                                <li class="list-group-item bg-dark">Valor de los Hilos : {{c.value_threads}}</li>
-                                <li class="list-group-item bg-dark">Valor de los Botones : {{c.value_buttons}}</li>
+                                <li class="list-group-item bg-dark">Valor de la Tela : {{instance.value_cloth}}</li>
+                                <li class="list-group-item bg-dark">Valor del Trabajo : {{instance.value_work}}</li>
+                                <li class="list-group-item bg-dark">Valor de los Hilos : {{instance.value_threads}}</li>
+                                <li class="list-group-item bg-dark">Valor de los Botones : {{instance.value_buttons}}</li>
                             </div>
                             <div class="col-sm-6">
-                                <li class="list-group-item bg-dark">Valor de los Cuellos : {{c.value_necks}}</li>
-                                <li class="list-group-item bg-dark">Valor de los Bordados : {{c.value_embroidery}}</li>
-                                <li class="list-group-item bg-dark">Valor del Estampado : {{c.value_prints}}</li>
-                                <li class="list-group-item bg-dark">Tipo de Moda : {{c.fashion}}</li>
+                                <li class="list-group-item bg-dark">Valor de los Cuellos : {{instance.value_necks}}</li>
+                                <li class="list-group-item bg-dark">Valor de los Bordados : {{instance.value_embroidery}}</li>
+                                <li class="list-group-item bg-dark">Valor del Estampado : {{instance.value_prints}}</li>
+                                <li class="list-group-item bg-dark">Tipo de Moda : {{instance.fashion}}</li>
                             </div>
                         </div>
 
@@ -47,7 +38,7 @@
                     </p>
                     <div class="container">    
                         <div class="row">
-                            <a href="#" class="card-link btn btn-info col-sm-5">For Client</a>
+                            <a href="/confma/cotizacion-user/{{instance.id}}" class="card-link btn btn-info col-sm-5">For Client</a>
                             <a href="#" class="card-link btn btn-secondary col-sm-5">For Cloth</a>
                         </div>
                     </div>

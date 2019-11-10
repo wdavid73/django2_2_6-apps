@@ -1,23 +1,39 @@
 {% extends 'layouts/base.html' %}
-
-{% block title%}
-    User Details
-{% endblock %}
-
-{% block principal_options%}
-{% endblock%}
-
+{% block title%} User Details {% endblock %}
+{% block principal_options%}{% endblock%}
 {% block content %}
-
-    <ul>
-        {% for u in user %}
-            <li>
-                {{forloop.counter}} => {{u.name}} - {{u.lastname}}
-            </li>
-        {%endfor%}
-    </ul>
-
-    <a href="../" class="btn btn-success">Back</a>
-
-
+    <div class="row">       
+    {% for instance in object_list %}
+        {% if instance.state == 1%}
+            <div class="col-sm-3">
+                <div class="card text-white bg-dark border-info mt-2 mb-2" style="width: 18rem;">
+                  <div class="card-body">
+                    <h5 class="card-title">Clientes <span class="badge badge-primary badge-pill float-right"># {{forloop.counter}}</span> 
+                    </h5>
+                    <p class="card-text">
+                        <ul class="list-group list-group-flush">
+                            <div class="row"> 
+                                <div class="col">
+                                    <li class="list-group-item bg-dark">Nombre : {{instance.name}}</li>
+                                    <li class="list-group-item bg-dark">Apellido : {{instance.lastname}}</li>
+                                    <li class="list-group-item bg-dark">Direccion : {{instance.address}}</li>
+                                    <li class="list-group-item bg-dark">Telefono : {{instance.phone}}</li>
+                                    <li class="list-group-item bg-dark">Celular : {{instance.cellphone}}</li>
+                                </div>
+                            </div>
+                        </ul>         
+                    </p>
+                  </div>
+                </div>
+            </div>
+        {%endif%}
+    {% empty %}
+        <p> NO HAY USUARIOS REGISTRADOS </p>
+    {%endfor%}
+    </div>
+        <div class="container">    
+            <div class="row">
+                <a href="../" class="btn btn-success btn-block">Back</a>
+            </div>
+    </div>
 {% endblock %}
