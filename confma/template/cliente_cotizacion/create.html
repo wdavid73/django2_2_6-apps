@@ -1,0 +1,84 @@
+{% extends 'layouts/base.html' %} 
+
+{% block title%} Home Confma App {% endblock%} 
+{% block principal_options%}{% endblock%}
+
+{% block name%}
+    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">account_circle</i> Cliente - Cotizacion</h2>
+{% endblock %}
+
+
+{% block content %}
+	<p>List User - Cotizacion</p>
+	<hr>
+	<div class="container">
+		<form action = "{% url 'cu_create' %}" method = "POST">
+			{% csrf_token %}
+			<div class="form-group" id="formOwn">
+				<div class="card text-white bg-dark border-info mt-2 mb-2" style=" margin : 0 auto">
+					<div class="card-header">
+						<p class="card-title">
+							Cotizacion Seleccionada
+						</p>
+					</div>
+					<div class="card-body">
+						<ul class="list-group list-group-flush">
+							<div class="row">
+								<div class="col-sm-6">
+									<li class="list-group-item bg-dark">Valor de la Tela : ${{coti.value_cloth}}</li>
+									<li class="list-group-item bg-dark">Valor del Trabajo : ${{coti.value_work}}</li>
+									<li class="list-group-item bg-dark">Valor de los Hilos : ${{coti.value_threads}}</li>
+									<li class="list-group-item bg-dark">Valor delos Botones : ${{coti.value_buttons}}</li>
+								</div>
+								<div class="col-sm-6">
+									<li class="list-group-item bg-dark">Valor de los Cuellos : ${{coti.value_necks}}</li>
+									<li class="list-group-item bg-dark">Valor del Bordado : ${{coti.value_embroidery}}</li>
+									<li class="list-group-item bg-dark">Valor del Estampado : ${{coti.value_prints}}</li>
+									<li class="list-group-item bg-dark">Moda : {{coti.fashion}}</li>
+								</div>
+							</div>
+							<li class="list-group-item bg-dark" style="margin : 0 auto"><div class="input-group">
+						        	<div class="input-group-prepend">
+						          		<div class="input-group-text">$</div>
+						        	</div>
+						        	<input type="number" class="form-control" placeholder="Valor Total de la Cotizacion" value="{{total}}" readonly="" name="total">
+						        	<input type="number" name="coti_id" value="{{coti.id}}"hidden>
+					      		</div> 
+	      					</li>
+						</ul>
+					</div>
+				</div>
+				<label for="">Client : </label>
+				<div class="container">
+					<div class="row">
+						<select  name="client_s" class="form-control">
+							<option value="" selected> Elegir Cliente : </option>
+							{% for c in cliente %}
+									<option value="{{c.id}}" id="{{c.id}}" >
+										{{c.name}} - {{c.address}} - {{c.phone}} - {{c.cellphone}}
+									</option>
+							{% endfor %}
+						</select>
+					</div>
+				</div>
+				<!-- <label for="">Total de la Cotizacion : </label>
+				<div class="input-group">
+		        	<div class="input-group-prepend">
+		          		<div class="input-group-text">$</div>
+		        	</div>
+		        	<input type="number" class="form-control" placeholder="Valor Total de la Cotizacion" value="{{total}}" readonly="" name="total">
+	      		</div> -->
+	      		<input type="submit" value="Submit " class="btn btn-primary btn-block mt-2">
+	    	</div>
+		</form>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div class="col">
+				<a href="/confma/cotizacon-user/list/" class="btn btn-primary"> LIST </a>
+			</div>
+		</div>
+	</div>
+
+	
+{%endblock%}

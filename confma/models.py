@@ -27,7 +27,7 @@ class Cotizacion(models.Model):
     value_prints        = models.DecimalField(max_digits = 8 ,decimal_places = 2,null = True , default = 0.00)
     fashion             = models.CharField(max_length = 50 , null = False)
     state               = models.SmallIntegerField(default = 1 , null = False)
-    user = models.ManyToManyField(User , through="Cotizacion_User")
+    user                = models.ManyToManyField(User , through="Cotizacion_User")
     #####################
     created_at          = models.DateTimeField(auto_now_add=True)
     updated_at          = models.DateTimeField(auto_now = True)
