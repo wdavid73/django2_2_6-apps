@@ -1,10 +1,8 @@
 from django.shortcuts import render ,redirect , get_object_or_404
 from django.http import Http404 , HttpResponse
-
 # Models
 from ..models import Cotizacion
 from ..forms.cotizacion import CotizacionFormModel
-
 from django.views.generic import (CreateView, ListView,  DeleteView, UpdateView)
 
 # Create your views here.
