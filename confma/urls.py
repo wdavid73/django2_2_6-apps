@@ -35,10 +35,12 @@ urlpatterns = [
 
     ### ROUTES COTIZACION-CLIENT
     #path('cotizacon-user/list/'             , UCListView.as_view()      , name="coti_user_list"),
-    path('cotizacon-user/list/'             , user_coti.list_view      , name="coti_user_list"),
+    path('cotizacion-user/list/'            , user_coti.list_view       , name="coti_user_list"),
     path('cotizacion-user/<int:id>/'        , user_coti.create_view     , name="coti_user_create"),
     path('cotizacion-user/'                 , user_coti.create          , name="cu_create"),
-
+    path('cotizacion_user/delete/'          , user_coti.deletelog       , name="cu_deletelog"),
+    path('cotizacion_user/restore'          , user_coti.restore_view    , name="cu_restore_view"),
+    path('cotizacion_user/restored'         , user_coti.restore         , name="cu_restore"),
     
 
 ]

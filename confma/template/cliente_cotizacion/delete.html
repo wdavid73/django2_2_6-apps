@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html' %}
+
+{% block title%} Home Confma App {% endblock%} 
+
+{% block name%}
+    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">delete</i>Delete Cotizacion ? </h2>
+{% endblock %}
+
+
+
+{% block content %}
+
+<form action="{% url 'cu_deletelog' %}" method="POST">
+	
+	
+</form>
+
+{% endblock %}

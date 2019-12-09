@@ -62,18 +62,42 @@ def getTotal(coti_obj):
 	total = total1 + total2 + total3
 	return total
 
-# def restore(request, id):
-#     obj = get_object_or_404(User , id=id)
-#     if request.method == 'POST':
-#         obj.state = 1
-#         obj.save()
-#         return redirect('../../')
+def deletelog(request):	
+	id = request.POST.get('coti_user_id')
+	obj = get_object_or_404(Cotizacion_User , id = id)
+	
+	if request.method == 'POST':
+		obj.state = 0
+		obj.save()
+		return redirect('/confma/cotizacion-user/list/')
+
+
+def restore_view(request):
+	obj_coti = Cotizacion.objects.all()
+	obj_user = User.objects.all()
+	obj_coti_user = Cotizacion_User.objects.all()
+	context = {	
+		"user" : obj_user,
+        "cotizacion" : obj_coti,
+        "cotizacion_user" : obj_coti_user
+	}
+	return render(request , "cliente_cotizacion/restore.html" , context)
+	
+
+def restore(request):
+	id = request.POST.get('coti_user_id')
+	obj = get_object_or_404(Cotizacion_User , id = id)
+	if request.method == 'POST':
+		obj.state = 1 
+		obj.save()
+		return redirect('/confma/cotizacion-user/list')
+	# id = request.POST.get('coti_user_id')
+ #    obj = get_object_or_404(Cotizacion_User , id=id)
+
+ #    if request.method == 'POST':
+ #        obj.state = 1
+ #        obj.save()
+ #        return redirect('/confma/cotizacon-user/list/')
         
-#     response = 'I Dont Know <a href = "/confma/users/"> BACK </a>'
-#     return HttpResponse(response)
-
-
-
-
-
-
+ #    response = 'I Dont Know <a href = "/confma/"> BACK </a>'
+ #    return HttpResponse(response)
