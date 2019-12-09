@@ -9,8 +9,6 @@
 
 
 {% block content %}
-	<p>List User - Cotizacion</p>
-	<hr>
 	<div class="container">
 		<form action = "{% url 'cu_create' %}" method = "POST">
 			{% csrf_token %}
@@ -39,28 +37,29 @@
 							</div>
 							<li class="list-group-item bg-dark" style="margin : 0 auto"><div class="input-group">
 						        	<div class="input-group-prepend">
-						          		<div class="input-group-text">$</div>
+						          		<div class="input-group-text bg-dark text-white">$</div>
 						        	</div>
-						        	<input type="number" class="form-control" placeholder="Valor Total de la Cotizacion" value="{{total}}" readonly="" name="total">
+						        	<input type="number" class="form-control bg-dark text-white" placeholder="Valor Total de la Cotizacion" value="{{total}}" readonly="" name="total">
 						        	<input type="number" name="coti_id" value="{{coti.id}}"hidden>
 					      		</div> 
 	      					</li>
 						</ul>
+						<label for="">Client : </label>
+						<div class="container">
+							<div class="row">
+								<select  name="client_s" class="form-control">
+									<option value="" selected> Elegir Cliente : </option>
+									{% for c in cliente %}
+											<option value="{{c.id}}" id="{{c.id}}" >
+												{{c.name}} - {{c.address}} - {{c.phone}} - {{c.cellphone}}
+											</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
 					</div>
 				</div>
-				<label for="">Client : </label>
-				<div class="container">
-					<div class="row">
-						<select  name="client_s" class="form-control">
-							<option value="" selected> Elegir Cliente : </option>
-							{% for c in cliente %}
-									<option value="{{c.id}}" id="{{c.id}}" >
-										{{c.name}} - {{c.address}} - {{c.phone}} - {{c.cellphone}}
-									</option>
-							{% endfor %}
-						</select>
-					</div>
-				</div>
+				
 				<!-- <label for="">Total de la Cotizacion : </label>
 				<div class="input-group">
 		        	<div class="input-group-prepend">
@@ -68,17 +67,18 @@
 		        	</div>
 		        	<input type="number" class="form-control" placeholder="Valor Total de la Cotizacion" value="{{total}}" readonly="" name="total">
 	      		</div> -->
-	      		<input type="submit" value="Submit " class="btn btn-primary btn-block mt-2">
+	      		<div class="row">
+		      		<div class="col-6">
+		      			<input type="submit" value="Submit " class="btn btn-primary btn-block">
+		      		</div>
+		      		<div class="col-6">
+		      			<a href="/confma/cotizacon-user/list/" class="btn btn-info btn-block">List of cotizacion with clients</a>
+		      		</div>
+	      		</div>
 	    	</div>
 		</form>
 	</div>
-	<div class="container">
-		<div class="row">
-			<div class="col">
-				<a href="/confma/cotizacon-user/list/" class="btn btn-primary"> LIST </a>
-			</div>
-		</div>
-	</div>
+	
 
 	
 {%endblock%}

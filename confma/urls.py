@@ -34,7 +34,8 @@ urlpatterns = [
     path('cotizacion/restored/<int:id>/'    , cotizacion.restore        , name="coti_restored"),
 
     ### ROUTES COTIZACION-CLIENT
-    path('cotizacon-user/list/'             , UCListView.as_view()      , name="coti_user_list"),
+    #path('cotizacon-user/list/'             , UCListView.as_view()      , name="coti_user_list"),
+    path('cotizacon-user/list/'             , user_coti.list_view      , name="coti_user_list"),
     path('cotizacion-user/<int:id>/'        , user_coti.create_view     , name="coti_user_create"),
     path('cotizacion-user/'                 , user_coti.create          , name="cu_create"),
 

@@ -12,8 +12,19 @@ from ..forms.cotizacion_user import CUFormModel , Coti_UserFormModel
 # Create your views here.
 
 class UCListView (ListView):
-	template_name = 'cliente_cotizacion/list.html'
+	template_name = 'cliente_cotizacion/list-client.html'
 	queryset = Cotizacion_User.objects.all()
+
+def list_view(request):
+	obj_coti = Cotizacion.objects.all()
+	obj_user = User.objects.all()
+	obj_coti_user = Cotizacion_User.objects.all()
+	context = {	
+		"user" : obj_user,
+        "cotizacion" : obj_coti,
+        "cotizacion_user" : obj_coti_user
+	}
+	return render(request , "cliente_cotizacion/list-client.html" , context)
 
 def create_view(request, id):
 	u = User.objects.all()
@@ -42,7 +53,7 @@ def create(request):
 			Cotizacion_User.objects.create( total = total , cotizacion_id = coti_id , user_id = u_id)
 			return redirect('../')
 	else:
-		return redirect("/confma/cotizacion/")
+		return redirect("/confma/cotizacion/list")
 
 def getTotal(coti_obj):
 	total1 = coti_obj.value_cloth + coti_obj.value_work

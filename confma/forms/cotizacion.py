@@ -14,6 +14,7 @@ class CotizacionFormModel(forms.ModelForm):
     class Meta:
         model = Cotizacion
         fields = [
+            'nickname',
             'value_cloth',
             'value_work',
             'value_threads',
@@ -25,6 +26,10 @@ class CotizacionFormModel(forms.ModelForm):
             ]
             
         widgets = {
+            'nickname'         : forms.TextInput(
+                attrs = {
+                    'placeholder' : 'Nombre de la Cotizacion , Ejemplo : Cotizacion Base' , 
+                    'class' : 'form-control bg-dark text-white mb-3'}),
 
             'value_cloth'      : forms.NumberInput(
                 attrs = {
@@ -68,6 +73,7 @@ class CotizacionFormModel(forms.ModelForm):
         }
 
         labels = {
+            "nickmae"           : _("Nombre para la Cotizacion"),
             "value_cloth"       : _("Valor de la Tela"),
             "value_work"        : _("Valor del Trabajo"),
             "value_threads"     : _("Valor de los Hilos"),
