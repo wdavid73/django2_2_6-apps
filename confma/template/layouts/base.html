@@ -38,20 +38,11 @@
   <body>
     {% include './navbar.html' %} 
     {% block name %}{% endblock %}
-    
-    {% block principal_options %}
-    <div class="row">
-        <div class="container mb-2 mt-2 btn-group btn-group-lg col-6">
-            <a href="create/" class="btn btn-secondary">Registered {{ model }}</a>
-            <a href="details/" class="btn btn-info">Register {{ model }}</a>
-        </div>
-    </div>
-    {% endblock %}
 
     {% block content %} 
     {% endblock %}
-
-<footer class="page-footer font-small stylish-color-dark pt-4 bg-dark text-white mt-3">
+  </body>
+  <footer class="page-footer font-small stylish-color-dark pt-4 bg-dark text-white mt-3">
   <div class="container text-center text-md-left">
     <div class="row">
       <div class="col-md-5 mx-auto">
@@ -97,9 +88,4 @@
     </div>
   </div>
 </footer>
-
-
-    
-
-  </body>
 </html>

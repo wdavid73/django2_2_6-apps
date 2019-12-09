@@ -6,12 +6,11 @@
     <h2 class="text-center mt-2 mb-4"> <i class="material-icons">account_circle</i> Users</h2>
 {% endblock %}
 
-
 {% block content %}    
-<div class="container">
-    <div class="row">
-        <div class="col-sm">
-                <div class="float-left">
+
+<div class="row">
+    <div class="container">
+        <div class="col">
                         <div class=" table-responsive table-bordered">
                             <table class="table table-dark">
                                 <thead>
@@ -28,7 +27,6 @@
                                 </thead>
                             <tbody>
                                 {% for u in user %}
-                                    {% if u.state == 1%}
                                         <tr>
                                             <td class="p-3"> {{forloop.counter}}</td>
                                             <!-- <td> {{u.id}}</td> -->
@@ -41,14 +39,17 @@
                                             {% include '../layouts/methods.html'%}
                                         </td>
                                         </tr>
-                                    {%endif%}
                                 {% empty %}
-                                    <p> NO HAY USUARIOS REGISTRADOS</p>
+                                        <div class="container"  style="height: 650px">
+                                            <div class="alert alert-info mt-3" role="alert">
+                                                No hay Clientes Registrados 
+                                                <a href="create/" class="btn btn-info badge badge-primary badge-pill float-right">Registrar Cliente</a> 
+                                            </div>
+                                        </div>
                                 {% endfor %}
                             </tbody>
                         </table>
                     </div>
-                </div>
         </div>
     </div>
 </div>

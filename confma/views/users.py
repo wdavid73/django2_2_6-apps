@@ -13,11 +13,18 @@ from django.views.generic import (CreateView ,UpdateView , ListView ,DeleteView)
 
 def home(request , *args, **kwargs):
     obj = User.objects.all()
+
+    users = []
+    for user in obj:
+        if user.state == 1:
+            users.append(user)
+    
     context = {
-        "user" : obj,
+        "user" : users,
         "model" : "Users"
      }
     return render(request , "users/home_users.html" , context)
+
 
 class UserCreateView(CreateView):
     template_name = "users/create.html"

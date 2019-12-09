@@ -6,7 +6,7 @@
     {% for instance in object_list %}
         {% if instance.state == 1%}
             <div class="col-sm-3">
-                <div class="card text-white bg-dark border-info mt-2 mb-2" style="width: 28rem;">
+                <div class="card text-white bg-dark border-info mt-2 mb-2">
                   <div class="card-body">
                     <h5 class="card-title">Cotizacion <span class="badge badge-primary badge-pill float-right"># {{forloop.counter}}</span> 
                         <div class="row" style="margin : 0 auto">
@@ -21,15 +21,15 @@
                     <ul class="list-group list-group-flush">
                         <div class="row"> 
                             <div class="col-sm-6">
-                                <li class="list-group-item bg-dark">Valor de la Tela : {{instance.value_cloth}}</li>
-                                <li class="list-group-item bg-dark">Valor del Trabajo : {{instance.value_work}}</li>
-                                <li class="list-group-item bg-dark">Valor de los Hilos : {{instance.value_threads}}</li>
-                                <li class="list-group-item bg-dark">Valor de los Botones : {{instance.value_buttons}}</li>
+                                <li class="list-group-item bg-dark">Valor de la Tela : ${{instance.value_cloth}}</li>
+                                <li class="list-group-item bg-dark">Valor del Trabajo : ${{instance.value_work}}</li>
+                                <li class="list-group-item bg-dark">Valor de los Hilos : ${{instance.value_threads}}</li>
+                                <li class="list-group-item bg-dark">Valor de los Botones : ${{instance.value_buttons}}</li>
                             </div>
                             <div class="col-sm-6">
-                                <li class="list-group-item bg-dark">Valor de los Cuellos : {{instance.value_necks}}</li>
-                                <li class="list-group-item bg-dark">Valor de los Bordados : {{instance.value_embroidery}}</li>
-                                <li class="list-group-item bg-dark">Valor del Estampado : {{instance.value_prints}}</li>
+                                <li class="list-group-item bg-dark">Valor de los Cuellos : ${{instance.value_necks}}</li>
+                                <li class="list-group-item bg-dark">Valor de los Bordados : ${{instance.value_embroidery}}</li>
+                                <li class="list-group-item bg-dark">Valor del Estampado : ${{instance.value_prints}}</li>
                                 <li class="list-group-item bg-dark">Tipo de Moda : {{instance.fashion}}</li>
                             </div>
                         </div>
@@ -47,8 +47,14 @@
             </div>
         {%endif%}
     {% empty %}
-    
-        <p> NO HAY COTIZACIONES REGISTRADAS </p>
+
+        
+        <div class="container"  style="height: 650px">
+            <div class="alert alert-info mt-3" role="alert">
+                No hay Cotizacion Registradas 
+                <a href="create/" class="btn btn-info badge badge-primary badge-pill float-right">Registrar Cotizacion</a> 
+            </div>
+        </div>
 
     {%endfor%}
 </div>
