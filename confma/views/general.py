@@ -2,12 +2,24 @@ from django.shortcuts import render ,redirect , get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 
-# # Models
-# from ..models import User
-# #Forms
-# from ..forms import UserForm , UserFormModel
-# # Create your views here.
-# from django.views.generic import (UpdateView)
+# Models
+from ..models import Cloth
+#Form
+from ..forms.cloth import ClothFormModel
+# Create your views here.
+from django.views.generic import (CreateView ,UpdateView , ListView ,DeleteView)
+
+class ClothCreateView(CreateView):
+    template_name = "cloth/create.html"
+    form_class = ClothFormModel
+    queryset = Cloth.objects.all()
+
+    def form_valid(self , form):
+        print(form.cleaned_data)
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return '../../'
 
 
 def home_view(request , *args, **kwargs):

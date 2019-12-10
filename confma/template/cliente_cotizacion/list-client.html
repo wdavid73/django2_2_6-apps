@@ -50,44 +50,57 @@
 
 								{%for c in cotizacion%}
 									{% if cu.cotizacion_id == c.id%}
-									<p>Cotizacion : {{c.nickname}}</p>
+									
+										{% for cl in cloth%}
+											{% if c.cloth_id == cl.id %}
+												<p>Cotizacion de {{cl.name}} </p>
+											{%endif%}
+										{%endfor%}
 
 										<button type="button" class="btn btn-success mb-4" data-toggle="modal" data-target="#cotizacionModalLong">
 										  Details Cotizacion
 										</button>
 
 										<!-- Modal -->
-										<div class="modal fade" id="cotizacionModalLong" tabindex="-1" role="dialog" aria-labelledby="cotizacionModalLong" aria-hidden="true">
-										  <div class="modal-dialog" role="document">
-										    <div class="modal-content bg-dark">
-										      <div class="modal-header">
-										        <h5 class="modal-title" id="cotizacionModalLongTitle"> INFOMACION DE LA COTIZACION </h5>
-										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										          <span aria-hidden="true">&times;</span>
-										        </button>
-										      </div>
-										      <div class="modal-body">
-										      	<div class="row"> 
-						                            <div class="col-sm-6">
-						                                <li class="list-group-item bg-dark">Valor de la Tela : ${{c.value_cloth}}</li>
-						                                <li class="list-group-item bg-dark">Valor del Trabajo : ${{c.value_work}}</li>
-						                                <li class="list-group-item bg-dark">Valor de los Hilos : ${{c.value_threads}}</li>
-						                                <li class="list-group-item bg-dark">Valor de los Botones : ${{c.value_buttons}}</li>
-						                            </div>
-						                            <div class="col-sm-6">
-						                               <li class="list-group-item bg-dark">Valor de los Cuellos : ${{c.value_necks}}</li>
-						                               <li class="list-group-item bg-dark">Valor de los Bordados : ${{c.value_embroidery}}</li>
-						                               <li class="list-group-item bg-dark">Valor del Estampado : ${{c.value_prints}}</li>
-						                               <li class="list-group-item bg-dark">Tipo de Moda : {{c.fashion}}</li>
-						                           </div>
-						                       </div>
-										     </div>
-										     <div class="modal-footer">
-										       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										     </div>
-										   </div>
-										 </div>
-									</div>
+										{% for cl in cloth%}
+											{% if c.cloth_id == cl.id %}
+												<div class="modal fade" id="cotizacionModalLong" tabindex="-1" role="dialog" aria-labelledby="cotizacionModalLong" aria-hidden="true">
+												  <div class="modal-dialog" role="document">
+												    <div class="modal-content bg-dark">
+												      <div class="modal-header">
+												        <h5 class="modal-title" id="cotizacionModalLongTitle"> INFOMACION DE LA COTIZACION </h5>
+												        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												          <span aria-hidden="true">&times;</span>
+												        </button>
+												      </div>
+												      <div class="modal-body">
+												      	<div class="row"> 
+								                            <div class="col-sm-6">
+								                                <li class="list-group-item bg-dark">Valor de la Tela : ${{c.value_cloth}}</li>
+								                                <li class="list-group-item bg-dark">Valor del Trabajo : ${{c.value_work}}</li>
+								                                <li class="list-group-item bg-dark">Valor de los Hilos : ${{c.value_threads}}</li>
+								                                <li class="list-group-item bg-dark">Valor de los Botones : ${{c.value_buttons}}</li>
+								                                <li class="list-group-item bg-dark">Talla de la Prenda : {{cl.size}}</li>
+								                            </div>
+								                            <div class="col-sm-6">
+								                               <li class="list-group-item bg-dark">Valor de los Cuellos : ${{c.value_necks}}</li>
+								                               <li class="list-group-item bg-dark">Valor de los Bordados : ${{c.value_embroidery}}</li>
+								                               <li class="list-group-item bg-dark">Valor del Estampado : ${{c.value_prints}}</li>
+								                               <li class="list-group-item bg-dark">Tipo de Moda : {{c.fashion}}</li>
+								                               <li class="list-group-item bg-dark">Color de la Prenda : {{cl.color}}</li>
+								                           </div>
+								                       </div>
+												     </div>
+												     <div class="modal-footer">
+												       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												     </div>
+												   </div>
+												 </div>
+											</div>
+											{%endif%}
+										{%endfor%}
+
+										
 								{%endif%}
 							{%endfor%}
 							<form action="{% url 'cu_deletelog' %}" method="POST">

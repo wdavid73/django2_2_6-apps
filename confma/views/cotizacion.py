@@ -1,7 +1,7 @@
 from django.shortcuts import render ,redirect , get_object_or_404
 from django.http import Http404 , HttpResponse
 # Models
-from ..models import Cotizacion
+from ..models import Cotizacion , Cloth
 from ..forms.cotizacion import CotizacionFormModel
 from django.views.generic import (CreateView, ListView,  DeleteView, UpdateView)
 
@@ -10,6 +10,11 @@ from django.views.generic import (CreateView, ListView,  DeleteView, UpdateView)
 class CotiListView(ListView):
      template_name = 'cotizacion/home.html'
      queryset = Cotizacion.objects.all()
+
+     def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cloth_list'] = Cloth.objects.all()
+        return context
 
 class CotiCreateView(CreateView):
     template_name = "cotizacion/create.html"
