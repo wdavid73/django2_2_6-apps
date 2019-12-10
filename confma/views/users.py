@@ -6,7 +6,7 @@ from django.urls import reverse
 from ..models import User
 
 #Forms
-from ..forms.user import UserFormModel , UserForm
+from ..forms.user import UserFormModel
 
 # Create your views here.
 from django.views.generic import (CreateView ,UpdateView , ListView ,DeleteView)

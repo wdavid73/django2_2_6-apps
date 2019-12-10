@@ -3,7 +3,7 @@ from django.http import Http404 , HttpResponse
 
 # Models
 
-from ..models import Cotizacion_User , Cotizacion , User
+from ..models import Cotizacion_User , Cotizacion , User , Cloth
 from django.views.generic import (ListView)
 
 #Forms
@@ -19,10 +19,12 @@ def list_view(request):
 	obj_coti = Cotizacion.objects.all()
 	obj_user = User.objects.all()
 	obj_coti_user = Cotizacion_User.objects.all()
+	obj_cloth = Cloth.objects.all()
 	context = {	
 		"user" : obj_user,
         "cotizacion" : obj_coti,
-        "cotizacion_user" : obj_coti_user
+        "cotizacion_user" : obj_coti_user,
+        "cloth" : obj_cloth
 	}
 	return render(request , "cliente_cotizacion/list-client.html" , context)
 
@@ -30,12 +32,20 @@ def create_view(request, id):
 	u = User.objects.all()
 	coti_obj = get_object_or_404(Cotizacion , id = id)
 	total_coti = getTotal(coti_obj)
+	cloth = get_cloth(coti_obj)
 	context = {	
 		'cliente' : u,
 		'coti' : coti_obj,
-		'total' : total_coti
+		'total' : total_coti,
+		'cloth' : cloth
 	}
 	return render(request , 'cliente_cotizacion/create.html' , context)
+
+def get_cloth(coti_obj):
+	obj_cloth = Cloth.objects.all()
+	for cloth in obj_cloth:
+		if(cloth.id == coti_obj.cloth_id):
+			return cloth
 
 
 def create(request):
@@ -91,13 +101,3 @@ def restore(request):
 		obj.state = 1 
 		obj.save()
 		return redirect('/confma/cotizacion-user/list')
-	# id = request.POST.get('coti_user_id')
- #    obj = get_object_or_404(Cotizacion_User , id=id)
-
- #    if request.method == 'POST':
- #        obj.state = 1
- #        obj.save()
- #        return redirect('/confma/cotizacon-user/list/')
-        
- #    response = 'I Dont Know <a href = "/confma/"> BACK </a>'
- #    return HttpResponse(response)

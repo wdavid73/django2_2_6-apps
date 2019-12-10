@@ -3,12 +3,18 @@
 {% block name%}{% endblock %}
 {% block content %}    
 <div class="row">       
+
+    
     {% for instance in object_list %}
         {% if instance.state == 1%}
             <div class="col-md-4 col-lg-4">
                 <div class="card text-white bg-dark border-info mt-2 mb-2">
                   <div class="card-body">
-                    <h5 class="card-title">Cotizacion <span class="badge badge-primary badge-pill float-right"># {{forloop.counter}}</span> 
+                    {% for cloth in cloth_list %}
+                        {% if cloth.id == instance.cloth_id%}
+                            <h5 class="card-title">Cotizacion de {{cloth.name}}  , Talla : {{cloth.size}} , Color : {{cloth.color}}</h5> 
+                        {% endif%}
+                    {%endfor%}
                         <div class="row" style="margin : 0 auto">
                             <div class="col mt-2 mb-2">
                                 <a href="{{instance.id}}/update/" class="btn btn-info badge badge-info badge-pill">Update</a> 
@@ -36,12 +42,7 @@
 
                     </ul>         
                     </p>
-                    <div class="container">    
-                        <div class="row">
-                            <a href="/confma/cotizacion-user/{{instance.id}}" class="card-link btn btn-info col-sm-5">For Client</a>
-                            <a href="#" class="card-link btn btn-secondary col-sm-5">For Cloth</a>
-                        </div>
-                    </div>
+                        <a href="/confma/cotizacion-user/{{instance.id}}" class="card-link btn btn-info btn-block">For Client</a>
                   </div>
                 </div>
             </div>

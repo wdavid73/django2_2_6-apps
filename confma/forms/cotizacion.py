@@ -2,19 +2,22 @@ from django.forms import ModelForm , TextInput
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
-from ..models import Cotizacion
+from ..models import Cotizacion , Cloth
 
 FASHION_CHOICE = [
-    ('General' , 'general'),
-    ('A medida' , 'a medida')
+    ('General' , 'General'),
+    ('A medida' , 'A Medida')
 ]
 
-class CotizacionFormModel(forms.ModelForm):
+CLOTH_CHOICE = []
+for clo in Cloth.objects.all():
+    CLOTH_CHOICE.append((clo.id , clo.name))
 
+class CotizacionFormModel(forms.ModelForm):
     class Meta:
         model = Cotizacion
         fields = [
-            'nickname',
+            'cloth',
             'value_cloth',
             'value_work',
             'value_threads',
@@ -22,14 +25,15 @@ class CotizacionFormModel(forms.ModelForm):
             'value_necks',
             'value_embroidery',
             'value_prints',
-            'fashion',
-            ]
-            
+            'fashion'
+         ]
+
+        #cloth = forms.ChoiceField(widget = forms.Select(attrs={'class' : 'form-control'})),
         widgets = {
-            'nickname'         : forms.TextInput(
-                attrs = {
-                    'placeholder' : 'Nombre de la Cotizacion , Ejemplo : Cotizacion Base' , 
-                    'class' : 'form-control bg-dark text-white mb-3'}),
+
+            'cloth'            : forms.Select(
+                choices = CLOTH_CHOICE,
+                attrs={'class ' : 'form-control bg-dark text-white mb-3'}),
 
             'value_cloth'      : forms.NumberInput(
                 attrs = {
@@ -73,7 +77,7 @@ class CotizacionFormModel(forms.ModelForm):
         }
 
         labels = {
-            "nickmae"           : _("Nombre para la Cotizacion"),
+            "cloth"             : _("Seleccione una Prenda"),
             "value_cloth"       : _("Valor de la Tela"),
             "value_work"        : _("Valor del Trabajo"),
             "value_threads"     : _("Valor de los Hilos"),

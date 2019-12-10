@@ -1,5 +1,6 @@
-{% extends 'layouts/base.html' %}
 
+{% extends 'layouts/base.html' %}
+{% load staticfiles %}
 {% block title%}
     Home Confma App
 {% endblock %}
@@ -9,39 +10,48 @@
 
 {% block content %}
 
-    <div class="container" id="main" style="width: 1080px ; height: 1920px">
-        <h1 class="text-center">Home</h1>
-        <h2>Quienes Somos?</h2>
-        <p class="text-justify">
-            Lorem ipsum dolor sit amet 
-            consectetur adipisicing elit. 
-            Quis illum tempore esse ratione 
-            repudiandae quidem ducimus quibusdam 
-            repellendus blanditiis cum fugit ea vitae 
-            atque repellat, saepe laudantium excepturi 
-            odio asperiores.
-        </p>
-    
-        <h2>Que hacemos</h2>
-        <p>
-            Lorem ipsum dolor sit amet 
-            consectetur adipisicing elit. 
-            Quis illum tempore esse ratione 
-            repudiandae quidem ducimus quibusdam 
-            repellendus blanditiis cum fugit ea vitae 
-            atque repellat, saepe laudantium excepturi 
-            odio asperiores.
-        </p>
+    <div class="container" id="main">
         
-        <h2>Donde Estamos</h2>
-        <p>
-            Lorem ipsum dolor sit amet 
-            consectetur adipisicing elit. 
-            Quis illum tempore esse ratione 
-            repudiandae quidem ducimus quibusdam 
-            repellendus blanditiis cum fugit ea vitae 
-            atque repellat, saepe laudantium excepturi 
-            odio asperiores.
-        </p>
+        <img src="{% static 'logo.png' %}" alt="logo" class="img-fluid container">
+
+        <div class="row mt-2 mb-5">
+            <div class="col">
+                <h2 class="text-center">¿Quienes Somos?</h2>
+                <p class="text-justify">
+                    Lorem ipsum dolor sit amet 
+                    consectetur adipisicing elit. 
+                    Quis illum tempore esse ratione 
+                    repudiandae quidem ducimus quibusdam 
+                    repellendus blanditiis cum fugit ea vitae 
+                    atque repellat, saepe laudantium excepturi 
+                    odio asperiores.
+                </p>
+            </div>
+            <div class="col">
+                <h2 class="text-center">Que hacemos</h2>
+                <p class="text-justify">
+                    Lorem ipsum dolor sit amet 
+                    consectetur adipisicing elit. 
+                    Quis illum tempore esse ratione 
+                    repudiandae quidem ducimus quibusdam 
+                    repellendus blanditiis cum fugit ea vitae 
+                    atque repellat, saepe laudantium excepturi 
+                    odio asperiores.
+                </p>
+            </div>
+            <div class="col">
+                <h2 class="text-center">Donde Estamos</h2>
+                <p class="text-justify">
+                    Lorem ipsum dolor sit amet 
+                    consectetur adipisicing elit. 
+                    Quis illum tempore esse ratione 
+                    repudiandae quidem ducimus quibusdam 
+                    repellendus blanditiis cum fugit ea vitae 
+                    atque repellat, saepe laudantium excepturi 
+                    odio asperiores.
+                </p>
+            </div>
+        </div>
+        
     </div>
 {% endblock %}
