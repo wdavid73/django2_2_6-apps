@@ -4,7 +4,7 @@ from django.template import RequestContext
 from datetime import date
 
 # Models
-from ..models import Cloth , Alquiler
+from ..models import Cloth , Alquiler , User
 #Form
 from ..forms.cloth import ClothFormModel 
 from ..forms.alquiler import AlquilerFormModel
@@ -38,6 +38,16 @@ class AlquilerCreateView(CreateView):
 
     def get_success_url(self):
         return '../../'
+
+class AlquilerListView(ListView):
+     template_name = 'alquiler/details.html'
+     queryset = Alquiler.objects.all()
+
+     def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['cloth_list'] = Cloth.objects.all()
+        context['user_list'] = User.objects.all()
+        return context
 
 
 def home_view(request , *args, **kwargs):

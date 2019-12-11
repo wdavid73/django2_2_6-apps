@@ -8,111 +8,55 @@
 {% endblock %}
 
 {% block content %}
-	<div class="row" id="main">
-		{%for cu in cotizacion_user%}
+<div class="row">
+	{%for cu in cotizacion_user%}
 		{% if cu.state == 1 %}
-			<div class="col-md-4 col-lg-2">
+			<div class="col-md-4 col-lg-4">
 				<div class="card bg-dark text-white ml-2 mt-2 mb-2">
+					<div class="card-header  text-center bg-info">CLIENTE</div>
 					<div class="card-body">
-						{%for u in user%}
-							{% if cu.user_id == u.id%}
-								<p>Cliente : {{ u.name }} {{u.lastname}} </p>						
-									<button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#userModalLong">
-										Details Client
-									</button>
-
-									<div class="modal fade" id="userModalLong" tabindex="-1" role="dialog" aria-labelledby="userModalLongTitle" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content bg-dark">
-										      <div class="modal-header">
-										        <h5 class="modal-title" id="userModalLongTitle">{{u.name}} {{u.lastname}}</h5>
-										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										          <span aria-hidden="true">&times;</span>
-										        </button>
-										      </div>
-										      <div class="modal-body">
-										      	<p>
-			                                    	Direccion : {{u.address}} <br>
-			                                    	Telefono : {{u.phone}} <br>
-			                                    	Celular : {{u.cellphone}} <br>
-										      	</p>
-										      </div>
-										      <div class="modal-footer">
-										        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										      </div>
-										    </div>
-										  </div>
-										</div>
-
-
-									{%endif%}
-								{%endfor%}
-
-								{%for c in cotizacion%}
-									{% if cu.cotizacion_id == c.id%}
-									
-										{% for cl in cloth%}
-											{% if c.cloth_id == cl.id %}
-												<p>Cotizacion de {{cl.name}} </p>
-											{%endif%}
-										{%endfor%}
-
-										<button type="button" class="btn btn-success mb-4" data-toggle="modal" data-target="#cotizacionModalLong">
-										  Details Cotizacion
-										</button>
-
-										<!-- Modal -->
-										{% for cl in cloth%}
-											{% if c.cloth_id == cl.id %}
-												<div class="modal fade" id="cotizacionModalLong" tabindex="-1" role="dialog" aria-labelledby="cotizacionModalLong" aria-hidden="true">
-												  <div class="modal-dialog" role="document">
-												    <div class="modal-content bg-dark">
-												      <div class="modal-header">
-												        <h5 class="modal-title" id="cotizacionModalLongTitle"> INFOMACION DE LA COTIZACION </h5>
-												        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												          <span aria-hidden="true">&times;</span>
-												        </button>
-												      </div>
-												      <div class="modal-body">
-												      	<div class="row"> 
-								                            <div class="col-sm-6">
-								                                <li class="list-group-item bg-dark">Valor de la Tela : ${{c.value_cloth}}</li>
-								                                <li class="list-group-item bg-dark">Valor del Trabajo : ${{c.value_work}}</li>
-								                                <li class="list-group-item bg-dark">Valor de los Hilos : ${{c.value_threads}}</li>
-								                                <li class="list-group-item bg-dark">Valor de los Botones : ${{c.value_buttons}}</li>
-								                                <li class="list-group-item bg-dark">Talla de la Prenda : {{cl.size}}</li>
-								                            </div>
-								                            <div class="col-sm-6">
-								                               <li class="list-group-item bg-dark">Valor de los Cuellos : ${{c.value_necks}}</li>
-								                               <li class="list-group-item bg-dark">Valor de los Bordados : ${{c.value_embroidery}}</li>
-								                               <li class="list-group-item bg-dark">Valor del Estampado : ${{c.value_prints}}</li>
-								                               <li class="list-group-item bg-dark">Tipo de Moda : {{c.fashion}}</li>
-								                               <li class="list-group-item bg-dark">Color de la Prenda : {{cl.color}}</li>
-								                           </div>
-								                       </div>
-												     </div>
-												     <div class="modal-footer">
-												       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-												     </div>
-												   </div>
-												 </div>
-											</div>
-											{%endif%}
-										{%endfor%}
-
-										
+						<ul class="list-group">
+							{%for u in user%}
+								{% if cu.user_id == u.id%}
+									<li class="list-group-item bg-dark text-white text-center">
+										Nombre : {{u.name}} {{u.lastname}} <br>
+										Telefono : {{u.phone}} <br>
+										Celular : {{u.cellphone}} <br>
+										Direccion : {{u.address}}
+									</li>		
 								{%endif%}
-							{%endfor%}
-							<form action="{% url 'cu_deletelog' %}" method="POST">
-								{%csrf_token%}
-								<input type="number" name="coti_user_id" value="{{cu.id}}"hidden>
-								<input type="submit" value="Delete" class="btn btn-warning btn-block">
-							</form>
-						</div>
+							{%endfor%}	
+						</ul>
+					</div>
+
+					<div class="card-header text-center bg-info">COTIZACION</div>
+					<div class="card-body">
+						<ul class="list-group  ">
+						{%for c in cotizacion%}
+							<div class="row"> 
+								{% if cu.cotizacion_id == c.id%}
+									<div class="col-sm-6">
+									    <li class="list-group-item bg-dark">Valor de la Tela : ${{c.value_cloth}}</li>
+									    <li class="list-group-item bg-dark">Valor del Trabajo : ${{c.value_work}}</li>
+									    <li class="list-group-item bg-dark">Valor de los Hilos : ${{c.value_threads}}</li>
+									    <li class="list-group-item bg-dark">Valor de los Botones : ${{c.value_buttons}}</li>
+									    <li class="list-group-item bg-dark">Talla de la Prenda : {{cl.size}}</li>
+									</div>
+									<div class="col-sm-6">
+									    <li class="list-group-item bg-dark">Valor de los Cuellos : ${{c.value_necks}}</li>
+									    <li class="list-group-item bg-dark">Valor de los Bordados : ${{c.value_embroidery}}</li>
+									    <li class="list-group-item bg-dark">Valor del Estampado : ${{c.value_prints}}</li>
+									    <li class="list-group-item bg-dark">Tipo de Moda : {{c.fashion}}</li>
+									    <li class="list-group-item bg-dark">Color de la Prenda : {{cl.color}}</li>
+									</div>
+								{%endif%}
+							</div>
+						{%endfor%}
+						</ul>
 					</div>
 				</div>
-			{% endif%}
-		{%endfor%}
-	</div>
-
+			</div>
+		{%endif%}
+	{%endfor%}
+</div>
 {%endblock%}

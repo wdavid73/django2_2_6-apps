@@ -1,0 +1,46 @@
+{% extends 'layouts/base.html' %}
+{% block title%} User Details {% endblock %}
+
+{% block content %}
+<div class="row">
+	{%for alquiler in object_list%}
+		{%if alquiler.state == 1%}
+			<div class="col-md-4 col-lg-2">
+				<div class="card bg-dark text-white ml-2 mt-2 mb-2">
+					<div class="card-header  text-center bg-info">PRENDA</div>
+					<div class="card-body">
+						<ul class="list-group">
+							{%for cloth in cloth_list%}
+								{%if cloth.id == alquiler.cloth_id%}
+									<li class="list-group-item bg-dark text-white">
+										Prenda : {{cloth.name}} <br> 
+										Color : {{cloth.color}} <br> 
+										Talla : {{cloth.size}} <br>
+									</li>		
+								{%endif%}
+							{%endfor%}	
+						</ul>
+					</div>
+
+					<div class="card-header text-center bg-info">CLIENTE</div>
+					<div class="card-body">
+						<ul class="list-group  ">
+						{%for user in user_list%}
+							{%if user.id == alquiler.user_id%}
+								<li class="list-group-item bg-dark text-white text-center">
+									Nombre : {{user.name}} {{user.lastname}} <br>
+									Telefono : {{user.phone}} <br>
+									Celular : {{user.cellphone}} <br>
+									Direccion : {{user.address}}
+								</li>
+							{%endif%}
+						{%endfor%}
+						</ul>
+					</div>
+				</div>
+			</div>
+		{%endif%}
+	{%endfor%}
+</div>
+
+{% endblock %}
