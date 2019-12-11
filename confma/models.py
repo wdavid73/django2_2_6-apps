@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.utils.timezone import datetime
 
 list_size = [
     ( 'XS'  , 'XS' ),
@@ -17,8 +18,8 @@ class User(models.Model):
     address     = models.CharField(max_length = 100 , null = True)
     phone       = models.IntegerField(null = True)
     cellphone   = models.BigIntegerField(null = False)
-    state       = models.SmallIntegerField(default = 1 , null = False)
     #############
+    state       = models.SmallIntegerField(default = 1 , null = False)
     created_at  = models.DateTimeField(auto_now_add=True)
     updated_at  = models.DateTimeField(auto_now = True)
 
@@ -26,14 +27,14 @@ class User(models.Model):
     	return reverse("users:users_home" , kwargs={"id" : self.id})
 
     def __str__(self):
-        return self.name
+        return (self.name + " "+ self.lastname)
 
 class Cloth(models.Model):
     name        = models.CharField(max_length = 100 , null = False)
     color       = models.CharField(max_length = 100 , null = False)
     size        = models.CharField(max_length = 10 ,null = False ,blank = False , choices = list_size , default = 1 )
-    state       = models.SmallIntegerField(default = 1 , null = False)
     #####################
+    state       = models.SmallIntegerField(default = 1 , null = False)
     created_at  = models.DateTimeField(auto_now_add=True)
     updated_at  = models.DateTimeField(auto_now = True)
     def __str__(self):
@@ -50,9 +51,9 @@ class Cotizacion(models.Model):
     value_prints        = models.DecimalField(max_digits = 8 ,decimal_places = 2,null = True , default = 0.00)
     fashion             = models.CharField(max_length = 50 , null = False)
     cloth               = models.ForeignKey(Cloth , on_delete=models.CASCADE , default  = 1)
-    state               = models.SmallIntegerField(default = 1 , null = False)
     user                = models.ManyToManyField(User , through="Cotizacion_User")
     #####################
+    state               = models.SmallIntegerField(default = 1 , null = False)
     created_at          = models.DateTimeField(auto_now_add=True)
     updated_at          = models.DateTimeField(auto_now = True)
     
@@ -66,7 +67,19 @@ class Cotizacion_User(models.Model):
     cotizacion = models.ForeignKey(Cotizacion , on_delete=models.CASCADE)
     user = models.ForeignKey(User , on_delete=models.CASCADE)
     total = models.BigIntegerField()
-    state = models.SmallIntegerField(default = 1 , null = False)
     #####################
+    state = models.SmallIntegerField(default = 1 , null = False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now = True)
+
+class Alquiler(models.Model):
+    date_now    = models.DateField(auto_now_add=True)#[YYYY-MM-DD]
+    date_return = models.DateField()#[YYYY-MM-DD]
+    price       = models.DecimalField(max_digits = 10 ,decimal_places = 2,null = False , default = 5000.00)
+    cloth       = models.ForeignKey(Cloth , on_delete=models.CASCADE)
+    user        = models.ForeignKey(User , on_delete=models.CASCADE)
+    #####################
+    state = models.SmallIntegerField(default = 1 , null = False)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now = True)
+

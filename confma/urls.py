@@ -6,7 +6,7 @@ from django.urls import path
 from .views             import users , general , cotizacion , user_coti
 from .views.users       import (UserCreateView , UserUpdateView , UserListView ,UserDeleteView)
 from .views.cotizacion  import (CotiCreateView , CotiUpdateView , CotiListView , CotiDeleteView)
-from .views.general     import (ClothCreateView)
+from .views.general     import (ClothCreateView , AlquilerCreateView)
 from .views.user_coti   import (UCListView)
 
 # app_name = 'users'
@@ -44,6 +44,6 @@ urlpatterns = [
     path('cotizacion_user/restored'         , user_coti.restore         , name="cu_restore"),
     ### ROUTES CLOTH
     path('cloth/create/'                    , ClothCreateView.as_view() , name="cloth_create"),
-    
+    path('alquiler/create/'                    , AlquilerCreateView.as_view() , name="alquiler_create"),
 
 ]
