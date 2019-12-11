@@ -1,5 +1,4 @@
-
-{% extends 'layouts/base.html' %}
+{% extends 'layouts/base_loggin.html' %}
 {% load staticfiles %}
 {% block title%}
     Home Confma App
@@ -11,6 +10,7 @@
 {% block content %}
 
     <div class="container" id="main">
+        
         <img src="{% static 'logo.png' %}" alt="logo" class="img-fluid container">
 
         <div class="row mt-2 mb-5">

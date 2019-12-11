@@ -33,8 +33,6 @@ class AlquilerCreateView(CreateView):
         now = date.today()        
         if form.cleaned_data["date_return"] > now:
             return super().form_valid(form)
-        else:
-            return redirect('/confma/alquiler/create')
 
     def get_success_url(self):
         return '../../'
@@ -52,6 +50,9 @@ class AlquilerListView(ListView):
 
 def home_view(request , *args, **kwargs):
     return render(request , "home.html" , {})
+
+def home_api(request , *args, **kwargs):
+    return render(request , "index.html" , {})
 
 
 def handler404(request, *args, **argv):
