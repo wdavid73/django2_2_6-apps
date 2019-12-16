@@ -1,5 +1,5 @@
 {% extends 'layouts/base_loggin.html' %}
-{% block title%} User Details {% endblock %}
+{% block title%} Alquiler Details {% endblock %}
 
 {% block content %}
 <div class="row">
@@ -25,13 +25,13 @@
 					<div class="card-header text-center bg-info">CLIENTE</div>
 					<div class="card-body">
 						<ul class="list-group  ">
-						{%for user in user_list%}
-							{%if user.id == alquiler.user_id%}
+						{%for client in client_list%}
+							{%if client.id == alquiler.client_id%}
 								<li class="list-group-item bg-dark text-white text-center">
-									Nombre : {{user.name}} {{user.lastname}} <br>
-									Telefono : {{user.phone}} <br>
-									Celular : {{user.cellphone}} <br>
-									Direccion : {{user.address}}
+									Nombre : {{client.name}} {{client.lastname}} <br>
+									Telefono : {{client.phone}} <br>
+									Celular : {{client.cellphone}} <br>
+									Direccion : {{client.address}}
 								</li>
 							{%endif%}
 						{%endfor%}

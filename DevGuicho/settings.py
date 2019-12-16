@@ -83,7 +83,7 @@ WSGI_APPLICATION = 'DevGuicho.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME' : 'confmari-django',
+        'NAME' : 'test-django',
         'USER' : 'root',
         'PASSWORD' : '',
         'HOST' : '127.0.0.1',

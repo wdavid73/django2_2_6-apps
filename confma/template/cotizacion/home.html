@@ -1,7 +1,9 @@
+
 {% extends 'layouts/base_loggin.html' %}
 {% block title%} Home Confma App {% endblock%} 
 {% block name%}{% endblock %}
 {% block content %}    
+{% with api="confma/api/v1" %}  
 <div class="row">       
 
     
@@ -42,7 +44,7 @@
 
                     </ul>         
                     </p>
-                        <a href="/confma/cotizacion-user/{{instance.id}}" class="card-link btn btn-info btn-block">For Client</a>
+                        <a href="/{{api}}/cotizacion-client/{{instance.id}}" class="card-link btn btn-info btn-block">For Client</a>
                   </div>
                 </div>
             </div>
@@ -59,4 +61,6 @@
 
     {%endfor%}
 </div>
+{%endwith%}
+
 {% endblock %}

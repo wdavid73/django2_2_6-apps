@@ -1,11 +1,11 @@
 from django.forms import ModelForm , TextInput
 from django import forms
 
-from ..models import User
+from ..models import Client
 
-class UserFormModel(forms.ModelForm):
+class ClientFormModel(forms.ModelForm):
     class Meta:
-        model = User
+        model = Client
         fields = [
             'name',
             'lastname',

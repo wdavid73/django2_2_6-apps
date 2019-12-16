@@ -3,7 +3,7 @@
 {% block title%} Home Confma App {% endblock%} 
 
 {% block name%}
-    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">account_circle</i> Users</h2>
+    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">account_circle</i> Clients</h2>
 {% endblock %}
 
 {% block content %}    
@@ -26,15 +26,15 @@
                                     </tr>
                                 </thead>
                             <tbody>
-                                {% for u in user %}
+                                {% for cli in client %}
                                         <tr>
                                             <td class="p-3"> {{forloop.counter}}</td>
                                             <!-- <td> {{u.id}}</td> -->
-                                            <td class="align-middle text-center"> {{u.name}}</td>
-                                            <td class="align-middle text-center"> {{u.lastname}}</td>
-                                            <td class="align-middle text-center"> {{u.address}}</td>
-                                            <td class="align-middle text-center"> {{u.phone}}</td>
-                                            <td class="align-middle text-center"> {{u.cellphone}}</td>
+                                            <td class="align-middle text-center"> {{cli.name}}</td>
+                                            <td class="align-middle text-center"> {{cli.lastname}}</td>
+                                            <td class="align-middle text-center"> {{cli.address}}</td>
+                                            <td class="align-middle text-center"> {{cli.phone}}</td>
+                                            <td class="align-middle text-center"> {{cli.cellphone}}</td>
                                             <td class="align-middle text-center">
                                             {% include '../layouts/methods.html'%}
                                         </td>

@@ -1,10 +1,11 @@
 from django.shortcuts import render ,redirect , get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from django.http import Http404 , HttpResponse
 from datetime import date
 
 # Models
-from ..models import Cloth , Alquiler , User
+from ..models import Cloth , Alquiler , Client
 #Form
 from ..forms.cloth import ClothFormModel 
 from ..forms.alquiler import AlquilerFormModel
@@ -33,6 +34,8 @@ class AlquilerCreateView(CreateView):
         now = date.today()        
         if form.cleaned_data["date_return"] > now:
             return super().form_valid(form)
+        else:
+            return HttpResponse("NO CUMPLE LA FECHA")
 
     def get_success_url(self):
         return '../../'
@@ -44,7 +47,7 @@ class AlquilerListView(ListView):
      def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['cloth_list'] = Cloth.objects.all()
-        context['user_list'] = User.objects.all()
+        context['client_list'] = Client.objects.all()
         return context
 
 

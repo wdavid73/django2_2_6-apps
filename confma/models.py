@@ -12,7 +12,7 @@ list_size = [
 ]
 
 # Create your models here.
-class User(models.Model):
+class Client(models.Model):
     name        = models.CharField(max_length = 100 , null = False)
     lastname    = models.CharField(max_length = 200 , null = False)
     address     = models.CharField(max_length = 100 , null = True)
@@ -37,8 +37,10 @@ class Cloth(models.Model):
     state       = models.SmallIntegerField(default = 1 , null = False)
     created_at  = models.DateTimeField(auto_now_add=True)
     updated_at  = models.DateTimeField(auto_now = True)
+    
     def __str__(self):
         return (self.name +" "+ ", Talla : " +  self.size +", Color : "+  self.color )
+
 
 
 class Cotizacion(models.Model):
@@ -51,7 +53,7 @@ class Cotizacion(models.Model):
     value_prints        = models.DecimalField(max_digits = 8 ,decimal_places = 2,null = True , default = 0.00)
     fashion             = models.CharField(max_length = 50 , null = False)
     cloth               = models.ForeignKey(Cloth , on_delete=models.CASCADE , default  = 1)
-    user                = models.ManyToManyField(User , through="Cotizacion_User")
+    client                = models.ManyToManyField(Client , through="Cotizacion_Client")
     #####################
     state               = models.SmallIntegerField(default = 1 , null = False)
     created_at          = models.DateTimeField(auto_now_add=True)
@@ -63,23 +65,23 @@ class Cotizacion(models.Model):
     def __str__(self):
         return self.cloth
 
-class Cotizacion_User(models.Model):
+class Cotizacion_Client(models.Model):
     cotizacion = models.ForeignKey(Cotizacion , on_delete=models.CASCADE)
-    user = models.ForeignKey(User , on_delete=models.CASCADE)
+    client = models.ForeignKey(Client , on_delete=models.CASCADE)
     total = models.BigIntegerField()
     #####################
     state = models.SmallIntegerField(default = 1 , null = False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now = True)
 
+
 class Alquiler(models.Model):
     date_now    = models.DateField(auto_now_add=True)#[YYYY-MM-DD]
     date_return = models.DateField()#[YYYY-MM-DD]
     price       = models.DecimalField(max_digits = 10 ,decimal_places = 2,null = False , default = 5000.00)
     cloth       = models.ForeignKey(Cloth , on_delete=models.CASCADE)
-    user        = models.ForeignKey(User , on_delete=models.CASCADE)
+    client        = models.ForeignKey(Client , on_delete=models.CASCADE)
     #####################
     state = models.SmallIntegerField(default = 1 , null = False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now = True)
-

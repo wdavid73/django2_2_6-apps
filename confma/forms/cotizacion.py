@@ -10,8 +10,17 @@ FASHION_CHOICE = [
 ]
 
 CLOTH_CHOICE = []
-for clo in Cloth.objects.all():
-    CLOTH_CHOICE.append((clo.id , clo.name))
+cc = []
+def cloths(cc):
+    if (Cloth.objects.all == None):
+        return cc
+    else:
+        for clo in Cloth.objects.all():
+            cc.append((clo.id , clo.name))
+        return cc
+
+CLOTH_CHOICE = cloths(cc)
+
 
 class CotizacionFormModel(forms.ModelForm):
     class Meta:

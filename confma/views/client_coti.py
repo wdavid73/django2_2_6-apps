@@ -3,33 +3,33 @@ from django.http import Http404 , HttpResponse
 
 # Models
 
-from ..models import Cotizacion_User , Cotizacion , User , Cloth
+from ..models import Cotizacion_Client , Cotizacion , Client , Cloth
 from django.views.generic import (ListView)
 
 #Forms
-from ..forms.cotizacion_user import CUFormModel , Coti_UserFormModel
+from ..forms.cotizacion_client import CUFormModel , Coti_UserFormModel
 
 # Create your views here.
 
 class UCListView (ListView):
 	template_name = 'cliente_cotizacion/list-client.html'
-	queryset = Cotizacion_User.objects.all()
+	queryset = Cotizacion_Client.objects.all()
 
 def list_view(request):
 	obj_coti = Cotizacion.objects.all()
-	obj_user = User.objects.all()
-	obj_coti_user = Cotizacion_User.objects.all()
+	obj_client = Client.objects.all()
+	obj_coti_clien = Cotizacion_Client.objects.all()
 	obj_cloth = Cloth.objects.all()
 	context = {	
-		"user" : obj_user,
+		"client" : obj_client,
         "cotizacion" : obj_coti,
-        "cotizacion_user" : obj_coti_user,
+        "cotizacion_user" : obj_coti_clien,
         "cloth" : obj_cloth
 	}
 	return render(request , "cliente_cotizacion/list-client.html" , context)
 
 def create_view(request, id):
-	u = User.objects.all()
+	u = Client.objects.all()
 	coti_obj = get_object_or_404(Cotizacion , id = id)
 	total_coti = getTotal(coti_obj)
 	cloth = get_cloth(coti_obj)
@@ -56,11 +56,11 @@ def create(request):
 		total = float(t)
 		if q != "":
 			u_id = q
-			Cotizacion_User.objects.create( total = total , cotizacion_id = coti_id , user_id = u_id)
+			Cotizacion_Client.objects.create( total = total , cotizacion_id = coti_id , client_id = u_id)
 			return redirect('../')
 		else:
 			u_id = 1
-			Cotizacion_User.objects.create( total = total , cotizacion_id = coti_id , user_id = u_id)
+			Cotizacion_Client.objects.create( total = total , cotizacion_id = coti_id , client_id = u_id)
 			return redirect('../')
 	else:
 		return redirect("/confma/cotizacion/list")
@@ -74,7 +74,7 @@ def getTotal(coti_obj):
 
 def deletelog(request):	
 	id = request.POST.get('coti_user_id')
-	obj = get_object_or_404(Cotizacion_User , id = id)
+	obj = get_object_or_404(Cotizacion_Client , id = id)
 	
 	if request.method == 'POST':
 		obj.state = 0
@@ -84,19 +84,19 @@ def deletelog(request):
 
 def restore_view(request):
 	obj_coti = Cotizacion.objects.all()
-	obj_user = User.objects.all()
-	obj_coti_user = Cotizacion_User.objects.all()
+	obj_client = Client.objects.all()
+	obj_coti_clien = Cotizacion_Client.objects.all()
 	context = {	
-		"user" : obj_user,
+		"client" : obj_client,
         "cotizacion" : obj_coti,
-        "cotizacion_user" : obj_coti_user
+        "cotizacion_client" : obj_coti_clien
 	}
 	return render(request , "cliente_cotizacion/restore.html" , context)
 	
 
 def restore(request):
 	id = request.POST.get('coti_user_id')
-	obj = get_object_or_404(Cotizacion_User , id = id)
+	obj = get_object_or_404(Cotizacion_Client , id = id)
 	if request.method == 'POST':
 		obj.state = 1 
 		obj.save()

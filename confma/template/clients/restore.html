@@ -3,14 +3,14 @@
 {% block title%} Home Confma App {% endblock%} 
 
 {% block name%}
-    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">account_circle</i> User Restoration</h2>
+    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">account_circle</i> Client Restoration</h2>
 {% endblock %}
 
 {% block content %}    
 
 <div class="row">
-{% for u in users %}
-    {% if u.state == 0%}
+{% for cli in clients %}
+    {% if cli.state == 0%}
         <div class="col-md-4 col-lg-2">
                 <div class="card text-white bg-dark border-info mt-2 mb-2" style="width: 28rem;">
                   <div class="card-body">
@@ -20,18 +20,19 @@
                     <ul class="list-group list-group-flush">
                         <div class="row"> 
                             <div class="col">
-                                <li class="list-group-item bg-dark">Nombre: {{u.name}}</li>
-                                <li class="list-group-item bg-dark">Apellido : {{u.lastname}}</li>
-                                <li class="list-group-item bg-dark">Dirreccion : {{u.address}}</li>
-                                <li class="list-group-item bg-dark">Telefono : {{u.phone}}</li>
-                                <li class="list-group-item bg-dark">Celular : {{u.cellphone}}</li>
+                                <li class="list-group-item bg-dark">Nombre: {{cli.name}}</li>
+                                <li class="list-group-item bg-dark">Apellido : {{cli.lastname}}</li>
+                                <li class="list-group-item bg-dark">Dirreccion : {{cli.address}}</li>
+                                <li class="list-group-item bg-dark">Telefono : {{cli.phone}}</li>
+                                <li class="list-group-item bg-dark">Celular : {{cli.cellphone}}</li>
                             </div>
                         </div>
 
                     </ul>         
                     </p>
-                    <div class="container">    
-                        <form action="/confma/users/restored/{{u.id}}/" method = "POST">
+                    <div class="container">  
+                      
+                        <form action="{% url 'client_restored' %}" method = "POST">
                             {% csrf_token %}
                             <input type="submit" class="btn btn-primary btn-block" value="Restore">    
                         </form>

@@ -15,13 +15,13 @@
 					<div class="card-header  text-center bg-info">CLIENTE</div>
 					<div class="card-body">
 						<ul class="list-group">
-							{%for u in user%}
-								{% if cu.user_id == u.id%}
+							{%for cli in client%}
+								{% if cu.client_id == cli.id%}
 									<li class="list-group-item bg-dark text-white text-center">
-										Nombre : {{u.name}} {{u.lastname}} <br>
-										Telefono : {{u.phone}} <br>
-										Celular : {{u.cellphone}} <br>
-										Direccion : {{u.address}}
+										Nombre : {{cli.name}} {{cli.lastname}} <br>
+										Telefono : {{cli.phone}} <br>
+										Celular : {{cli.cellphone}} <br>
+										Direccion : {{cli.address}}
 									</li>		
 								{%endif%}
 							{%endfor%}	

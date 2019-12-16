@@ -12,7 +12,7 @@ class AlquilerFormModel(forms.ModelForm):
             'date_return',
             'price',      
             'cloth',       
-            'user'        
+            'client'        
          ]
         
         widgets = {
@@ -22,7 +22,7 @@ class AlquilerFormModel(forms.ModelForm):
                     attrs = {'class' : 'form-control bg-dark text-white mb-3'}),
             'cloth' : forms.Select(
                     attrs = {'class ' : 'form-control bg-dark text-white mb-3'}),
-            'user'  : forms.Select(
+            'client'  : forms.Select(
                     attrs = {'class ' : 'form-control bg-dark text-white mb-3'}),
         }
 
@@ -30,5 +30,5 @@ class AlquilerFormModel(forms.ModelForm):
             'date_return'   : _("Fecha de Devolucion (YYYY-MM-DD) "),
             'price'         : _("Valor del Alquier"),
             'cloth'         : _("Prenda a Alquilar"),
-            'user'          : _("Cliente")
+            'client'          : _("Cliente")
         }
