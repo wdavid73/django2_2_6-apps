@@ -1,18 +1,31 @@
-from django.urls import path
+from django.urls import path , include
 from .views             import clients , general , cotizacion , client_coti , registration
 from .views.clients       import (ClientCreateView , ClientUpdateView , ClientListView ,ClientDeleteView)
 from .views.cotizacion  import (CotiCreateView , CotiUpdateView , CotiListView , CotiDeleteView)
 from .views.general     import (ClothCreateView , AlquilerCreateView, AlquilerListView)
 from .views.client_coti   import (UCListView)
-from .views.registration import (UserCreateView)
+from .views.registration import (SignUp)
 
 api = 'api/v1/'
 urlpatterns = [
 	###ROUTES GENERAL###
 	path('' , general.home_view , name = "home"),
-    path('login/' ,UserCreateView.as_view(), name="login"),
-    path('logged/' ,registration.iniciar_sesion, name="iniciar_sesion"),
-    # path('signup/' ,registration.registro, name="signup"),
+    ### LOGIN AND LOGOUT
+
+    path('', include('django.contrib.auth.urls')),
+        # confma/ login/ [name='login']
+        # confma/ logout/ [name='logout']
+        # confma/ password_change/ [name='password_change']
+        # confma/ password_change/done/ [name='password_change_done']
+        # confma/ password_reset/ [name='password_reset']
+        # confma/ password_reset/done/ [name='password_reset_done']
+        # confma/ reset/<uidb64>/<token>/ [name='password_reset_confirm']
+        # confma/ reset/done/ [name='password_reset_complete'] 
+
+    path('signup/' ,SignUp.as_view(), name="signup"),
+        
+    # path('logged/' ,registration.iniciar_sesion, name="iniciar_sesion"),
+    
 
 
 

@@ -8,11 +8,9 @@
 {% endblock%}
 
 {% block content %}
-
-    <div class="container" id="main">
-        
+    {% if user.is_authenticated %}
+      <div class="container" id="main">
         <img src="{% static 'logo.png' %}" alt="logo" class="img-fluid container">
-
         <div class="row mt-2 mb-5">
             <div class="col">
                 <h2 class="text-center">¿Quienes Somos?</h2>
@@ -53,4 +51,8 @@
         </div>
         
     </div>
+    {% else %}
+      <p>You are not logged in <a href="{% url 'login' %}" class="btn btn-info">login</a> </p>
+    {% endif %}
 {% endblock %}
+

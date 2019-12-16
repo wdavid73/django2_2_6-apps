@@ -1,22 +1,51 @@
+
 {% extends 'layouts/base.html' %}
 {% load staticfiles %}
-{% block title%}
-    Home Confma App
-{% endblock %}
-
-{% block principal_options%}
-{% endblock%}
-
+{% block title %}Login{% endblock %}
 {% block content %}
 
-	<div class="container">
-		
-		<form action=" {% url 'iniciar_sesion' %} " method="POST">
-			{% csrf_token %}
-			{{form}}
-			<input type="submit" value="Iniciar Sesion" class="btn btn-primary">
-		</form>
-
+<div class="container mt-4">
+	<div class="row justify-content-center align-items-center">
+		<div class="col-sm-12 col-md-8 col-lg-6">
+			<div class="card p-3">
+				<div class="card-body">
+					<p class="card-title">
+                        <div class="container">
+                            <div class="row justify-content-center align-items-center">
+	                            <div class="col-sm-12 col-md-8 col-lg-9 my-2">
+	                            	<p>
+										<img src="{% static 'logo.png' %}" alt="logo" class="img-fluid container">
+									</p>
+	                            </div>
+                        	</div>
+                        </div>
+				</div>
+				<form method="POST" autocomplete="off">
+					{% csrf_token %}
+					<div class="form-group">
+						<label for="">Username : </label>
+						<input type="text" name="{{form.username.html_name}}" id="" class="form-control bg-dark text-white" placeholder="Insert Username">
+					</div>
+					<div class="form-group">
+						<label for="">Password : </label>
+						<input type="password" name="{{form.password.html_name}}" id="" class="form-control bg-dark text-white" placeholder="Insert Password">
+					</div>
+					<div class="row">
+						<div class="col">
+							{% if form.errors %}
+								{% for key , value in form.error.items %}
+									<div class="alert alert-danger" role="alert">
+			                            {% if key != '__all__' %}{{ key }} - {% endif %}{{ value | striptags }}
+			                        </div>
+								{% endfor%}
+							{% endif %}
+						</div>
+					</div>
+					<input type="submit" value="Login" class="btn btn-warning container my-1">
+				</form>
+			</div>
+		</div>		
 	</div>
+</div>
 
-{%endblock%}
+{% endblock %}
