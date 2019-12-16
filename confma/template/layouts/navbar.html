@@ -1,6 +1,6 @@
-{% with api="confma/api/v1" %}     
+ 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/{{api}}">Confma Api</a>
+  <a class="navbar-brand" href="/confma">Confma</a>
   <button
     class="navbar-toggler"
     type="button"
@@ -13,65 +13,15 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav">
+    <ul class="navbar-nav mr-auto"></ul>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Clientes
-        </a>
-        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a href='/{{api}}/clients/create/'  class="dropdown-item bg-dark text-white">Register</a>
-          <div class="dropdown-divider bg-dark"></div>
-          <a href="/{{api}}/clients/details/" class="dropdown-item  bg-dark text-white">Registered</a>
-        </div>
-      </li>
+    <form action="{% url 'login' %}">
+      <input type="submit" value="Login" class="btn btn-outline-secondary bg-dark">
+    </form>
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Cotizaciones
-        </a>
-        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a href="/{{api}}/cotizacion/create/" class="dropdown-item bg-dark text-white">Register</a>
-          <div class="dropdown-divider bg-dark"></div>
-          <a href="/{{api}}/cotizacion/" class="dropdown-item  bg-dark text-white">Registered</a>
-          <div class="dropdown-divider bg-dark"></div>
-          <a href="/{{api}}/cotizacion-client/list/" class="dropdown-item  bg-dark text-white">Cliente - Cotizacion Registered</a>
-        </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Cloth
-        </a>
-        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a href="/{{api}}/cloth/create/" class="dropdown-item bg-dark text-white">Register</a>
-          <!-- <div class="dropdown-divider bg-dark"></div> -->
-          <!-- <a href="/confma/cotizacion/" class="dropdown-item  bg-dark text-white">Registered</a>
-          <div class="dropdown-divider bg-dark"></div>
-          <a href="/confma/cotizacion-user/list/" class="dropdown-item  bg-dark text-white">Cliente - Cotizacion Registered</a> -->
-        </div>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Alquiler
-        </a>
-        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a href="/{{api}}/alquiler/create/" class="dropdown-item bg-dark text-white">Register</a>
-          <div class="dropdown-divider bg-dark"></div>
-          <a href="/{{api}}/alquiler/details/all" class="dropdown-item  bg-dark text-white">Details All</a>
-          <!-- <div class="dropdown-divider bg-dark"></div>
-          <a href="/confma/cotizacion-user/list/" class="dropdown-item  bg-dark text-white">Cliente - Cotizacion Registered</a> -->
-        </div>
-      </li>
-  
-      <!-- <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
-          >Disabled</a
-        >
-
-      </li> -->
-    </ul>
+    <form action="">
+      <input type="submit" value="Sign Up" class="btn btn-outline-success bg-dark">
+    </form>
+    
   </div>
 </nav>
-
-{% endwith %}
