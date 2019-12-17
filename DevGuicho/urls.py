@@ -21,7 +21,7 @@ urlpatterns = [
 	path('' , views.index ,name = "index"),
     path('admin/', admin.site.urls),
     path('confma/' , include('confma.urls')),
-
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 # handler404 = "confma.views.general.handler404"

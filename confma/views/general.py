@@ -12,6 +12,8 @@ from ..forms.alquiler import AlquilerFormModel
 # Create your views here.
 from django.views.generic import (CreateView ,UpdateView , ListView ,DeleteView)
 
+count = 0
+
 class ClothCreateView(CreateView):
     template_name = "cloth/create.html"
     form_class = ClothFormModel
@@ -55,7 +57,8 @@ def home_view(request , *args, **kwargs):
     return render(request , "home.html" , {})
 
 def home_api(request , *args, **kwargs):
-    return render(request , "index.html" , {})
+    
+    return render(request , "index.html" , {'count' : count })
 
 
 def handler404(request, *args, **argv):
