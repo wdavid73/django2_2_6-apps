@@ -29,7 +29,7 @@
 				    	<small id="UserNameHelp" class="form-text text-muted">{{form.username.help_text}}</small>
 				    </div>
 
-				    <!-- <div class="form-group">
+				    <div class="form-group">
 				    	<label for="">First Name : </label>
 				    	<input type="text"  name="{{form.first_name.html_name}}" id="" class="form-control bg-dark text-white" placeholder="Insert First Name">
 				    	<small id="UserNameHelp" class="form-text text-muted">{{form.first_name.help_text}}</small>
@@ -45,7 +45,7 @@
 				    	<label for="">Email : </label>
 				    	<input type="email"  name="{{form.email.html_name}}" id="" class="form-control bg-dark text-white" placeholder="Insert E-mail">
 				    	<small id="UserNameHelp" class="form-text text-muted">{{form.email.help_text}}</small>
-				    </div> -->
+				    </div>
 
 				    <div class="form-group">
 				    	<label for="">Password : </label>
@@ -61,6 +61,7 @@
 
 				    <div class="row">
 						<div class="col">
+							{{form.errors}}
 							{% if form.errors %}
 								{% for key , value in form.error.items %}
 									<div class="alert alert-danger" role="alert">
