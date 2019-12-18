@@ -7,12 +7,64 @@
 {% endblock %}
 
 
-
 {% block content %}
+<form action="{% url 'cu_deletelog_temp'%}" method="POST">
+	{% csrf_token %}
+		<div class="col-sm-12 col-md-8 col-lg-9 container">
+			<div class="card">
 
-<form action="{% url 'cu_deletelog' %}" method="POST">
-	
-	
+				<div class="card-header bg-dark text-white">
+					<span class="badge badge-primary badge-pill">#{{client_coti.id}}</span>
+				</div>
+
+				<div class="card-body bg-dark text-white">
+					<div class="row">
+						<div class="col">
+							<h2>Cotizacion</h2>
+							<div class="col-sm">
+								<ul class="list-group mb-2">
+	                                <li class="list-group-item bg-dark">Valor de la Tela : ${{cotizacion.value_cloth}}</li>
+	                                <li class="list-group-item bg-dark">Valor del Trabajo : ${{cotizacion.value_work}}</li>
+	                                <li class="list-group-item bg-dark">Valor de los Hilos : ${{cotizacion.value_threads}}</li>
+	                                <li class="list-group-item bg-dark">Valor de los Botones : ${{cotizacion.value_buttons}}</li>
+	                                <li class="list-group-item bg-dark">Valor de los Cuellos : ${{cotizacion.value_necks}}</li>
+	                                <li class="list-group-item bg-dark">Valor de los Bordados : ${{cotizacion.value_embroidery}}</li>
+	                                <li class="list-group-item bg-dark">Valor del Estampado : ${{cotizacion.value_prints}}</li>
+	                                <li class="list-group-item bg-dark">Tipo de Moda : {{cotizacion.fashion}}</li>
+	                                <li class="list-group-item bg-dark">Total : ${{client_coti.total}}</li>
+	                                <li class="list-group-item bg-dark">Prenda : {{cloth.name}} - Color :  {{cloth.color}} - Talla : {{cloth.size}}</li>
+								</ul>
+                            </div>
+						</div>
+						<div class="col">
+							<h2>Cliente</h2>
+							<ul class="list-group list-group-flush">
+                            <div class="row"> 
+                                <div class="col">
+                                    <li class="list-group-item bg-dark">Nombre : {{client.name}}</li>
+                                    <li class="list-group-item bg-dark">Apellido : {{client.lastname}}</li>
+                                    <li class="list-group-item bg-dark">Direccion : {{client.address}}</li>
+                                    <li class="list-group-item bg-dark">Telefono : {{client.phone}}</li>
+                                    <li class="list-group-item bg-dark">Celular : {{client.cellphone}}</li>
+                                </div>
+                            </div>
+                        </ul>  
+						</div>
+					</div>
+		    		<div class="row">
+		    			<div class="col-6">
+		    				<input type="number" name="coti_client_id" value="{{client_coti.id}}"hidden>
+		    				<input type="submit" class="btn btn-warning btn-block" value="Yes">
+		    			</div>
+		    			<div class="col-6">
+		    				<a href="../../" class="btn btn-success btn-block">No</a>	
+		    			</div>
+		    		</div>
+					
+					
+		  		</div>
+			</div>
+		</div>
 </form>
 
 {% endblock %}

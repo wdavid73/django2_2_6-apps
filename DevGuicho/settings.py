@@ -125,7 +125,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LOGIN_REDIRECT_URL = '/confma/api/v1'
+LOGIN_REDIRECT_URL = '/confma/'
 LOGOUT_REDIRECT_URL = '/confma/'
 
 # Static files (CSS, JavaScript, Images)

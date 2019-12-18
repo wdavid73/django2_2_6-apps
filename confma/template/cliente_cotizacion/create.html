@@ -15,11 +15,7 @@
 				<div class="card text-white bg-dark border-info mt-2 mb-2" style=" margin : 0 auto">
 					<div class="card-header">
 						<p class="card-title">
-							
-
-							Cotizacion de {{cloth.name}} , Talla : {{cloth.size}} , Color : {{cloth.color}}
-
-
+							Cotizacion Para :  {{cloth.name}} , Talla : {{cloth.size}} , Color : {{cloth.color}}
 						</p>
 					</div>
 					<div class="card-body">
@@ -75,7 +71,7 @@
 		      			<input type="submit" value="Submit " class="btn btn-primary btn-block">
 		      		</div>
 		      		<div class="col-6">
-		      			<a href="/confma/cotizacion-user/list/" class="btn btn-info btn-block">List of cotizacion with clients</a>
+		      			<a href="{% url 'coti_user_list' %}" class="btn btn-info btn-block">List of cotizacion with clients</a>
 		      		</div>
 	      		</div>
 	    	</div>

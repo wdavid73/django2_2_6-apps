@@ -62,8 +62,8 @@ class Cotizacion(models.Model):
     def get_absolute_url(self):
         return reverse("cotizacion:coti_home" , kwargs={"id" : self.id})
 
-    def __str__(self):
-        return self.cloth
+    # def __str__(self):
+    #     return self.cloth
 
 class Cotizacion_Client(models.Model):
     cotizacion = models.ForeignKey(Cotizacion , on_delete=models.CASCADE)

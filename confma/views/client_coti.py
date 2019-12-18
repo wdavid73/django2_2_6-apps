@@ -57,13 +57,13 @@ def create(request):
 		if q != "":
 			u_id = q
 			Cotizacion_Client.objects.create( total = total , cotizacion_id = coti_id , client_id = u_id)
-			return redirect('../')
+			return redirect("/confma/api/v1/cotizacion-client/list")
 		else:
 			u_id = 1
 			Cotizacion_Client.objects.create( total = total , cotizacion_id = coti_id , client_id = u_id)
-			return redirect('../')
+			return redirect("/confma/api/v1/cotizacion-client/list")
 	else:
-		return redirect("/confma/cotizacion/list")
+		return redirect("/confma/api/v1/cotizacion/list")
 
 def getTotal(coti_obj):
 	total1 = coti_obj.value_cloth + coti_obj.value_work
@@ -73,13 +73,42 @@ def getTotal(coti_obj):
 	return total
 
 def deletelog(request):	
-	id = request.POST.get('coti_user_id')
+	id = request.POST.get('coti_client_id')
 	obj = get_object_or_404(Cotizacion_Client , id = id)
-	
+	obj_client = get_client(Client.objects.all() , obj)
+	obj_cotizacion = get_cotizacion(Cotizacion.objects.all() ,obj)
+	obj_cloth = get_cloth(obj_cotizacion)
+
+	context = {
+		'client_coti' : obj,
+		'client' : obj_client,
+		'cotizacion' : obj_cotizacion,
+		'cloth':obj_cloth
+	}
+
+	return render (request , 'cliente_cotizacion/delete.html',context)
+
+def temp(request):
+
+	id = request.POST.get('coti_client_id')
+	obj = get_object_or_404(Cotizacion_Client , id = id)
 	if request.method == 'POST':
 		obj.state = 0
 		obj.save()
-		return redirect('/confma/cotizacion-user/list/')
+		return redirect('/confma')
+
+
+def get_client(client, obj):
+	for cli in client:
+		if cli.id == obj.client_id:
+			return cli
+
+def get_cotizacion(cotizacion , obj):
+	for coti in cotizacion:
+		if coti.id == obj.cotizacion_id:
+			return coti
+
+
 
 
 def restore_view(request):

@@ -3,13 +3,20 @@
 
 {% block content %}
     <div class="row">       
-    {% for instance in object_list %}
+    {% for instance in clients %}
         {% if instance.state == 1%}
             <div class="col-md-4 col-lg-2">
                 <div class="card text-white bg-dark border-info mt-2 mb-2" style="width: 18rem;">
                   <div class="card-body">
-                    <h5 class="card-title">Clientes <span class="badge badge-primary badge-pill float-right"># {{forloop.counter}}</span> 
+                    
+                    <h5 class="card-title">Clientes <span class="badge badge-primary badge-pill float-right"># 
+                    {{forloop.counter}}</span> 
                     </h5>
+
+                    <div class="col mt-2 mb-2">
+                                <a href="{{instance.id}}/update/" class="btn btn-info badge badge-info badge-pill">Update</a> 
+                                <a href="{{instance.id}}/delete/" class="btn btn-warning badge badge-warning badge-pill">Delete</a>   
+                            </div>
                     <p class="card-text">
                         <ul class="list-group list-group-flush">
                             <div class="row"> 
@@ -33,7 +40,7 @@
     </div>
         <div class="container">    
             <div class="row">
-                <a href="../" class="btn btn-success btn-block">Back</a>
+                <a href="../../../" class="btn btn-success btn-block">Back</a>
             </div>
     </div>
 {% endblock %}

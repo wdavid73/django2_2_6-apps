@@ -48,6 +48,13 @@
 									    <li class="list-group-item bg-dark">Tipo de Moda : {{c.fashion}}</li>
 									    <li class="list-group-item bg-dark">Color de la Prenda : {{cl.color}}</li>
 									</div>
+									<div class="m-2">
+										<form action="{% url 'cu_deletelog' %}" method="POST">
+											{% csrf_token %}
+											<input type="number" name="coti_client_id" value="{{cu.id}}"hidden>
+											<input type="submit" value="Delete " class="btn btn-warning btn-block">
+										</form>	
+									</div>
 								{%endif%}
 							</div>
 						{%endfor%}

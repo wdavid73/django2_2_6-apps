@@ -20,10 +20,10 @@ def home(request , *args, **kwargs):
             clients.append(client)
     
     context = {
-        "client" : clients,
+        "clients" : clients,
         "model" : "Client"
      }
-    return render(request , "clients/home_clients.html" , context)
+    return render(request , "clients/details.html" , context)
 
 
 class ClientCreateView(CreateView):
@@ -38,12 +38,6 @@ class ClientCreateView(CreateView):
     def get_success_url(self):
         return '../'
 
-def details(request):
-    obj = Client.objects.all()
-    context = {
-        "client" : obj
-    }
-    return render(request , "clients/details.html" , context)
 
 class ClientListView(ListView):
     template_name = 'clients/details.html'
@@ -93,17 +87,14 @@ def deletelog(request , id):
 
 def restoreview(request):
     obj = Client.objects.all()
-    context = {
-        'clients' : obj
-    }
-    return render(request , 'clients/restore.html', context)
+    return render(request , 'clients/restore.html', {'clients' : obj})
 
 def restore(request, id):
     obj = get_object_or_404(Client , id=id)
     if request.method == 'POST':
         obj.state = 1
         obj.save()
-        return redirect('../../')
+        return redirect('/confma')
         
     response = 'I Dont Know <a href = "/confma/clients/"> BACK </a>'
     return HttpResponse(response)

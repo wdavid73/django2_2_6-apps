@@ -52,6 +52,11 @@ class AlquilerListView(ListView):
         context['client_list'] = Client.objects.all()
         return context
 
+def home(request , *args , **kwargs):
+    if request.user.is_authenticated:
+        return render(request , "index.html" , {})
+    else:
+        return render(request , "home.html" , {})
 
 def home_view(request , *args, **kwargs):
     return render(request , "home.html" , {})
