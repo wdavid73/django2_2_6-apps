@@ -10,7 +10,7 @@
 					</div>
 					    <form method="POST">
 				            {% csrf_token %}
-				            {{ form }}
+				            {{ form.as_p }}
 							<input type="submit" value="Enviar" class="btn btn-primary btn-block mt-3" id="client"  name ="submit_coti">
 				        </form>
 				  </div>

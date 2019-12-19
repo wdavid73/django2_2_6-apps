@@ -26,8 +26,7 @@ urlpatterns = [
     path('signup/' ,SignUp.as_view(), name="signup"),
 
     ### ROUTES API
-    # path( api                                 , login_required(general.home)          , name = "home_api"),
-	   ### ROUTES USERS###
+	### ROUTES USERS###
     path(api + 'clients/'                     , login_required(clients.home), name = "clients_home"),
     # path(api + 'clients/details/'             , login_required(ClientListView.as_view()), name = "client_details"),
     path(api + 'clients/create/'              , login_required(ClientCreateView.as_view()), name = "client_create"),

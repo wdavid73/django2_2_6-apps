@@ -1,4 +1,5 @@
-{% with api="confma/api/v1" %}     
+{% with api="confma/api/v1" %}
+{% load staticfiles %}     
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <a class="navbar-brand" href="/confma">Confma Api</a>
   <button
@@ -25,6 +26,14 @@
           <a href="/{{api}}/clients/" class="dropdown-item  bg-dark text-white">Registered</a>
         </div>
       </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Cloth
+        </a>
+        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+          <a href="/{{api}}/cloth/create/" class="dropdown-item bg-dark text-white">Register</a>
+        </div>
+      </li>
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -38,18 +47,6 @@
           <a href="/{{api}}/cotizacion-client/list/" class="dropdown-item  bg-dark text-white">Cliente - Cotizacion Registered</a>
         </div>
       </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Cloth
-        </a>
-        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a href="/{{api}}/cloth/create/" class="dropdown-item bg-dark text-white">Register</a>
-          <!-- <div class="dropdown-divider bg-dark"></div> -->
-          <!-- <a href="/confma/cotizacion/" class="dropdown-item  bg-dark text-white">Registered</a>
-          <div class="dropdown-divider bg-dark"></div>
-          <a href="/confma/cotizacion-user/list/" class="dropdown-item  bg-dark text-white">Cliente - Cotizacion Registered</a> -->
-        </div>
-      </li>
 
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -59,22 +56,13 @@
           <a href="/{{api}}/alquiler/create/" class="dropdown-item bg-dark text-white">Register</a>
           <div class="dropdown-divider bg-dark"></div>
           <a href="/{{api}}/alquiler/details/all" class="dropdown-item  bg-dark text-white">Details All</a>
-          <!-- <div class="dropdown-divider bg-dark"></div>
-          <a href="/confma/cotizacion-user/list/" class="dropdown-item  bg-dark text-white">Cliente - Cotizacion Registered</a> -->
         </div>
       </li>
-  
-      <!-- <li class="nav-item">
-        <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true"
-          >Disabled</a
-        >
-
-      </li> -->
     </ul>
     {% if user.is_authenticated %}
        <div class="btn-group">
           <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Icon
+            <img src="{% static 'img_user.jpg' %}" alt="img-user" class="img-fluid" width="50px" style="border-radius: 50%">
           </button>
           <div class="dropdown-menu dropdown-menu-right bg-dark">
             <p class="dropdown-item bg-primary" type="button">Hi {{user.username}}!</p>

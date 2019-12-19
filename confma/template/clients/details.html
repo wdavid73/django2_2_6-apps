@@ -5,7 +5,7 @@
     <div class="row">       
     {% for instance in clients %}
         {% if instance.state == 1%}
-            <div class="col-md-4 col-lg-2">
+            <div class="col-sm-12 col-md-4 col-lg-3 m-2">
                 <div class="card text-white bg-dark border-info mt-2 mb-2" style="width: 18rem;">
                   <div class="card-body">
                     
@@ -37,10 +37,5 @@
     {% empty %}
         <p> NO HAY USUARIOS REGISTRADOS </p>
     {%endfor%}
-    </div>
-        <div class="container">    
-            <div class="row">
-                <a href="../../../" class="btn btn-success btn-block">Back</a>
-            </div>
     </div>
 {% endblock %}

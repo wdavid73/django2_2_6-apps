@@ -49,23 +49,17 @@
 								<select  name="client_s" class="form-control">
 									<option value="" selected> Elegir Cliente : </option>
 									{% for c in cliente %}
+										{% if c.state == 1 %}
 											<option value="{{c.id}}" id="{{c.id}}" >
 												{{c.name}} - {{c.address}} - {{c.phone}} - {{c.cellphone}}
 											</option>
+										{%endif%}
 									{% endfor %}
 								</select>
 							</div>
 						</div>
 					</div>
 				</div>
-				
-				<!-- <label for="">Total de la Cotizacion : </label>
-				<div class="input-group">
-		        	<div class="input-group-prepend">
-		          		<div class="input-group-text">$</div>
-		        	</div>
-		        	<input type="number" class="form-control" placeholder="Valor Total de la Cotizacion" value="{{total}}" readonly="" name="total">
-	      		</div> -->
 	      		<div class="row">
 		      		<div class="col-6">
 		      			<input type="submit" value="Submit " class="btn btn-primary btn-block">

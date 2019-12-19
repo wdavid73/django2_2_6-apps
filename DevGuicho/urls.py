@@ -24,5 +24,5 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 ]
 
-# handler404 = "confma.views.general.handler404"
-# handler500 = "confma.views.general.handler500"
+handler404 = "confma.views.general.handler404"
+handler500 = "confma.views.general.handler500"
