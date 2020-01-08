@@ -11,7 +11,7 @@ from ..forms.cotizacion_client import CUFormModel , Coti_UserFormModel
 """Metodo para el listado de todas las cotizacion asociadas a un client"""
 class UCListView (ListView):
 	template_name = 'cliente_cotizacion/list-client.html'
-	queryset = Cotizacion_Client.objects.all()
+	queryset = Cotizacion_Client.objects.filter(state = 1)
 
 """
 Segundo Metodo para el listado de todas las cotizacion asociadas a un client , en este
@@ -19,10 +19,11 @@ pasamos mas informacion asociada a la cotizacion en particular como a que client
 que prenda se cotizo y los valor de esa cotizacion.
 """
 def list_view(request):
-	obj_coti = Cotizacion.objects.all()
-	obj_client = Client.objects.all()
-	obj_coti_clien = Cotizacion_Client.objects.all()
-	obj_cloth = Cloth.objects.all()
+	obj_coti_clien = Cotizacion_Client.objects.all().filter(state = 1)
+	obj_coti = Cotizacion.objects.all().filter(state = 1)
+	obj_client = Client.objects.all().filter(state = 1)
+	obj_cloth = Cloth.objects.all().filter(state = 1)
+
 	context = {	
 		"client" : obj_client,
         "cotizacion" : obj_coti,
@@ -35,7 +36,7 @@ def list_view(request):
 Metodo que Crea la vista para el registro de una cotizacion con un cliente
 """
 def create_view(request, id):
-	u = Client.objects.all()
+	u = Client.objects.all().filter(state=1)
 	coti_obj = get_object_or_404(Cotizacion , id = id)
 	total_coti = getTotal(coti_obj)
 	cloth = get_cloth(coti_obj)
@@ -53,7 +54,7 @@ Metodo para obtener una prenda en particular,
 pasandole una cotizacion en especifico
 """
 def get_cloth(coti_obj):
-	obj_cloth = Cloth.objects.all()
+	obj_cloth = Cloth.objects.all().filter(state=1)
 	for cloth in obj_cloth:
 		if(cloth.id == coti_obj.cloth_id):
 			return cloth
@@ -97,7 +98,7 @@ def deletelog(request):
 	id = request.POST.get('coti_client_id')
 	obj = get_object_or_404(Cotizacion_Client , id = id)
 	obj_client = get_client(Client.objects.all() , obj)
-	obj_cotizacion = get_cotizacion(Cotizacion.objects.all() ,obj)
+	obj_cotizacion = get_cotizacion(Cotizacion.objects.all().filter(state=1) ,obj)
 	obj_cloth = get_cloth(obj_cotizacion)
 
 	context = {
@@ -133,9 +134,9 @@ def get_cotizacion(cotizacion , obj):
 
 """metodo que genera la vista para restaurar registro borrados logicamente"""
 def restore_view(request):
-	obj_coti = Cotizacion.objects.all()
-	obj_client = Client.objects.all()
-	obj_coti_clien = Cotizacion_Client.objects.all()
+	obj_coti = Cotizacion.objects.all().filter(state=0)
+	obj_client = Client.objects.all().filter(state=0)
+	obj_coti_clien = Cotizacion_Client.objects.all().filter(state=0)
 	context = {	
 		"client" : obj_client,
         "cotizacion" : obj_coti,

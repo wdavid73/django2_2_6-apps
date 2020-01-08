@@ -26,7 +26,7 @@ from django.views.generic import (CreateView ,UpdateView , ListView ,DeleteView)
 class ClothCreateView(CreateView):
     template_name = "cloth/create.html"
     form_class = ClothFormModel
-    queryset = Cloth.objects.all()
+    # queryset = Cloth.objects.all()
 
     def form_valid(self , form):
         print(form.cleaned_data)
@@ -39,7 +39,7 @@ class ClothCreateView(CreateView):
 class AlquilerCreateView(CreateView):
     template_name = "alquiler/create.html"
     form_class = AlquilerFormModel
-    queryset = Alquiler.objects.all()
+    # queryset = Alquiler.objects.all()
 
     def form_valid(self , form):
         # print(form.cleaned_data)
@@ -58,12 +58,12 @@ class AlquilerCreateView(CreateView):
 """metodo que usa el LISTVIEW de django para listar todas los alquileres registrados en la base de datos"""
 class AlquilerListView(ListView):
      template_name = 'alquiler/details.html'
-     queryset = Alquiler.objects.all()
+     queryset = Alquiler.objects.filter(state = 1)
 
      def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cloth_list'] = Cloth.objects.all()
-        context['client_list'] = Client.objects.all()
+        context['cloth_list'] = Cloth.objects.filter(state = 1)
+        context['client_list'] = Client.objects.filter( state = 1)
         return context
 
 """metodo que renderiza las vista de index y home , una es la vista con el navbar para hacer CRUD en los distintos

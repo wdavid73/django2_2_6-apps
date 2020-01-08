@@ -13,18 +13,18 @@ el registro con todas las prendas registradas para asi asociar la informacion"""
 
 class CotiListView(ListView):
      template_name = 'cotizacion/home.html'
-     queryset = Cotizacion.objects.all()
+     queryset = Cotizacion.objects.all().filter(state = 1)
 
      def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['cloth_list'] = Cloth.objects.all()
+        context['cloth_list'] = Cloth.objects.all().filter(state = 1)
         return context
 
 """metodo que usa el CREATEVIEW de django para el registro de las cotizacion en la base de datos"""
 class CotiCreateView(CreateView):
     template_name = "cotizacion/create.html"
     form_class = CotizacionFormModel
-    queryset = Cotizacion.objects.all()
+    # queryset = Cotizacion.objects.all()
 
     def form_valid(self , form):
         print(form.cleaned_data)

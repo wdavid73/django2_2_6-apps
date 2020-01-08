@@ -4,7 +4,6 @@
 {% block content %}
 <div class="row">
 	{%for alquiler in object_list%}
-		{%if alquiler.state == 1%}
 			<div class="col-md-4 col-lg-2">
 				<div class="card bg-dark text-white ml-2 mt-2 mb-2">
 					<div class="card-header  text-center bg-info">PRENDA</div>
@@ -26,20 +25,23 @@
 					<div class="card-body">
 						<ul class="list-group  ">
 						{%for client in client_list%}
-							{%if client.id == alquiler.client_id%}
+							{% if alquiler.client_id == client.id%}
 								<li class="list-group-item bg-dark text-white text-center">
 									Nombre : {{client.name}} {{client.lastname}} <br>
 									Telefono : {{client.phone}} <br>
 									Celular : {{client.cellphone}} <br>
 									Direccion : {{client.address}}
 								</li>
+							{% empty %}
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit eius at enim ullam, magni necessitatibus natus magnam, molestiae perspiciatis reiciendis officiis voluptatem, voluptatum tenetur! Quod ipsum voluptas, doloribus laudantium nam.</p>
+
 							{%endif%}
+
 						{%endfor%}
 						</ul>
 					</div>
 				</div>
 			</div>
-		{%endif%}
 	{%endfor%}
 </div>
 

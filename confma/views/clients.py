@@ -12,15 +12,16 @@ from ..forms.client import ClientFormModel
 """ metodo que carga una vista con todos los clientes registrados filtrando
 a los que tengan estado 0 para que no se muestren"""
 def home(request , *args, **kwargs):
-    obj = Client.objects.all()
+    # obj = Client.objects.all()
+    obj = Client.objects.filter(state = 1)
 
-    clients = []
-    for client in obj:
-        if client.state == 1:
-            clients.append(client)
+    # clients = []
+    # for client in obj:
+    #     if client.state == 1:
+    #         clients.append(client)
     
     context = {
-        "clients" : clients,
+        "clients" : obj,
         "model" : "Client"
      }
     return render(request , "clients/details.html" , context)
@@ -30,7 +31,7 @@ clientes en la base de datos"""
 class ClientCreateView(CreateView):
     template_name = "clients/create.html"
     form_class = ClientFormModel
-    queryset = Client.objects.all()
+    # queryset = Client.objects.all()
 
     def form_valid(self , form):
         print(form.cleaned_data)
@@ -43,7 +44,7 @@ class ClientCreateView(CreateView):
 registrados , Actualmente no se usa"""
 class ClientListView(ListView):
     template_name = 'clients/details.html'
-    queryset = Client.objects.all()
+    queryset = Client.objects.filter(state = 1)
 
 
 """metodo que usa el DELETEVIEW de django para borrar permanente un cliente en particular
@@ -93,7 +94,7 @@ def deletelog(request , id):
 
 """metodo que genera la vista para restaurar registro borrados logicamente"""
 def restoreview(request):
-    obj = Client.objects.all()
+    obj = Client.objects.filter(state = 0)
     return render(request , 'clients/restore.html', {'clients' : obj})
     
 """metodo que restaura los modelos borrados logicamente cambiando el estado de 0 a 1"""

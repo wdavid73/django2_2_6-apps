@@ -9,21 +9,19 @@
 {% block content %}
 <div class="row">
 	{%for cu in cotizacion_user%}
-		{% if cu.state == 1 %}
+		
 			<div class="col-md-4 col-lg-4">
 				<div class="card bg-dark text-white ml-2 mt-2 mb-2">
 					<div class="card-header  text-center bg-info">CLIENTE</div>
 					<div class="card-body">
 						<ul class="list-group">
 							{%for cli in client%}
-								{% if cu.client_id == cli.id%}
 									<li class="list-group-item bg-dark text-white text-center">
 										Nombre : {{cli.name}} {{cli.lastname}} <br>
 										Telefono : {{cli.phone}} <br>
 										Celular : {{cli.cellphone}} <br>
 										Direccion : {{cli.address}}
 									</li>		
-								{%endif%}
 							{%endfor%}	
 						</ul>
 					</div>
@@ -62,7 +60,6 @@
 					</div>
 				</div>
 			</div>
-		{%endif%}
 	{%endfor%}
 </div>
 {%endblock%}
