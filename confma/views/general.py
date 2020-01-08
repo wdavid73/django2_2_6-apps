@@ -6,6 +6,16 @@ from datetime import date
 
 # Models
 from ..models import Cloth , Alquiler , Client
+
+def client_tupla(client_choice):
+    if (Client.objects.all == None):
+        return client_choice
+    else:
+        for cli in Client.objects.all():
+            if cli.state == 1:
+                client_choice.append((cli.id , (cli.name + " " + cli.lastname + " - " + cli.address + " - " + str(cli.phone) + " - " + str(cli.cellphone))))
+        return client_choice
+
 #Form
 from ..forms.cloth import ClothFormModel 
 from ..forms.alquiler import AlquilerFormModel
@@ -38,9 +48,9 @@ class AlquilerCreateView(CreateView):
             if form.cleaned_data["client"].state == 1:
                 return super().form_valid(form)
             else:
-                return HttpResponse("CLIENTE INVALIDO")
+                return redirect('alquiler_create')   
         else:
-            return HttpResponse("NO CUMPLE LA FECHA")
+            return redirect('alquiler_create')
 
     def get_success_url(self):
         return '../../../../'

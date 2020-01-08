@@ -27,7 +27,9 @@ class Client(models.Model):
     	return reverse("users:users_home" , kwargs={"id" : self.id})
 
     def __str__(self):
-        return (self.name + " "+ self.lastname)
+         return (self.name + " "+ self.lastname + " - " + self.address)
+
+    
 
 class Cloth(models.Model):
     name        = models.CharField(max_length = 100 , null = False)
