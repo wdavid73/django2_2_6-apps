@@ -34,6 +34,7 @@ urlpatterns = [
     path(api + 'clients/<int:id>/delete/'     , login_required(clients.deletelog), name = "client_deletelog"),
     path(api + 'clients/restore'              , login_required(clients.restoreview), name = "client_restore"),
     path(api + 'clients/restored/<int:id>/'   , login_required(clients.restore), name = "client_restored"),
+    path(api + 'clients/search/'              , login_required(clients.search), name = "client_search"),
         ### ROUTES COTIZACION ### 
     path(api + 'cotizacion/'                  , login_required(CotiListView.as_view()),name = "coti_list"),
 	path(api + 'cotizacion/create/'           , login_required(CotiCreateView.as_view()),name = "coti_create"),

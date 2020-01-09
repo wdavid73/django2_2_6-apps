@@ -107,4 +107,7 @@ def restore(request, id):
         
     response = 'I Dont Know <a href = "/confma/clients/"> BACK </a>'
     return HttpResponse(response)
+
+def search(request):
+    return HttpResponse("BUSCAR CLIENTE")
     
