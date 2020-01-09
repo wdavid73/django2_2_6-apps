@@ -35,6 +35,8 @@ class Cloth(models.Model):
     name        = models.CharField(max_length = 100 , null = False)
     color       = models.CharField(max_length = 100 , null = False)
     size        = models.CharField(max_length = 10 ,null = False ,blank = False , choices = list_size , default = 1 )
+    fashion     = models.CharField(max_length = 50 , null = False)
+    # fields para agregar una imagen
     #####################
     state       = models.SmallIntegerField(default = 1 , null = False)
     created_at  = models.DateTimeField(auto_now_add=True)
@@ -53,7 +55,7 @@ class Cotizacion(models.Model):
     value_necks         = models.DecimalField(max_digits = 8 ,decimal_places = 2 , null = True , blank = False)
     value_embroidery    = models.DecimalField(max_digits = 8 ,decimal_places = 2 , null = True , blank = False)
     value_prints        = models.DecimalField(max_digits = 8 ,decimal_places = 2 , null = True , blank = False)
-    fashion             = models.CharField(max_length = 50 , null = False)
+    # fashion             = models.CharField(max_length = 50 , null = False) # quitar field
     cloth               = models.ForeignKey(Cloth , on_delete=models.CASCADE , blank = False , null = False)
     client                = models.ManyToManyField(Client , through="Cotizacion_Client")
     #####################
@@ -87,3 +89,10 @@ class Alquiler(models.Model):
     state = models.SmallIntegerField(default = 1 , null = False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now = True)
+# ideas
+
+"""  ALQUILER
+cuando se vaya a hacer un alquiler le ingrese la fecha de retorno y el valor del alquiler
+para despues seleccionar la ropa en un buscador se ingresa el nombre de la ropa por ejemplo camisa,
+salen todas las camisas y selecciona la que se desea alquilar, la misma idea para los clientes
+ """

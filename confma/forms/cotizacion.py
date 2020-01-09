@@ -4,23 +4,6 @@ from django.utils.translation import gettext_lazy as _
 
 from ..models import Cotizacion , Cloth
 
-FASHION_CHOICE = [
-    ('General' , 'General'),
-    ('A medida' , 'A Medida')
-]
-
-CLOTH_CHOICE = []
-cc = []
-def cloths(cc):
-    if (Cloth.objects.all == None):
-        return cc
-    else:
-        for clo in Cloth.objects.all():
-            cc.append((clo.id , clo.name))
-        return cc
-
-CLOTH_CHOICE = cloths(cc)
-
 
 class CotizacionFormModel(forms.ModelForm):
     class Meta:
@@ -34,14 +17,12 @@ class CotizacionFormModel(forms.ModelForm):
             'value_necks',
             'value_embroidery',
             'value_prints',
-            'fashion'
          ]
 
         #cloth = forms.ChoiceField(widget = forms.Select(attrs={'class' : 'form-control'})),
         widgets = {
 
             'cloth'            : forms.Select(
-                choices = CLOTH_CHOICE,
                 attrs={'class ' : 'form-control bg-dark text-white mb-3'}),
 
             'value_cloth'      : forms.NumberInput(
@@ -78,10 +59,6 @@ class CotizacionFormModel(forms.ModelForm):
                 attrs = {
                     'placeholder' : 'Valor del estanpado  , Ejemplo : 150.00',
                     'class' : 'form-control bg-dark text-white mb-3'}),
-
-            'fashion'          : forms.Select(choices = FASHION_CHOICE,
-                attrs ={
-                    'class' : 'form-control bg-dark text-white mb-3'}),
             
         }
 
@@ -94,5 +71,4 @@ class CotizacionFormModel(forms.ModelForm):
             "value_necks"       : _("Valor de los cuellos"),
             "value_embroidery"  : _("Valor del bordado"),
             "value_print"       : _("Valor del estampado"),
-            "fashion"           : _("Selecciones una Moda:"),
         }
