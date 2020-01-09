@@ -25,9 +25,9 @@ def list_view(request):
 	obj_cloth = Cloth.objects.all().filter(state = 1)
 
 	context = {	
-		"client" : obj_client,
-        "cotizacion" : obj_coti,
-        "cotizacion_user" : obj_coti_clien,
+		"clients" : obj_client,
+        "cotizacions" : obj_coti,
+        "cotizacion_client" : obj_coti_clien,
         "cloth" : obj_cloth
 	}
 	return render(request , "cliente_cotizacion/list-client.html" , context)

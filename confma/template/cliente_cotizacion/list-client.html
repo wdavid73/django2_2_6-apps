@@ -8,30 +8,31 @@
 
 {% block content %}
 <div class="row">
-	{%for cu in cotizacion_user%}
-		
+	{% for cc in cotizacion_client %}	
 			<div class="col-md-4 col-lg-4">
 				<div class="card bg-dark text-white ml-2 mt-2 mb-2">
 					<div class="card-header  text-center bg-info">CLIENTE</div>
 					<div class="card-body">
 						<ul class="list-group">
-							{%for cli in client%}
-									<li class="list-group-item bg-dark text-white text-center">
-										Nombre : {{cli.name}} {{cli.lastname}} <br>
-										Telefono : {{cli.phone}} <br>
-										Celular : {{cli.cellphone}} <br>
-										Direccion : {{cli.address}}
-									</li>		
-							{%endfor%}	
+							{% for cli in clients %}
+									{% if cli.id == cc.client_id%}
+										<li class="list-group-item bg-dark text-white text-center">
+											Nombre : {{cli.name}} {{cli.lastname}} <br>
+											Telefono : {{cli.phone}} <br>
+											Celular : {{cli.cellphone}} <br>
+											Direccion : {{cli.address}}
+										</li>
+									{% endif%}
+							{% endfor %}	
 						</ul>
 					</div>
 
 					<div class="card-header text-center bg-info">COTIZACION</div>
 					<div class="card-body">
 						<ul class="list-group  ">
-						{%for c in cotizacion%}
+						{%for c in cotizacions%}
 							<div class="row"> 
-								{% if cu.cotizacion_id == c.id%}
+								{% if cc.cotizacion_id == c.id%}
 									<div class="col-sm-6">
 									    <li class="list-group-item bg-dark">Valor de la Tela : ${{c.value_cloth}}</li>
 									    <li class="list-group-item bg-dark">Valor del Trabajo : ${{c.value_work}}</li>

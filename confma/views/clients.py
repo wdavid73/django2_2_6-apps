@@ -13,7 +13,7 @@ from ..forms.client import ClientFormModel
 a los que tengan estado 0 para que no se muestren"""
 def home(request , *args, **kwargs):
     # obj = Client.objects.all()
-    obj = Client.objects.filter(state = 1)
+    obj = Client.objects.all().filter(state = 1)
 
     # clients = []
     # for client in obj:
@@ -44,7 +44,7 @@ class ClientCreateView(CreateView):
 registrados , Actualmente no se usa"""
 class ClientListView(ListView):
     template_name = 'clients/details.html'
-    queryset = Client.objects.filter(state = 1)
+    queryset = Client.objects.all().filter(state = 1)
 
 
 """metodo que usa el DELETEVIEW de django para borrar permanente un cliente en particular
