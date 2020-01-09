@@ -3,7 +3,7 @@ from django.http import Http404 , HttpResponse
 from django.urls import reverse
 from django.views.generic import (CreateView ,UpdateView , ListView ,DeleteView)
 # Models
-from ..models import Client
+from ..models import Client , Cloth , Cotizacion_Client , Cotizacion
 #Forms
 from ..forms.client import ClientFormModel
 
@@ -109,5 +109,52 @@ def restore(request, id):
     return HttpResponse(response)
 
 def search(request):
-    return HttpResponse("BUSCAR CLIENTE")
-    
+    name = request.GET.get('name_client')
+    number = request.GET.get('number_client')
+    if name != "":
+        obj_client = Client.objects.filter(state = 1).filter(name = name)
+        cloth = coti_cloth()
+        cotizacion = coti_client(obj_client)
+        return render(request, 'clients/search.html' , { 'client' : obj_client , 'cloth' : cloth , 'cotizacion' : cotizacion})
+    elif number != "":
+        obj_client = Client.objects.all().filter(state = 1).filter(cellphone = number )
+        cloth = coti_cloth()
+        cotizacion = coti_client(obj_client)
+        return render(request, 'clients/search.html' , { 'client' : obj_client , 'cloth' : cloth , 'cotizacion' : cotizacion})
+    elif name and number :
+        obj_client = Client.objects.all().filter(state = 1).filter(cellphone = number )
+        cloth = coti_cloth()
+        cotizacion = coti_client(obj_client)
+        return render(request, 'clients/search.html' , { 'client' : obj_client , 'cloth' : cloth , 'cotizacion' : cotizacion})
+    elif name == "" and number == "":
+        message = "INGRESE INFORMACION EN LOS CAMPOS"
+        obj_client = []
+        return render(request, 'clients/search.html' , { 'client' : obj_client , 'message' : message})
+
+    return render(request, 'clients/search.html' , {})
+
+def coti_cloth():
+    obj_coti = Cotizacion.objects.all().filter(state = 1)
+    obj_cloth = Cloth.objects.all()
+    cloth = []
+    for coti in obj_coti:
+        for clo in obj_cloth:
+            if coti.cloth_id == clo.id:
+                cloth.append(clo)
+    return cloth
+
+def coti_client(client):
+    obj_client_coti = Cotizacion_Client.objects.all().filter( state = 1)
+    obj_coti = Cotizacion.objects.all().filter(state = 1)
+    cotizacion = []
+    for cli in client:
+        for cc in obj_client_coti:
+            for coti in obj_coti:
+                if cli.id == cc.client_id and coti.id == cc.cotizacion_id:
+                    cotizacion.append(coti)
+    return cotizacion
+
+
+
+
+
