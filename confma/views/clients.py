@@ -109,29 +109,68 @@ def restore(request, id):
     return HttpResponse(response)
 
 def search(request):
-    name = request.GET.get('name_client')
-    number = request.GET.get('number_client')
-    if name != "":
-        obj_client = Client.objects.filter(state = 1).filter(name = name)
-        cloth = coti_cloth()
-        cotizacion = coti_client(obj_client)
-        return render(request, 'clients/search.html' , { 'client' : obj_client , 'cloth' : cloth , 'cotizacion' : cotizacion})
-    elif number != "":
-        obj_client = Client.objects.all().filter(state = 1).filter(cellphone = number )
-        cloth = coti_cloth()
-        cotizacion = coti_client(obj_client)
-        return render(request, 'clients/search.html' , { 'client' : obj_client , 'cloth' : cloth , 'cotizacion' : cotizacion})
-    elif name and number :
-        obj_client = Client.objects.all().filter(state = 1).filter(cellphone = number )
-        cloth = coti_cloth()
-        cotizacion = coti_client(obj_client)
-        return render(request, 'clients/search.html' , { 'client' : obj_client , 'cloth' : cloth , 'cotizacion' : cotizacion})
-    elif name == "" and number == "":
-        message = "INGRESE INFORMACION EN LOS CAMPOS"
-        obj_client = []
-        return render(request, 'clients/search.html' , { 'client' : obj_client , 'message' : message})
+    if request.method == 'POST':
+        name = request.POST.get('name_client')
+        number = request.POST.get('number_client')
+        coti_cli = Cotizacion_Client.objects.all().filter(state = 1)
+        if name != "":
+            obj_client = Client.objects.filter(state = 1).filter(name = name)
+            cloth = coti_cloth()
+            cotizacion = coti_client(obj_client)
+            size_client = len(obj_client)
+            COTI = tupla_coti_total(cotizacion , obj_client)
+            return render(request, 
+                    'clients/search.html' , 
+                    {
+                    'client' : obj_client , 
+                    'cloth' : cloth , 
+                    'cotizacion' : cotizacion , 
+                    'size_client' : size_client , 
+                    'coti_client' : coti_cli})
+        elif number != "":
+            obj_client = Client.objects.all().filter(state = 1).filter(cellphone = number )
+            cloth = coti_cloth()
+            cotizacion = coti_client(obj_client)
+            size_client = len(obj_client)
+            return render(request, 
+                    'clients/search.html' , 
+                    {
+                    'client' : obj_client , 
+                    'cloth' : cloth , 
+                    'cotizacion' : cotizacion , 
+                    'size_client' : size_client , 
+                    'coti_client' : coti_cli
+                    })
+        elif name and number :
+            obj_client = Client.objects.all().filter(state = 1).filter(cellphone = number )
+            cloth = coti_cloth()
+            cotizacion = coti_client(obj_client)
+            size_client = len(obj_client)
+            return render(request, 
+                'clients/search.html' , 
+                {   'client' : obj_client , 
+                    'cloth' : cloth , 
+                    'cotizacion' : cotizacion , 
+                    'size_client' : size_client , 
+                    'coti_client' : coti_cli
+                })
+        elif name == "" and number == "":
+            message = "INGRESE INFORMACION EN LOS CAMPOS"
+            obj_client = []
+            size_client = len(obj_client)
+            return render(request, 'clients/search.html' , { 'client' : obj_client , 'message' : message , 'size_client' : size_client})
 
     return render(request, 'clients/search.html' , {})
+
+def tupla_coti_total(cotizacion , client):
+    coti_client = Cotizacion_Client.objects.all().filter(state  = 1)
+    COTI = []
+    for cli in client:
+        for coti in cotizacion:
+            for cc in coti_client:
+                if coti.id == cc.cotizacion_id and cc.client_id == cli.id :
+                    COTI.append( (coti.id , cc.total) )
+    return COTI
 
 def coti_cloth():
     obj_coti = Cotizacion.objects.all().filter(state = 1)
@@ -153,8 +192,3 @@ def coti_client(client):
                 if cli.id == cc.client_id and coti.id == cc.cotizacion_id:
                     cotizacion.append(coti)
     return cotizacion
-
-
-
-
-

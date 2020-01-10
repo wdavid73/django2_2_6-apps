@@ -38,14 +38,23 @@
 									    <li class="list-group-item bg-dark">Valor del Trabajo : ${{c.value_work}}</li>
 									    <li class="list-group-item bg-dark">Valor de los Hilos : ${{c.value_threads}}</li>
 									    <li class="list-group-item bg-dark">Valor de los Botones : ${{c.value_buttons}}</li>
-									    <li class="list-group-item bg-dark">Talla de la Prenda : {{cl.size}}</li>
+									    {% for cl in cloth %}
+										    {% if c.cloth_id == cl.id %}
+									    		<li class="list-group-item bg-dark">Talla de la Prenda : {{cl.size}}</li>
+										    {% endif %}
+									    {% endfor %}
 									</div>
 									<div class="col-sm-6">
 									    <li class="list-group-item bg-dark">Valor de los Cuellos : ${{c.value_necks}}</li>
 									    <li class="list-group-item bg-dark">Valor de los Bordados : ${{c.value_embroidery}}</li>
 									    <li class="list-group-item bg-dark">Valor del Estampado : ${{c.value_prints}}</li>
-									    <li class="list-group-item bg-dark">Tipo de Moda : {{c.fashion}}</li>
-									    <li class="list-group-item bg-dark">Color de la Prenda : {{cl.color}}</li>
+									    {% for cl in cloth %}
+										    {% if c.cloth_id == cl.id %}
+									    		<li class="list-group-item bg-dark">Tipo de Moda : {{cl.fashion}}</li>
+									    		<li class="list-group-item bg-dark">Prenda : {{cl.name}} - {{cl.color}}</li>
+										    {% endif %}
+									    {% endfor %}
+									    
 									</div>
 									<div class="m-2">
 										<form action="{% url 'cu_deletelog' %}" method="POST">

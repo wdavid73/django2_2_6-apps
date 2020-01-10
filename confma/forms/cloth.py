@@ -6,7 +6,7 @@ from ..models import  Cloth
 
 FASHION_CHOICE = [
     ('General' , 'General'),
-    ('A medida' , 'A Medida')
+    ('A Medida' , 'A Medida')
 ]
 
 class ClothFormModel(forms.ModelForm):
