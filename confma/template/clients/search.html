@@ -14,7 +14,7 @@
                         {% csrf_token %}
                         <div class="row">
                             <div class="col-6">
-                                <input type="text" id="name_client" name="name_client" placeholder=" Nombre del Cliente" class="form-control mt-2">
+                                <input type="text" id="name_client" name="name_client" placeholder=" Nombre del Cliente" class="form-control mt-2" required>
                             </div>
                             <div class="col-6">
                                 <input type="number" id="number_client" name="number_client" placeholder=" Numero de Telefono del Cliente" class="form-control mt-2">
@@ -93,7 +93,41 @@
                         </div>
                     {%endfor%}
                 </div>
-
+                <div class="card-header">
+                {% for cli in client %}
+                    <h5 class="text-center card-title h5"> Prendas Alquiladas para 
+                        <span class="badge badge-primary badge-pill">
+                        {{cli.name}} {{cli.lastname}}
+                        </span>
+                    </h5>
+                {% endfor %}                
+                </div>
+                <div class="row">
+                    {% for alq in alquileres%}
+                        <div class="col-sm-12 col-md-4 col-lg-4">
+                            <div class="card bg-dark text-white mb-2 mt-2 border-info">
+                                <div class="card-header">
+                                    <p class="card-text h5"> {{alq.cloth_name}} - {{alq.cloth_color}} -  {{alq.cloth_size}} - {{alq.cloth_fashion}} </p>
+                                </div>
+                                <div class="card-body">
+                                    <div>
+                                        <ul class="list-group list-group-md list-group-flush">
+                                          <li class="list-group-item bg-dark"> Fecha de Entrega : {{alq.alquiler_date_now}}</li>
+                                          <li class="list-group-item bg-dark"> Fecha de Devolucion : {{alq.alquiler_date_return }}</li>
+                                          <li class="list-group-item bg-dark"> Valor del Alquiler : {{alq.alquiler_price}}</li>
+                                        </ul>    
+                                    </div>
+                                    <div>
+                                        <ul class="list-group list-group-flush">
+                                          <li class="list-group-item bg-dark">{{alq.client_name}} {{alq.client_lastname}}</li>
+                                        </ul>                                        
+                                    </div>
+                                    informacion del cliente
+                                </div>
+                            </div>
+                        </div>
+                    {%endfor%}
+                </div>
             </div>
         </div>
     </div>
