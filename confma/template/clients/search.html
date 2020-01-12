@@ -12,13 +12,15 @@
                 <div class="form-group">
                     <form action="{% url 'client_search' %}" method="POST">
                         {% csrf_token %}
-                        <div class="row">
-                            <div class="col-6">
-                                <input type="text" id="name_client" name="name_client" placeholder=" Nombre del Cliente" class="form-control mt-2" required>
-                            </div>
-                            <div class="col-6">
-                                <input type="number" id="number_client" name="number_client" placeholder=" Numero de Telefono del Cliente" class="form-control mt-2">
-                            </div>
+                        <div>
+                            <select  name="client_id" class="form-control" required>
+                                    <option value="" selected> Elegir Cliente : </option>
+                                    {% for c in all_client %}
+                                            <option value="{{c.id}}" id="{{c.id}}" >
+                                                {{c.name}} - {{c.address}} - {{c.phone}} - {{c.cellphone}}
+                                            </option>
+                                    {% endfor %}
+                                </select>
                         </div>
                         <input type="submit" value="Buscar" class="btn btn-primary btn-block mt-2">
                     </form>
@@ -28,123 +30,51 @@
     </div>
     <div class="col"></div>
 </div>
-
-<div class="row">
-    {% if size_client != 0 %}
-    <div class="col-sm-12 col-md-12 col-lg-12">
-        <div class="card m-2">
-            <div class="card-header">
-            {% for cli in client %}
-                <h5 class="text-center card-title h5"> Prendas Cotizadas para 
-                    <span class="badge badge-primary badge-pill">
-                    {{cli.name}} {{cli.lastname}}
-                    </span>
-                </h5>
-            {% endfor %}                
-            </div>
-            <div class="card-body">
-
-                <div class="row">
-                    {% for coti in cotizacion%}
-                        <div class="col-sm-12 col-md-6 col-lg-6">
-                            <div class="card bg-dark text-white mb-2 mt-2 border-info">
-                                    {% for clo in cloth%}
-                                        {% if clo.id == coti.cloth_id%}
-                                            <div class="row no-gutters">
-                                                {% if clo.fashion == "A Medida" %}
-                                                    <div class="col-md-4">
-                                                        <img src="" alt="img de moda" class="card-img">
-                                                    </div>
-                                                {% endif %}
-                                                <div class="col-md-8">
-                                                    <div class="card-body">
-                                                        <h5 class="card-title">{{clo.name}} - {{clo.size}} - {{clo.color}} - {{clo.fashion}}</h5>
-                                                        <p class="card-text">
-                                                            <ul class="list-group list-group-flush">
-                                                                <div class="row"> 
-                                                                    <div class="col-sm-6">
-                                                                        <li class="list-group-item bg-dark">Valor de la Tela : $ {{coti.value_cloth}}</li>
-                                                                        <li class="list-group-item bg-dark">Valor del Trabajo : $ {{coti.value_work}}</li>
-                                                                        <li class="list-group-item bg-dark">Valor de los Hilos : $ {{coti.value_threads}}</li>
-                                                                        <li class="list-group-item bg-dark">Valor de los Botones : $ {{coti.value_buttons}}</li>
-                                                                    </div>
-                                                                    <div class="col-sm-6">
-                                                                        <li class="list-group-item bg-dark">Valor de los Cuellos : $ {{coti.value_necks}}</li>
-                                                                        <li class="list-group-item bg-dark">Valor de los Bordados : $ {{coti.value_embroidery}}</li>
-                                                                        <li class="list-group-item bg-dark">Valor del Estampado : $ {{coti.value_prints}}</li>
-                                                                        {% for cli in client %}
-                                                                            {% for cc in coti_client %}
-                                                                                {%if cc.cotizacion_id == coti.id and cc.client_id == cli.id%}
-                                                                                    <li class="list-group-item bg-dark">Total : $ {{cc.total}}</li>
-                                                                                {%endif%}
-                                                                            {% endfor%}
-                                                                        {% endfor %}     
-                                                                    </div>
-                                                                </div>
-
-                                                            </ul>         
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        {% endif %}
-                                    {%endfor%}    
+    {% if count_coti_cli > 0 and count_alquiler > 0%}
+        <p class="text-center display-4">{{client}}</p>
+        <div class="card-deck ml-3 mr-3">
+            {% for coti_cli in cotizacion_client%}
+              <div class="card bg-dark text-white">
+                <div class="card-body bg-warning">  
+                    <div class="container">
+                        <li class="list-group-item bg-dark text-center">Prenda Cotizada : {{coti_cli.cotizacion.cloth}}</li>
+                        <div class="row mt-2">
+                            <div class="col">
+                                <li class="list-group-item bg-dark">Valor de la Tela : $ {{coti_cli.cotizacion.value_cloth}}</li>
+                                <li class="list-group-item bg-dark">Valor del Trabajo : $ {{coti_cli.cotizacion.value_work}}</li>
+                                <li class="list-group-item bg-dark">Valor de los Hilos : $ {{coti_cli.cotizacion.value_threads}}</li>
+                                <li class="list-group-item bg-dark">Valor de los Botones : ${{coti_cli.cotizacion.value_buttons}}</li>
+                            </div>
+                            <div class="col">
+                                <li class="list-group-item bg-dark">Valor de los Cuellos : $ {{coti_cli.cotizacion.value_necks}}</li>
+                                <li class="list-group-item bg-dark">Valor de los Bordados ${{coti_cli.cotizacion.value_embroidery}}</li>
+                                <li class="list-group-item bg-dark">Valor del Estampado : $ {{coti_cli.cotizacion.value_prints}}</li>
+                                <li class="list-group-item bg-dark">Total : $ {{coti_cli.total}}</li>  
                             </div>
                         </div>
-                    {%endfor%}
+                    </div>
                 </div>
-                <div class="card-header">
-                {% for cli in client %}
-                    <h5 class="text-center card-title h5"> Prendas Alquiladas para 
-                        <span class="badge badge-primary badge-pill">
-                        {{cli.name}} {{cli.lastname}}
-                        </span>
-                    </h5>
-                {% endfor %}                
-                </div>
-                <div class="row">
-                    {% for alq in alquileres%}
-                        <div class="col-sm-12 col-md-4 col-lg-4">
-                            <div class="card bg-dark text-white mb-2 mt-2 border-info">
-                                <div class="card-header">
-                                    <p class="card-text h5"> {{alq.cloth_name}} - {{alq.cloth_color}} -  {{alq.cloth_size}} - {{alq.cloth_fashion}} </p>
-                                </div>
-                                <div class="card-body">
-                                    <div>
-                                        <ul class="list-group list-group-md list-group-flush">
-                                          <li class="list-group-item bg-dark"> Fecha de Entrega : {{alq.alquiler_date_now}}</li>
-                                          <li class="list-group-item bg-dark"> Fecha de Devolucion : {{alq.alquiler_date_return }}</li>
-                                          <li class="list-group-item bg-dark"> Valor del Alquiler : {{alq.alquiler_price}}</li>
-                                        </ul>    
-                                    </div>
-                                    <div>
-                                        <ul class="list-group list-group-flush">
-                                          <li class="list-group-item bg-dark">{{alq.client_name}} {{alq.client_lastname}}</li>
-                                        </ul>                                        
-                                    </div>
-                                    informacion del cliente
-                                </div>
-                            </div>
-                        </div>
-                    {%endfor%}
-                </div>
-            </div>
+              </div>
+            {%endfor%}
         </div>
-    </div>
-    {% elif size_client == 0 %}
-    
-    <div class="col-sm-12 col-md-10 col-lg-6 m-2">
-            <div class="alert alert-warning alert-dismissible fade show mt-2" role="alert">
-              <p><strong>{{message}}.</strong></p>
-              <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-    </div>
-
-    {% endif %}
-
-</div>
-
-
+        <div class="card-deck m-3">
+            {% for alq_cli in alquiler_cliente %}
+                <div class="card bg-dark text-white">
+                    <div class="row no-gutters">
+                        <div class="col-md-4 bg-secondary">
+                            <img src="....." alt="img de prenda">
+                        </div>
+                        <div class="col-md-8">
+                            <div class="card-body">
+                                <div class="container">
+                                    <h5 class="card-title text-center h5"> Alquiler : {{alq_cli.date_now}} - {{alq_cli.date_return}} -  Valor : ${{alq_cli.price}}</h5>
+                                    <h5 class="card-title text-center h5"> Prenda : {{alq_cli.cloth}}</h5>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>            
+    {%endif%}
 {% endblock %}

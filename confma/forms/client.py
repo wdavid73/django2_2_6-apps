@@ -12,5 +12,10 @@ class ClientFormModel(forms.ModelForm):
             'address',
             'phone',
             'cellphone'
-            
         ]
+
+
+class AllClientForm(forms.ModelForm):
+	class Meta:
+		model = Client
+		fields = ['id']

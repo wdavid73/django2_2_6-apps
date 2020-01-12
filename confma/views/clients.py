@@ -110,37 +110,33 @@ def restore(request, id):
 
 def search(request):
     ##tratar de implementar un formulario por django
+    clients = Client.objects.all().filter(state = 1)
+
     if request.method == 'POST':
-        name = request.POST.get('name_client')
-        number = request.POST.get('number_client')
-        coti_cli = Cotizacion_Client.objects.all().filter(state = 1)
-        if name != "" or number != "":
+        id_ = request.POST.get('client_id')
+        obj_client = get_object_or_404(Client , id=id_)
+        #query que trate los alquileres de un cliente en especifico
+        alquiler_cliente = Alquiler.objects.filter(client = obj_client)
+        count_alquiler = alquiler_cliente.count()
+        cloth = list(Cloth.objects.all()) #array con los registro de todas las prendas
+        # trae las cotizacion que ya tiene una prenda asignada
+        cotizacion = list(Cotizacion.objects.all().filter(state = 1 , cloth__in = cloth))
+        # trae los registro de los clientes que tienen asignado una cotizacion con su respectiva prenda
+        cotizacion_cliente = Cotizacion_Client.objects.filter(cotizacion__in = cotizacion , client = obj_client)
+        count_coti_cli = cotizacion_cliente.count
+        context = { 
+            'all_client' : clients , 
+            'alquiler_cliente' : alquiler_cliente , 
+            'count_alquiler' : count_alquiler,
+            'cotizacion_client' : cotizacion_cliente,
+            'count_coti_cli' : count_coti_cli,
+            'client' : obj_client
+            }
+        return render(request , 'clients/search.html' , context)
 
-            obj_client = Client.objects.filter(state = 1).filter(name = name)
-            cloth = coti_cloth()
-            cotizacion = coti_client(obj_client)
-            size_client = len(obj_client)
-            alquileres = alqu_client_cloth(obj_client , cloth)
-            context = { 'client' : obj_client , 'cloth' : cloth , 
-                        'cotizacion' : cotizacion , 'size_client' : size_client , 'coti_client' : coti_cli , 'alquileres' : alquileres}
-            return render(request, 'clients/search.html' , context)
-        elif name == "" and number == "":
-            message = "INGRESE INFORMACION EN LOS CAMPOS"
-            obj_client = []
-            size_client = len(obj_client)
-            return render(request, 'clients/search.html' , { 'client' : obj_client , 'message' : message , 'size_client' : size_client})
+    
+    return render(request, 'clients/search.html' , { 'all_client' : clients})
 
-    return render(request, 'clients/search.html' , {})
-
-def tupla_coti_total(cotizacion , client):
-    coti_client = Cotizacion_Client.objects.all().filter(state  = 1)
-    COTI = []
-    for cli in client:
-        for coti in cotizacion:
-            for cc in coti_client:
-                if coti.id == cc.cotizacion_id and cc.client_id == cli.id :
-                    COTI.append( (coti.id , cc.total) )
-    return COTI
 
 def alqu_client_cloth(client , cloth):
     alquileres = Alquiler.objects.all().filter(state = 1)
@@ -164,6 +160,16 @@ def alqu_client_cloth(client , cloth):
                             }
                         array_alquiler.append(obj_new)
     return array_alquiler
+
+def tupla_coti_total(cotizacion , client):
+    coti_client = Cotizacion_Client.objects.all().filter(state  = 1)
+    COTI = []
+    for cli in client:
+        for coti in cotizacion:
+            for cc in coti_client:
+                if coti.id == cc.cotizacion_id and cc.client_id == cli.id :
+                    COTI.append( (coti.id , cc.total) )
+    return COTI
 
 def coti_cloth():
     obj_coti = Cotizacion.objects.all().filter(state = 1)

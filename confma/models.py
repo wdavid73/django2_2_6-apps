@@ -89,6 +89,10 @@ class Alquiler(models.Model):
     state = models.SmallIntegerField(default = 1 , null = False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now = True)
+
+    def __str__(self):
+        return ("Fecha De Registro " + str(self.date_now) +" "+ ", Fecha de Retorno : " +  str(self.date_return) +", Valor : "+  str(self.price) +" "+ ", Cliente : "+ str(self.client) + " " + ", Prenda : " + str(self.cloth) )
+        
 # ideas
 
 """  ALQUILER
