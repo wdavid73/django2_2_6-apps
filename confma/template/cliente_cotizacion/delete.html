@@ -23,16 +23,15 @@
 							<h2>Cotizacion</h2>
 							<div class="col-sm">
 								<ul class="list-group mb-2">
-	                                <li class="list-group-item bg-dark">Valor de la Tela : ${{cotizacion.value_cloth}}</li>
-	                                <li class="list-group-item bg-dark">Valor del Trabajo : ${{cotizacion.value_work}}</li>
-	                                <li class="list-group-item bg-dark">Valor de los Hilos : ${{cotizacion.value_threads}}</li>
-	                                <li class="list-group-item bg-dark">Valor de los Botones : ${{cotizacion.value_buttons}}</li>
-	                                <li class="list-group-item bg-dark">Valor de los Cuellos : ${{cotizacion.value_necks}}</li>
-	                                <li class="list-group-item bg-dark">Valor de los Bordados : ${{cotizacion.value_embroidery}}</li>
-	                                <li class="list-group-item bg-dark">Valor del Estampado : ${{cotizacion.value_prints}}</li>
-	                                <li class="list-group-item bg-dark">Tipo de Moda : {{cotizacion.fashion}}</li>
+	                                <li class="list-group-item bg-dark">Valor de la Tela : ${{client_coti.cotizacion.value_cloth}}</li>
+	                                <li class="list-group-item bg-dark">Valor del Trabajo : ${{client_coti.cotizacion.value_work}}</li>
+	                                <li class="list-group-item bg-dark">Valor de los Hilos : ${{client_coti.cotizacion.value_threads}}</li>
+	                                <li class="list-group-item bg-dark">Valor de los Botones : ${{client_coti.cotizacion.value_buttons}}</li>
+	                                <li class="list-group-item bg-dark">Valor de los Cuellos : ${{client_coti.cotizacion.value_necks}}</li>
+	                                <li class="list-group-item bg-dark">Valor de los Bordados : ${{client_coti.cotizacion.value_embroidery}}</li>
+	                                <li class="list-group-item bg-dark">Valor del Estampado : ${{client_coti.cotizacion.value_prints}}</li>
 	                                <li class="list-group-item bg-dark">Total : ${{client_coti.total}}</li>
-	                                <li class="list-group-item bg-dark">Prenda : {{cloth.name}} - Color :  {{cloth.color}} - Talla : {{cloth.size}}</li>
+	                                <li class="list-group-item bg-dark">Prenda : {{client_coti.cotizacion.cloth}}</li>
 								</ul>
                             </div>
 						</div>
@@ -41,11 +40,11 @@
 							<ul class="list-group list-group-flush">
                             <div class="row"> 
                                 <div class="col">
-                                    <li class="list-group-item bg-dark">Nombre : {{client.name}}</li>
-                                    <li class="list-group-item bg-dark">Apellido : {{client.lastname}}</li>
-                                    <li class="list-group-item bg-dark">Direccion : {{client.address}}</li>
-                                    <li class="list-group-item bg-dark">Telefono : {{client.phone}}</li>
-                                    <li class="list-group-item bg-dark">Celular : {{client.cellphone}}</li>
+                                    <li class="list-group-item bg-dark">Nombre : {{client_coti.client.name}}</li>
+                                    <li class="list-group-item bg-dark">Apellido : {{client_coti.client.lastname}}</li>
+                                    <li class="list-group-item bg-dark">Direccion : {{client_coti.client.address}}</li>
+                                    <li class="list-group-item bg-dark">Telefono : {{client_coti.client.phone}}</li>
+                                    <li class="list-group-item bg-dark">Celular : {{client_coti.client.cellphone}}</li>
                                 </div>
                             </div>
                         </ul>  
@@ -57,7 +56,7 @@
 		    				<input type="submit" class="btn btn-warning btn-block" value="Yes">
 		    			</div>
 		    			<div class="col-6">
-		    				<a href="../../" class="btn btn-success btn-block">No</a>	
+		    				<a href="{% url 'coti_client_list '%}" class="btn btn-success btn-block">No</a>	
 		    			</div>
 		    		</div>
 					

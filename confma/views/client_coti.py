@@ -97,17 +97,9 @@ registro de 1 a 0
 def deletelog(request):	
 	id = request.POST.get('coti_client_id')
 	obj = get_object_or_404(Cotizacion_Client , id = id)
-	obj_client = get_client(Client.objects.all() , obj)
-	obj_cotizacion = get_cotizacion(Cotizacion.objects.all().filter(state=1) ,obj)
-	obj_cloth = get_cloth(obj_cotizacion)
-
 	context = {
 		'client_coti' : obj,
-		'client' : obj_client,
-		'cotizacion' : obj_cotizacion,
-		'cloth':obj_cloth
 	}
-
 	return render (request , 'cliente_cotizacion/delete.html',context)
 
 def temp(request):
@@ -134,12 +126,8 @@ def get_cotizacion(cotizacion , obj):
 
 """metodo que genera la vista para restaurar registro borrados logicamente"""
 def restore_view(request):
-	obj_coti = Cotizacion.objects.all().filter(state=0)
-	obj_client = Client.objects.all().filter(state=0)
 	obj_coti_clien = Cotizacion_Client.objects.all().filter(state=0)
 	context = {	
-		"client" : obj_client,
-        "cotizacion" : obj_coti,
         "cotizacion_client" : obj_coti_clien
 	}
 	return render(request , "cliente_cotizacion/restore.html" , context)
@@ -151,4 +139,4 @@ def restore(request):
 	if request.method == 'POST':
 		obj.state = 1 
 		obj.save()
-		return redirect('/confma/cotizacion-user/list')
+		return redirect('coti_client_list')
