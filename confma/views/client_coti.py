@@ -72,13 +72,13 @@ def create(request):
 		if q != "":
 			u_id = q
 			Cotizacion_Client.objects.create( total = total , cotizacion_id = coti_id , client_id = u_id)
-			return redirect("/confma/api/v1/cotizacion-client/list")
+			return redirect("coti_client_list")
 		else:
 			u_id = 1
 			Cotizacion_Client.objects.create( total = total , cotizacion_id = coti_id , client_id = u_id)
-			return redirect("/confma/api/v1/cotizacion-client/list")
+			return redirect("coti_client_list")
 	else:
-		return redirect("/confma/api/v1/cotizacion/")
+		return redirect("coti_list")
 
 """
 Metodo para obtener el valor total de la cotizacion
