@@ -9,7 +9,7 @@ from ..forms.cotizacion_client import CUFormModel , Coti_UserFormModel
 
 # Create your views here.
 """Metodo para el listado de todas las cotizacion asociadas a un client"""
-class UCListView (ListView):
+class CCListView (ListView):
 	template_name = 'cliente_cotizacion/list-client.html'
 	queryset = Cotizacion_Client.objects.filter(state = 1)
 
@@ -36,12 +36,12 @@ def list_view(request):
 Metodo que Crea la vista para el registro de una cotizacion con un cliente
 """
 def create_view(request, id):
-	u = Client.objects.all().filter(state=1)
+	client = Client.objects.all().filter(state = 1)
 	coti_obj = get_object_or_404(Cotizacion , id = id)
 	total_coti = getTotal(coti_obj)
 	cloth = get_cloth(coti_obj)
 	context = {	
-		'cliente' : u,
+		'cliente' : client,
 		'coti' : coti_obj,
 		'total' : total_coti,
 		'cloth' : cloth
@@ -72,13 +72,13 @@ def create(request):
 		if q != "":
 			u_id = q
 			Cotizacion_Client.objects.create( total = total , cotizacion_id = coti_id , client_id = u_id)
-			return redirect("/confma/api/v1/cotizacion-client/list")
+			return redirect("coti_client_list")
 		else:
 			u_id = 1
 			Cotizacion_Client.objects.create( total = total , cotizacion_id = coti_id , client_id = u_id)
-			return redirect("/confma/api/v1/cotizacion-client/list")
+			return redirect("coti_client_list")
 	else:
-		return redirect("/confma/api/v1/cotizacion/list")
+		return redirect("coti_list")
 
 """
 Metodo para obtener el valor total de la cotizacion
@@ -97,17 +97,9 @@ registro de 1 a 0
 def deletelog(request):	
 	id = request.POST.get('coti_client_id')
 	obj = get_object_or_404(Cotizacion_Client , id = id)
-	obj_client = get_client(Client.objects.all() , obj)
-	obj_cotizacion = get_cotizacion(Cotizacion.objects.all().filter(state=1) ,obj)
-	obj_cloth = get_cloth(obj_cotizacion)
-
 	context = {
 		'client_coti' : obj,
-		'client' : obj_client,
-		'cotizacion' : obj_cotizacion,
-		'cloth':obj_cloth
 	}
-
 	return render (request , 'cliente_cotizacion/delete.html',context)
 
 def temp(request):
@@ -134,12 +126,8 @@ def get_cotizacion(cotizacion , obj):
 
 """metodo que genera la vista para restaurar registro borrados logicamente"""
 def restore_view(request):
-	obj_coti = Cotizacion.objects.all().filter(state=0)
-	obj_client = Client.objects.all().filter(state=0)
 	obj_coti_clien = Cotizacion_Client.objects.all().filter(state=0)
 	context = {	
-		"client" : obj_client,
-        "cotizacion" : obj_coti,
         "cotizacion_client" : obj_coti_clien
 	}
 	return render(request , "cliente_cotizacion/restore.html" , context)
@@ -151,4 +139,4 @@ def restore(request):
 	if request.method == 'POST':
 		obj.state = 1 
 		obj.save()
-		return redirect('/confma/cotizacion-user/list')
+		return redirect('coti_client_list')

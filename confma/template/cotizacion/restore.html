@@ -10,7 +10,6 @@
 
 <div class="row">       
     {% for c in coti%}
-        {% if c.state == 0%}
             <div class="col-md-4 col-lg-2">
                 <div class="card text-white bg-dark border-info mt-2 mb-2" style="width: 28rem;">
                   <div class="card-body">
@@ -43,10 +42,9 @@
                   </div>
                 </div>
             </div>
-        {%endif%}
     {% empty %}
     
-        <p> NO HAY COTIZACIONES REGISTRADAS </p>
+        <p> NO HAY COTIZACIONES BORRADAS </p>
 
     {%endfor%}
 </div>

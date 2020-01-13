@@ -3,19 +3,8 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.http import Http404 , HttpResponse
 from datetime import date
-
 # Models
 from ..models import Cloth , Alquiler , Client
-
-def client_tupla(client_choice):
-    if (Client.objects.all == None):
-        return client_choice
-    else:
-        for cli in Client.objects.all():
-            if cli.state == 1:
-                client_choice.append((cli.id , (cli.name + " " + cli.lastname + " - " + cli.address + " - " + str(cli.phone) + " - " + str(cli.cellphone))))
-        return client_choice
-
 #Form
 from ..forms.cloth import ClothFormModel 
 from ..forms.alquiler import AlquilerFormModel
@@ -58,13 +47,8 @@ class AlquilerCreateView(CreateView):
 """metodo que usa el LISTVIEW de django para listar todas los alquileres registrados en la base de datos"""
 class AlquilerListView(ListView):
      template_name = 'alquiler/details.html'
-     queryset = Alquiler.objects.filter(state = 1)
-
-     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['cloth_list'] = Cloth.objects.filter(state = 1)
-        context['client_list'] = Client.objects.filter( state = 1)
-        return context
+     list_client = list(Client.objects.all().filter(state = 1))
+     queryset = Alquiler.objects.filter(state = 1).filter(client__in = list_client)
 
 """metodo que renderiza las vista de index y home , una es la vista con el navbar para hacer CRUD en los distintos
 modelos de la base de datos , pero antes se tienen que registrar o en su defecto iniciar sesion , y por otra parte el home
@@ -98,3 +82,12 @@ def handler500(request, *args, **argv):
                                   context_instance=RequestContext(request))
     response.status_code = 500
     return response
+
+def client_tupla(client_choice):
+    if (Client.objects.all == None):
+        return client_choice
+    else:
+        for cli in Client.objects.all():
+            if cli.state == 1:
+                client_choice.append((cli.id , (cli.name + " " + cli.lastname + " - " + cli.address + " - " + str(cli.phone) + " - " + str(cli.cellphone))))
+        return client_choice

@@ -9,14 +9,12 @@
 
 {% block content %}
 	<div class="row" id="main">
-		{%for cu in cotizacion_user%}
+		{%for cc in cotizacion_client%}
 		
 			<div class="col-md-4 col-lg-2">
 				<div class="card bg-dark text-white ml-2 mt-2 mb-2">
 					<div class="card-body">
-						{%for u in user%}
-							{% if cu.user_id == u.id%}
-								<p>Cliente : {{ u.name }} {{u.lastname}} </p>						
+								<p>Cliente : {{ cc.client.name }} {{cc.client.lastname}} </p>						
 									<button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#userModalLong">
 										Details Client
 									</button>
@@ -32,9 +30,9 @@
 										      </div>
 										      <div class="modal-body">
 										      	<p>
-			                                    	Direccion : {{u.address}} <br>
-			                                    	Telefono : {{u.phone}} <br>
-			                                    	Celular : {{u.cellphone}} <br>
+			                                    	Direccion : {{cc.client.address}} <br>
+			                                    	Telefono : {{cc.client.phone}} <br>
+			                                    	Celular : {{cc.client.cellphone}} <br>
 										      	</p>
 										      </div>
 										      <div class="modal-footer">
@@ -45,12 +43,7 @@
 										</div>
 
 
-									{%endif%}
-								{%endfor%}
-
-								{%for c in cotizacion%}
-									{% if cu.cotizacion_id == c.id%}
-									<p>Cotizacion : {{c.nickname}}</p>
+									<p>Cotizacion de : {{cc.cotizacion.cloth}}</p>
 
 										<button type="button" class="btn btn-success mb-4" data-toggle="modal" data-target="#cotizacionModalLong">
 										  Details Cotizacion
@@ -69,16 +62,15 @@
 										      <div class="modal-body">
 										      	<div class="row"> 
 						                            <div class="col-sm-6">
-						                                <li class="list-group-item bg-dark">Valor de la Tela : ${{c.value_cloth}}</li>
-						                                <li class="list-group-item bg-dark">Valor del Trabajo : ${{c.value_work}}</li>
-						                                <li class="list-group-item bg-dark">Valor de los Hilos : ${{c.value_threads}}</li>
-						                                <li class="list-group-item bg-dark">Valor de los Botones : ${{c.value_buttons}}</li>
+						                                <li class="list-group-item bg-dark">Valor de la Tela : ${{cc.cotizacion.value_cloth}}</li>
+						                                <li class="list-group-item bg-dark">Valor del Trabajo : ${{cc.cotizacion.value_work}}</li>
+						                                <li class="list-group-item bg-dark">Valor de los Hilos : ${{cc.cotizacion.value_threads}}</li>
+						                                <li class="list-group-item bg-dark">Valor de los Botones : ${{cc.cotizacion.value_buttons}}</li>
 						                            </div>
 						                            <div class="col-sm-6">
-						                               <li class="list-group-item bg-dark">Valor de los Cuellos : ${{c.value_necks}}</li>
-						                               <li class="list-group-item bg-dark">Valor de los Bordados : ${{c.value_embroidery}}</li>
-						                               <li class="list-group-item bg-dark">Valor del Estampado : ${{c.value_prints}}</li>
-						                               <li class="list-group-item bg-dark">Tipo de Moda : {{c.fashion}}</li>
+						                               <li class="list-group-item bg-dark">Valor de los Cuellos : ${{cc.cotizacion.value_necks}}</li>
+						                               <li class="list-group-item bg-dark">Valor de los Bordados : ${{cc.cotizacion.value_embroidery}}</li>
+						                               <li class="list-group-item bg-dark">Valor del Estampado : ${{cc.cotizacion.value_prints}}</li>
 						                           </div>
 						                       </div>
 										     </div>
@@ -88,11 +80,9 @@
 										   </div>
 										 </div>
 									</div>
-								{%endif%}
-							{%endfor%}
 							<form action="{% url 'cu_restore' %}" method="POST">
 								{%csrf_token%}
-								<input type="number" name="coti_user_id" value="{{cu.id}}"hidden>
+								<input type="number" name="coti_user_id" value="{{cc.id}}"hidden>
 								<input type="submit" value="Restore" class="btn btn-info btn-block">
 							</form>
 						</div>

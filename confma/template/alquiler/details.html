@@ -9,31 +9,20 @@
 					<div class="card-header  text-center bg-info">PRENDA</div>
 					<div class="card-body">
 						<ul class="list-group">
-							{%for cloth in cloth_list%}
-								{%if cloth.id == alquiler.cloth_id%}
-									<li class="list-group-item bg-dark text-white">
-										Prenda : {{cloth.name}} <br> 
-										Color : {{cloth.color}} <br> 
-										Talla : {{cloth.size}} <br>
-									</li>		
-								{%endif%}
-							{%endfor%}	
+							<li class="list-group-item bg-dark text-white">
+								{{alquiler.cloth}}
+							</li>		
 						</ul>
 					</div>
-
 					<div class="card-header text-center bg-info">CLIENTE</div>
 					<div class="card-body">
 						<ul class="list-group  ">
-						{%for client in client_list%}
-							{% if alquiler.client_id == client.id%}
-								<li class="list-group-item bg-dark text-white text-center">
-									Nombre : {{client.name}} {{client.lastname}} <br>
-									Telefono : {{client.phone}} <br>
-									Celular : {{client.cellphone}} <br>
-									Direccion : {{client.address}}
-								</li>
-							{%endif%}
-						{%endfor%}
+							<li class="list-group-item bg-dark text-white text-center">
+								Nombre : {{alquiler.client.name}} {{alquiler.client.lastname}} <br>
+								Telefono : {{alquiler.client.phone}} <br>
+								Celular : {{alquiler.client.cellphone}} <br>
+								Direccion : {{alquiler.client.address}}
+							</li>
 						</ul>
 					</div>
 				</div>
