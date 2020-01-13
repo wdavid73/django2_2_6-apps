@@ -13,12 +13,13 @@ el registro con todas las prendas registradas para asi asociar la informacion"""
 
 class CotiListView(ListView):
      template_name = 'cotizacion/home.html'
-     queryset = Cotizacion.objects.all().filter(state = 1)
+     cloth = list(Cloth.objects.all())
+     queryset = Cotizacion.objects.all().filter(state = 1 , cloth__in = cloth)
 
-     def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['cloth_list'] = Cloth.objects.all().filter(state = 1)
-        return context
+     # def get_context_data(self, **kwargs):
+     #    context = super().get_context_data(**kwargs)
+     #    context['cloth_list'] = Cloth.objects.all().filter(state = 1)
+     #    return context
 
 """metodo que usa el CREATEVIEW de django para el registro de las cotizacion en la base de datos"""
 class CotiCreateView(CreateView):
@@ -80,7 +81,7 @@ def deletelog(request , id):
 
 """metodo que genera la vista para restaurar registro borrados logicamente"""
 def restoreview(request):
-    obj = Cotizacion.objects.all()
+    obj = Cotizacion.objects.all().filter(state = 0)
     context = {
         "coti" : obj,
         "model" : "Cotizacion",

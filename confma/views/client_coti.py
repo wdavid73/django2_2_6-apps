@@ -9,7 +9,7 @@ from ..forms.cotizacion_client import CUFormModel , Coti_UserFormModel
 
 # Create your views here.
 """Metodo para el listado de todas las cotizacion asociadas a un client"""
-class UCListView (ListView):
+class CCListView (ListView):
 	template_name = 'cliente_cotizacion/list-client.html'
 	queryset = Cotizacion_Client.objects.filter(state = 1)
 
@@ -36,12 +36,12 @@ def list_view(request):
 Metodo que Crea la vista para el registro de una cotizacion con un cliente
 """
 def create_view(request, id):
-	u = Client.objects.all().filter(state=1)
+	client = Client.objects.all().filter(state = 1)
 	coti_obj = get_object_or_404(Cotizacion , id = id)
 	total_coti = getTotal(coti_obj)
 	cloth = get_cloth(coti_obj)
 	context = {	
-		'cliente' : u,
+		'cliente' : client,
 		'coti' : coti_obj,
 		'total' : total_coti,
 		'cloth' : cloth
@@ -78,7 +78,7 @@ def create(request):
 			Cotizacion_Client.objects.create( total = total , cotizacion_id = coti_id , client_id = u_id)
 			return redirect("/confma/api/v1/cotizacion-client/list")
 	else:
-		return redirect("/confma/api/v1/cotizacion/list")
+		return redirect("/confma/api/v1/cotizacion/")
 
 """
 Metodo para obtener el valor total de la cotizacion

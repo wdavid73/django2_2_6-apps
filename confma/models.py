@@ -24,7 +24,7 @@ class Client(models.Model):
     updated_at  = models.DateTimeField(auto_now = True)
 
     def get_absolute_url(self):
-    	return reverse("users:users_home" , kwargs={"id" : self.id})
+    	return reverse("clients:clients_home" , kwargs={"id" : self.id})
 
     def __str__(self):
          return (self.name + " "+ self.lastname + " - " + self.address)

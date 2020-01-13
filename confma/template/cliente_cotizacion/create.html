@@ -9,13 +9,13 @@
 
 {% block content %}
 	<div class="container">
-		<form action = "{% url 'cu_create' %}" method = "POST">
+		<form action = "{% url 'cc_create' %}" method = "POST">
 			{% csrf_token %}
 			<div class="form-group" id="formOwn">
 				<div class="card text-white bg-dark border-info mt-2 mb-2" style=" margin : 0 auto">
 					<div class="card-header">
 						<p class="card-title">
-							Cotizacion Para :  {{cloth.name}} , Talla : {{cloth.size}} , Color : {{cloth.color}}
+							Cotizacion Para :  {{coti.cloth.name}} , Talla : {{coti.cloth.size}} , Color : {{coti.cloth.color}}
 						</p>
 					</div>
 					<div class="card-body">
@@ -31,7 +31,6 @@
 									<li class="list-group-item bg-dark">Valor de los Cuellos : ${{coti.value_necks}}</li>
 									<li class="list-group-item bg-dark">Valor del Bordado : ${{coti.value_embroidery}}</li>
 									<li class="list-group-item bg-dark">Valor del Estampado : ${{coti.value_prints}}</li>
-									<li class="list-group-item bg-dark">Moda : {{coti.fashion}}</li>
 								</div>
 							</div>
 							<li class="list-group-item bg-dark" style="margin : 0 auto"><div class="input-group">
@@ -46,7 +45,7 @@
 						<label for="">Client : </label>
 						<div class="container">
 							<div class="row">
-								<select  name="client_s" class="form-control">
+								<select  name="client_s" class="form-control" required>
 									<option value="" selected> Elegir Cliente : </option>
 									{% for c in cliente %}
 											<option value="{{c.id}}" id="{{c.id}}" >
@@ -62,9 +61,9 @@
 		      		<div class="col-6">
 		      			<input type="submit" value="Submit " class="btn btn-primary btn-block">
 		      		</div>
-		      		<div class="col-6">
+		      		<!-- <div class="col-6">
 		      			<a href="{% url 'coti_user_list' %}" class="btn btn-info btn-block">List of cotizacion with clients</a>
-		      		</div>
+		      		</div> -->
 	      		</div>
 	    	</div>
 		</form>

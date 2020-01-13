@@ -4,7 +4,7 @@ from .views             import clients , general , cotizacion , client_coti , re
 from .views.clients       import (ClientCreateView , ClientUpdateView  ,ClientDeleteView)
 from .views.cotizacion  import (CotiCreateView , CotiUpdateView , CotiListView , CotiDeleteView)
 from .views.general     import (ClothCreateView , AlquilerCreateView, AlquilerListView)
-from .views.client_coti   import (UCListView)
+from .views.client_coti   import (CCListView)
 from .views.registration import (SignUp)
 
 api = 'api/v1/'
@@ -44,8 +44,8 @@ urlpatterns = [
     path(api + 'cotizacion/restored/<int:id>/', login_required(cotizacion.restore),name = "coti_restored"),
         ### ROUTES COTIZACION-CLIENT
     path(api + 'cotizacion-client/<int:id>/'  , login_required(client_coti.create_view), name = "coti_user_create"),
-    path(api + 'cotizacion-client/'           , login_required(client_coti.create), name = "cu_create"),
-    path(api + 'cotizacion-client/list/'      , login_required(client_coti.list_view), name = "coti_user_list"),
+    path(api + 'cotizacion-client/'           , login_required(client_coti.create), name = "cc_create"),
+    path(api + 'cotizacion-client/list/'      , login_required(CCListView.as_view()), name = "coti_client_list"),
     path(api + 'cotizacion-client/delete/'    , login_required(client_coti.deletelog), name = "cu_deletelog"),
     path(api + 'cotizacion-client/delete/temp', login_required(client_coti.temp), name = "cu_deletelog_temp"),
     path(api + 'cotizacion-client/restore'    , login_required(client_coti.restore_view), name = "cu_restore_view"),

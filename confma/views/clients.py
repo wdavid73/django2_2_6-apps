@@ -12,14 +12,7 @@ from ..forms.client import ClientFormModel
 """ metodo que carga una vista con todos los clientes registrados filtrando
 a los que tengan estado 0 para que no se muestren"""
 def home(request , *args, **kwargs):
-    # obj = Client.objects.all()
     obj = Client.objects.all().filter(state = 1)
-
-    # clients = []
-    # for client in obj:
-    #     if client.state == 1:
-    #         clients.append(client)
-    
     context = {
         "clients" : obj,
         "model" : "Client"
@@ -80,12 +73,12 @@ Metodo para el borrado logico del registro , cambia el estado del
 registro de 1 a 0 
 """
 def deletelog(request , id):
-    obj = get_object_or_404 (Client , id=id)
+    obj = get_object_or_404 (Client , id = id)
 
     if request.method == 'POST':
         obj.state = 0
         obj.save()
-        return redirect('../../')
+        return redirect('clients_home')
 
     context = {
         'client' : obj
@@ -94,7 +87,7 @@ def deletelog(request , id):
 
 """metodo que genera la vista para restaurar registro borrados logicamente"""
 def restoreview(request):
-    obj = Client.objects.filter(state = 0)
+    obj = Client.objects.all().filter(state = 0)
     return render(request , 'clients/restore.html', {'clients' : obj})
     
 """metodo que restaura los modelos borrados logicamente cambiando el estado de 0 a 1"""
