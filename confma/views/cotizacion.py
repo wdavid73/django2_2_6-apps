@@ -13,8 +13,9 @@ el registro con todas las prendas registradas para asi asociar la informacion"""
 
 class CotiListView(ListView):
      template_name = 'cotizacion/home.html'
-     cloth = list(Cloth.objects.all())
-     queryset = Cotizacion.objects.all().filter(state = 1 , cloth__in = cloth)
+     #cloth = list(Cloth.objects.all())
+     #queryset = Cotizacion.objects.all().filter(state = 1 , cloth__in = cloth)
+     queryset = Cotizacion.objects.all().filter(state = 1)
 
      # def get_context_data(self, **kwargs):
      #    context = super().get_context_data(**kwargs)

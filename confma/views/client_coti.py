@@ -95,21 +95,13 @@ Metodo para el borrado logico del registro , cambia el estado del
 registro de 1 a 0 
 """
 def deletelog(request):	
-	id = request.POST.get('coti_client_id')
-	obj = get_object_or_404(Cotizacion_Client , id = id)
-	context = {
-		'client_coti' : obj,
-	}
-	return render (request , 'cliente_cotizacion/delete.html',context)
-
-def temp(request):
-	id = request.POST.get('coti_client_id')
-	obj = get_object_or_404(Cotizacion_Client , id = id)
+	id_ = request.POST.get('coti_client_id')
+	obj = get_object_or_404(Cotizacion_Client , id = id_)
 	if request.method == 'POST':
 		obj.state = 0
 		obj.save()
-		return redirect('/confma')
-
+		return redirect('coti_client_list')
+		
 """metodo para obtener un cliente pasandole el modelo del cliente y el modelo
 de cliente-cotizacion """
 def get_client(client, obj):

@@ -47,7 +47,7 @@ urlpatterns = [
     path(api + 'cotizacion-client/'           , login_required(client_coti.create), name = "cc_create"),
     path(api + 'cotizacion-client/list/'      , login_required(CCListView.as_view()), name = "coti_client_list"),
     path(api + 'cotizacion-client/delete/'    , login_required(client_coti.deletelog), name = "cu_deletelog"),
-    path(api + 'cotizacion-client/delete/temp', login_required(client_coti.temp), name = "cu_deletelog_temp"),
+    #path(api + 'cotizacion-client/delete/temp', login_required(client_coti.temp), name = "cu_deletelog_temp"),
     path(api + 'cotizacion-client/restore'    , login_required(client_coti.restore_view), name = "cu_restore_view"),
     path(api + 'cotizacion-client/restored' , login_required(client_coti.restore), name = "cu_restore"),
         ### ROUTES CLOTH
