@@ -12,15 +12,12 @@ de las usando el metodo get_context_data para agregarle al context que se le pas
 el registro con todas las prendas registradas para asi asociar la informacion"""
 
 class CotiListView(ListView):
-     template_name = 'cotizacion/home.html'
-     #cloth = list(Cloth.objects.all())
-     #queryset = Cotizacion.objects.all().filter(state = 1 , cloth__in = cloth)
-     queryset = Cotizacion.objects.all().filter(state = 1)
-
-     # def get_context_data(self, **kwargs):
-     #    context = super().get_context_data(**kwargs)
-     #    context['cloth_list'] = Cloth.objects.all().filter(state = 1)
-     #    return context
+    template_name = 'cotizacion/home.html'
+    if Cloth.objects.all().filter(state = 1) == None:
+        queryset = Cotizacion.objects.all().filter(state = 1)
+    else:
+        cloth = list(Cloth.objects.all())
+        queryset = Cotizacion.objects.all().filter(state = 1 , cloth__in = cloth)
 
 """metodo que usa el CREATEVIEW de django para el registro de las cotizacion en la base de datos"""
 class CotiCreateView(CreateView):

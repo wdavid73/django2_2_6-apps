@@ -46,9 +46,12 @@ class AlquilerCreateView(CreateView):
 
 """metodo que usa el LISTVIEW de django para listar todas los alquileres registrados en la base de datos"""
 class AlquilerListView(ListView):
-     template_name = 'alquiler/details.html'
-     list_client = list(Client.objects.all().filter(state = 1))
-     queryset = Alquiler.objects.filter(state = 1).filter(client__in = list_client)
+    template_name = 'alquiler/details.html'
+    if Client.objects.all().filter(state = 1) == None:
+        queryset = Alquiler.objects.filter(state = 1)
+    else:
+        list_client = list(Client.objects.all().filter(state = 1))
+        queryset = Alquiler.objects.filter(state = 1).filter(client__in = list_client)
 
 """metodo que renderiza las vista de index y home , una es la vista con el navbar para hacer CRUD en los distintos
 modelos de la base de datos , pero antes se tienen que registrar o en su defecto iniciar sesion , y por otra parte el home
