@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Image Gallery</title>
+  </head>
+  <body>
+    {% load static %}
+    {% for photo in photos %}
+      <!-- {{ photo }} -->
+      <!-- <img src="{{image.image.url}}" alt="{{image.name}}" style="width:150px;">
+      <p>{{image.name}}</p> -->
+      <img src="{{photo.image.url}}" alt="{{photo.name}}" style="width:150px; background: red">
+      <p>{{photo.name}}</p>
+    {% endfor %}
+  </body>
+</html>

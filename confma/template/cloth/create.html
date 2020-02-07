@@ -8,13 +8,39 @@
 				  	<div class="card-header">
 				  		<p class="display-4">Registrar Prenda</p>
 					</div>
-					    <form method="POST">
+					    <form action="{% url 'cloth_image' %}" method="POST" enctype="multipart/form-data">
 				            {% csrf_token %}
-				            {{ form }}
+
+				            <div class="form-group">
+                        		<label for=""> Nombre de la Prenda :</label>
+                        		<input type="text" name="{{form.name.html_name}}" class="form-control bg-dark text-white" placeholder="Ingrese un Nombre para identificar a la Prenda" required>
+                    		</div>
+                    		<div class="form-group">
+                        		<label for=""> Color de la Prenda :</label>
+                        		<input type="text" name="{{form.color.html_name}}" class="form-control bg-dark text-white" placeholder="Ingrese el color del Prenda" required>
+                    		</div>
+                    		<div class="form-group">
+                    			<label for=""> Talla de la Prenda :</label>
+                        		{{ form.size }}
+                    		</div>
+
+                    		<div class="form-group">
+                    			<label for=""> Moda de la Prenda :</label>
+                        		{{ form.fashion }}
+                    		</div>
+
+                    		<div class="form-group">
+                    			<label for="">Foto de la Moda</label>
+                    			<input type="file" name="{{form.image.html_name}}" class="form-control bg-dark text-white border-dark">
+                    			<!-- <input type="file"
+							       id="avatar" name="avatar"
+							       accept="image/png, image/jpeg"> -->
+                    		</div>	
+
 							<input type="submit" value="Enviar" class="btn btn-primary btn-block mt-3" id="client"  name ="submit_coti">
 				        </form>
+
 				         {% if form.errors %}
-					        <div class="col-6">
 					            <div class="row">
 					                    <div class="col-md-8">
 					                         {% for key,value in form.errors.items %}
@@ -27,7 +53,6 @@
 					                        {% endfor %}
 					                    </div>
 					            </div>
-					        </div>
     					{% endif %}
 				  </div>
 			</div>		

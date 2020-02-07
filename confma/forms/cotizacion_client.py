@@ -1,11 +1,11 @@
 from django.forms import ModelForm , TextInput
 from django import forms
 
-from ..models import Cotizacion , Client , Cotizacion_Client
+from ..models import Cotizacion , Client , CotizacionClient
 
 class CUFormModel(forms.ModelForm):
     class Meta:
-        model = Cotizacion_Client
+        model = CotizacionClient
         fields = [
             'cotizacion',
             'client',
@@ -19,7 +19,7 @@ class CUFormModel(forms.ModelForm):
 
 class Coti_UserFormModel(forms.ModelForm):
     class Meta:
-        model = Cotizacion_Client
+        model = CotizacionClient
         exclude = ["state"]
         def __init__ (self , *args , **kwargs):
             # brand = kwargs.pop("brand")

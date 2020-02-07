@@ -60,6 +60,15 @@
         </div>
         
     </div>
+    <ul>
+        {% for clo in cloth %}
+            {{clo.image.url}}
+            <li>
+                <img src="{{clo.image.url}}" alt="{{clo.name}}" width="500px" style="background: red">
+            </li>
+        {%endfor%}
+    </ul>
+
     {% else %}
 
   
