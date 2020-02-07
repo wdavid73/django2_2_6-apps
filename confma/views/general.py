@@ -14,8 +14,6 @@ from ..forms.alquiler import AlquilerFormModel
 from django.views.generic import (CreateView, UpdateView, ListView, DeleteView)
 
 
-def get_success_url():
-    return '../../../../'
 
 
 """metodo que usa el CREATEVIEW de django para el registro de las prendas en la base de datos"""
@@ -24,16 +22,21 @@ def upload_pic(request):
     print(request.FILES)
     if request.method == 'POST':
         form = ClothFormModel(request.POST, request.FILES)
-        q = request.POST.get('avatar')
-        print(q)
         if form.is_valid():
-            print("2")
-            print(form.cleaned_data['image'])
-            # m = CLoth.objects.get(pk=course_id)
+            print(form.cleaned_data)
+            Cloth.objects.create(**form.cleaned_data)
+            # m = Cloth.objects.get(pk=1)
             # m.model_pic = form.cleaned_data['image']
+            # print(m)
             # m.save()
-            return HttpResponse('image upload success')
-    return HttpResponseForbidden('allowed only via POST')
+            # if form.is_valid():
+            # #ingreso a la base de datos
+            # print(form.cleaned_data)
+            # User.objects.create(**form.cleaned_data)
+            # # form = UserForm()
+            # return redirect('../')
+            return redirect('../../../../')
+    return redirect('cloth_create')
 
 class ClothCreateView(CreateView):
     template_name = "cloth/create.html"
@@ -45,7 +48,8 @@ class ClothCreateView(CreateView):
         print(form.cleaned_data['image'])
         return super().form_valid(form)
 
-    get_success_url()
+    def get_success_url():
+        return '../../../../'
 
 
 """metodo que usa el CREATEVIEW de django para el registro de los alquileres en la base de datos"""
@@ -68,7 +72,8 @@ class AlquilerCreateView(CreateView):
         else:
             return redirect('alquiler_create')
 
-    get_success_url()
+    def get_success_url():
+        return '../../../../'
 
 
 """metodo que usa el LISTVIEW de django para listar todas los alquileres registrados en la base de datos"""

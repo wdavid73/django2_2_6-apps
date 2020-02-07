@@ -61,11 +61,16 @@
         
     </div>
     <ul>
+        <img src="{% static 'moda1.jpeg'%}" alt="" width="150px">
+
         {% for clo in cloth %}
-            {{clo.image.url}}
             <li>
-                <img src="{{clo.image.url}}" alt="{{clo.name}}" width="500px" style="background: red">
+                {{clo}}
+                {{clo.image.url}}
+                <img src="{{clo.image.url}}" alt="moda" width="150px">
             </li>
+
+            <!-- <img src="{{clo.image.ulr}}" alt="moda"> -->
         {%endfor%}
     </ul>
 
