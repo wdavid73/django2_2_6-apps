@@ -1,34 +1,107 @@
 {% extends 'layouts/base_loggin.html' %}
 {% block title%} Registrar Cotizacion Sola {% endblock %}
 {% block content %}
-	<div class="row">
-		<div class="col">
+	<div class="row justify-content-md-center justify-content-sm-center">
+		<div class="col-lg-6 col-md-10 col-sm-10 m-2">
 			<div class="form-group mt-3">
-				<div class="card bg-dark text-white mb-3 w-50 container p-3" >
+				<div class="card bg-dark text-white" >
 				  	<div class="card-header">
 				  		<p class="display-4">Registrar Cotizacion</p>
 					</div>
 					    <form method="POST">
 				            {% csrf_token %}
-				            {{ form }}
-							<input type="submit" value="Enviar" class="btn btn-primary btn-block mt-3" id="client"  name ="submit_coti">
+
+							<div class="form-row m-2">
+								<div class="col-lg-12 col-md-12 col-sm-12">
+									{{form.cloth}}
+								</div>
+							</div>
+
+							<div class="form-row m-2">
+							    <div class="col-lg-6 col-md-6 col-sm-6">
+									<div class="input-group mb-2">
+								        <div class="input-group-prepend">
+								          <div class="input-group-text">$</div>
+								        </div>
+								        <input type="number" name="{{form.value_cloth.html_name}}" class="form-control bg-dark text-white" placeholder="Valor de la Tela" required>
+								     </div>
+							    </div>
+							    <div class="col-lg-6 col-md-6 col-sm-6">
+							    	<div class="input-group mb-2">
+								        <div class="input-group-prepend">
+								          <div class="input-group-text">$</div>
+								        </div>
+								      <input type="number" name="{{form.value_work.html_name}}" class="form-control bg-dark text-white" placeholder="Valor del Trabajo" required>
+								    </div>
+								</div>
+							</div>
+							<div class="form-row m-2">
+							    <div class="col-lg-6 col-md-6 col-sm-6">
+							    	<div class="input-group mb-2">
+								        <div class="input-group-prepend">
+								          <div class="input-group-text">$</div>
+								        </div>
+								      <input type="number" name="{{form.value_threads.html_name}}" class="form-control bg-dark text-white" placeholder="Valor de los Hilos" required>
+								     </div>
+							    </div>
+							    <div class="col-lg-6 col-md-6 col-sm-6">
+							    	<div class="input-group mb-2">
+								        <div class="input-group-prepend">
+								          <div class="input-group-text">$</div>
+								        </div>
+								      <input type="number" name="{{form.value_buttons.html_name}}" class="form-control bg-dark text-white" placeholder="Valor de los Botones" required>
+								     </div>
+							    </div>
+							</div>
+							<div class="form-row m-2">
+							    <div class="col-lg-4 col-md-4 col-sm-6">
+							    	<div class="input-group mb-2">
+								        <div class="input-group-prepend">
+								          <div class="input-group-text">$</div>
+								        </div>
+								      <input type="number" name="{{form.value_necks.html_name}}" class="form-control bg-dark text-white" placeholder="Valor de los Cuellos">
+								     </div>
+							    </div>
+							    <div class="col-lg-4 col-md-4 col-sm-6">
+							    	<div class="input-group mb-2">
+								        <div class="input-group-prepend">
+								          <div class="input-group-text">$</div>
+								        </div>
+								      <input type="number" name="{{form.value_embroidery.html_name}}" class="form-control bg-dark text-white" placeholder="Valor del Bordado">
+								     </div>
+							    </div>
+							    <div class="col-lg-4 col-md-4 col-sm-6">
+							    	<div class="input-group mb-2">
+								        <div class="input-group-prepend">
+								          <div class="input-group-text">$</div>
+								        </div>
+								      <input type="number" name="{{form.value_prints.html_name}}" class="form-control bg-dark text-white" placeholder="Valor del Estampado">
+								     </div>
+							    </div>
+							</div>
+
+							<div class="row justify-content-md-center justify-content-sm-center">
+									<div class="col-lg-10 col-md-10 col-sm-10 m-2">
+										<input type="submit" value="Enviar" class="btn btn-primary btn-block" name ="submit_coti">
+									</div>
+							</div>
 				        </form>
 				         {% if form.errors %}
-        <div class="col-6">
-            <div class="row">
-                    <div class="col-md-8">
-                         {% for key,value in form.errors.items %}
-                            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                                <strong>{{ key|escape }} : {{ value|escape }}</strong>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        {% endfor %}
-                    </div>
-            </div>
-        </div>
-    {% endif %}
+					        <div class="col-6">
+					            <div class="row">
+					                    <div class="col-md-8">
+					                         {% for key,value in form.errors.items %}
+					                            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+					                                <strong>{{ key|escape }} : {{ value|escape }}</strong>
+					                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+					                                    <span aria-hidden="true">&times;</span>
+					                                </button>
+					                            </div>
+					                        {% endfor %}
+					                    </div>
+					            </div>
+					        </div>
+					    {% endif %}
 				  </div>
 			</div>		
 		</div>

@@ -13,40 +13,40 @@
 			{% csrf_token %}
 			<div class="form-group" id="formOwn">
 				<div class="card text-white bg-dark border-info mt-2 mb-2" style=" margin : 0 auto">
-					<div class="card-header">
-						<p class="card-title">
-							Cotizacion Para :  {{coti.cloth.name}} , Talla : {{coti.cloth.size}} , Color : {{coti.cloth.color}}
-						</p>
-					</div>
-					<div class="card-body">
-						<ul class="list-group list-group-flush">
-							<div class="row">
-								<div class="col-sm-6">
-									<li class="list-group-item bg-dark">Valor de la Tela : ${{coti.value_cloth}}</li>
-									<li class="list-group-item bg-dark">Valor del Trabajo : ${{coti.value_work}}</li>
-									<li class="list-group-item bg-dark">Valor de los Hilos : ${{coti.value_threads}}</li>
-									<li class="list-group-item bg-dark">Valor delos Botones : ${{coti.value_buttons}}</li>
-								</div>
-								<div class="col-sm-6">
-									<li class="list-group-item bg-dark">Valor de los Cuellos : ${{coti.value_necks}}</li>
-									<li class="list-group-item bg-dark">Valor del Bordado : ${{coti.value_embroidery}}</li>
-									<li class="list-group-item bg-dark">Valor del Estampado : ${{coti.value_prints}}</li>
-								</div>
-							</div>
-							<li class="list-group-item bg-dark" style="margin : 0 auto">
-								<div class="input-group">
-						        	<div class="input-group-prepend">
-						          		<div class="input-group-text bg-dark text-white">$</div>
-						        	</div>
-						        	<input type="number" class="form-control bg-dark text-white" placeholder="Valor Total de la Cotizacion" value="{{total}}" readonly="" name="total">
-						        	<input type="number" name="coti_id" value="{{coti.id}}"hidden>
-					      		</div> 
-	      					</li>
-						</ul>
-						<label for="">Client : </label>
+					<div class="row no-gutters">
+                    <div class="col-md-5 p-2 d-flex align-items-center justify-content-center">
+                        <img src="{{coti.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
+                    </div>
+                    <div class="col-md-7">
+                        <div class="card-body">
+                            <p class="card-title text-center"> <strong>Prenda : {{coti.cloth}}</strong> </p>
+                            <p class="card-text">
+                                <ul class="list-group list-group-flush">
+                                    <div class="row"> 
+                                        <div class="col-sm-6">
+                                            <li class="list-group-item bg-dark">Valor de la Tela : $ {{coti.value_cloth}}</li>
+                                            <li class="list-group-item bg-dark">Valor del Trabajo : $ {{coti.value_work}}</li>
+                                            <li class="list-group-item bg-dark">Valor de los Hilos : $ {{coti.value_threads}}</li>
+                                            <li class="list-group-item bg-dark">Valor de los Botones : $ {{coti.value_buttons}}</li>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <li class="list-group-item bg-dark">Valor de los Cuellos : $ {{coti.value_necks}}</li>
+                                            <li class="list-group-item bg-dark">Valor de los Bordados : $ {{coti.value_embroidery}}</li>
+                                            <li class="list-group-item bg-dark">Valor del Estampado : $ {{coti.value_prints}}</li>
+                                        </div>
+                                    </div>
+                                </ul>  
+                            </p>
+                            <div class="input-group mb-2">
+						        <div class="input-group-prepend">
+						          	<div class="input-group-text bg-dark text-white">Total: $</div>
+						        </div>
+						        <input type="number" class="form-control bg-dark text-white" placeholder="Valor Total de la Cotizacion" value="{{total}}" readonly="" name="total">
+						        <input type="number" name="coti_id" value="{{coti.id}}"hidden>
+					      	</div> 
 						<div class="container">
 							<div class="row">
-								<select  name="client_s" class="form-control" required>
+								<select  name="client_s" class="form-control bg-dark text-white" required>
 									<option value="" selected> Elegir Cliente : </option>
 									{% for c in cliente %}
 											<option value="{{c.id}}" id="{{c.id}}" >
@@ -56,19 +56,18 @@
 								</select>
 							</div>
 						</div>
-					</div>
+						<div class="row">
+							<div class="col-lg-12 col-md-12 col-sm-12">
+								<input type="submit" value="Realizar Cotizacion" class="btn btn-primary btn-block mt-2">
+							</div>
+						</div>
+                            <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
+                        </div>
+                    </div>
+                </div>
 				</div>
-	      		<div class="row">
-		      		<div class="col-6">
-		      			<input type="submit" value="Submit " class="btn btn-primary btn-block">
-		      		</div>
-		      	
-	      		</div>
 	    	</div>
 		</form>
 		
 	</div>
-	
-
-	
 {%endblock%}

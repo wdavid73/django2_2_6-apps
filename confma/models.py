@@ -43,7 +43,7 @@ class Cloth(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name + " " + ", Talla : " + self.size + ", Color : " + self.color
+        return self.name + " " + ", Talla : " + self.size + ", Color : " + self.color + ", Moda : " + self.fashion
 
 
 class Cotizacion(models.Model):
