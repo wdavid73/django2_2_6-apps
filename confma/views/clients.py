@@ -135,12 +135,12 @@ def search(request):
         # query que trate los alquileres de un cliente en especifico
         alquiler_cliente = Alquiler.objects.filter(client=obj_client)
         count_alquiler = alquiler_cliente.count()
-        cloth = list(Cloth.objects.all())  # array con los registro de todas las prendas
+        cloth = list(Cloth.objects.all().filter(state = 1))  # array con los registro de todas las prendas
         # trae las cotizacion que ya tiene una prenda asignada
         cotizacion = list(Cotizacion.objects.all().filter(state=1, cloth__in=cloth))
         # trae los registro de los clientes que tienen asignado una cotizacion con su respectiva prenda
         cotizacion_cliente = CotizacionClient.objects.filter(cotizacion__in=cotizacion, client=obj_client)
-        count_coti_cli = cotizacion_cliente.count
+        count_coti_cli = cotizacion_cliente.count()
         context = {
             'all_client': clients,
             'alquiler_cliente': alquiler_cliente,

@@ -94,3 +94,6 @@ class Alquiler(models.Model):
         return ("Fecha De Registro " + str(self.date_now) + " " + ", Fecha de Retorno : " + str(
             self.date_return) + ", Valor : " + str(self.price) + " " + ", Cliente : " + str(
             self.client) + " " + ", Prenda : " + str(self.cloth))
+
+    def get_absolute_url(self):
+        return reverse("alquiler:alquiler_details_all")

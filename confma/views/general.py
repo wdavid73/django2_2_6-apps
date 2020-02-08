@@ -2,7 +2,7 @@ from datetime import date
 from django.shortcuts import render, redirect, get_object_or_404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.http import Http404, HttpResponse ,HttpResponseForbidden
+from django.http import Http404, HttpResponse ,HttpResponseForbidden ,HttpResponseRedirect
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage
 # Models
@@ -12,8 +12,6 @@ from ..forms.cloth import ClothFormModel
 from ..forms.alquiler import AlquilerFormModel
 # Create your views here.
 from django.views.generic import (CreateView, UpdateView, ListView, DeleteView)
-
-
 
 """metodo que usa el CREATEVIEW de django para el registro de las prendas en la base de datos"""
 
@@ -28,7 +26,7 @@ class ClothCreateView(CreateView):
         print(form.cleaned_data['image'])
         return super().form_valid(form)
 
-    def get_success_url():
+    def get_success_url(self):
         return '../../../../'
 
 
@@ -54,10 +52,7 @@ class AlquilerCreateView(CreateView):
     template_name = "alquiler/create.html"
     form_class = AlquilerFormModel
 
-    # queryset = Alquiler.objects.all()
-
     def form_valid(self, form):
-        # print(form.cleaned_data)
         now = date.today()
         if form.cleaned_data["date_return"] > now:
             if form.cleaned_data["client"].state == 1:
@@ -67,7 +62,7 @@ class AlquilerCreateView(CreateView):
         else:
             return redirect('alquiler_create')
 
-    def get_success_url():
+    def get_success_url(self):
         return '../../../../'
 
 
