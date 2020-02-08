@@ -36,7 +36,7 @@ class Cloth(models.Model):
     size = models.CharField(max_length=10, null=False, blank=False, choices=list_size, default=1)
     fashion = models.CharField(max_length=50, null=False)
     # image       = models.ImageField(upload_to = 'fashion' , default = 'notfound.jpg')
-    image = models.ImageField(upload_to='fashion')
+    image = models.ImageField(upload_to='fashion/%Y/%m/%d/')
     #####################
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)

@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .views import clients, general, cotizacion, client_coti, registration
 from .views.clients import (ClientCreateView, ClientUpdateView, ClientDeleteView)
 from .views.cotizacion import (CotiCreateView, CotiUpdateView, CotiListView, CotiDeleteView)
-from .views.general import (ClothCreateView, AlquilerCreateView, AlquilerListView)
+from .views.general import (ClothCreateView, ClothListView ,AlquilerCreateView, AlquilerListView)
 from .views.client_coti import (CCListView)
 from .views.registration import (SignUp)
 
@@ -52,7 +52,9 @@ urlpatterns = [
     path(api + 'cotizacion-client/restored', login_required(client_coti.restore), name="cu_restore"),
     # ROUTES CLOTH
     path(api + 'cloth/create/', login_required(ClothCreateView.as_view()), name="cloth_create"),
-    path(api + 'cloth/image/', general.upload_pic, name="cloth_image"),
+    path(api + 'cloth/image/', login_required(general.upload_pic), name="cloth_image"),
+    path(api + 'cloth/list/', login_required(ClothListView.as_view()), name="cloth_list"),
+    
     # ROUTES ALQUILER
     path(api + 'alquiler/create/', login_required(AlquilerCreateView.as_view()), name="alquiler_create"),
     path(api + 'alquiler/details/all', login_required(AlquilerListView.as_view()), name="alquiler_details_all"),

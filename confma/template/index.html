@@ -1,7 +1,7 @@
 {% extends 'layouts/base_loggin.html' %}
 {% load staticfiles %}
 {% block title%}
-    Home Confma App
+    Inicio
 {% endblock %}
 
 {% block principal_options%}
@@ -60,19 +60,6 @@
         </div>
         
     </div>
-    <ul>
-        <img src="{% static 'moda1.jpeg'%}" alt="" width="150px">
-
-        {% for clo in cloth %}
-            <li>
-                {{clo}}
-                {{clo.image.url}}
-                <img src="{{clo.image.url}}" alt="moda" width="150px">
-            </li>
-
-            <!-- <img src="{{clo.image.ulr}}" alt="moda"> -->
-        {%endfor%}
-    </ul>
 
     {% else %}
 

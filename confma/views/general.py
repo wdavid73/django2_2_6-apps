@@ -15,28 +15,8 @@ from django.views.generic import (CreateView, UpdateView, ListView, DeleteView)
 
 
 
-
 """metodo que usa el CREATEVIEW de django para el registro de las prendas en la base de datos"""
 
-def upload_pic(request):
-    print(request.FILES)
-    if request.method == 'POST':
-        form = ClothFormModel(request.POST, request.FILES)
-        if form.is_valid():
-            print(form.cleaned_data)
-            Cloth.objects.create(**form.cleaned_data)
-            # m = Cloth.objects.get(pk=1)
-            # m.model_pic = form.cleaned_data['image']
-            # print(m)
-            # m.save()
-            # if form.is_valid():
-            # #ingreso a la base de datos
-            # print(form.cleaned_data)
-            # User.objects.create(**form.cleaned_data)
-            # # form = UserForm()
-            # return redirect('../')
-            return redirect('../../../../')
-    return redirect('cloth_create')
 
 class ClothCreateView(CreateView):
     template_name = "cloth/create.html"
@@ -50,6 +30,21 @@ class ClothCreateView(CreateView):
 
     def get_success_url():
         return '../../../../'
+
+
+def upload_pic(request):
+    print(request.FILES)
+    if request.method == 'POST':
+        form = ClothFormModel(request.POST, request.FILES)
+        if form.is_valid():
+            print(form.cleaned_data)
+            Cloth.objects.create(**form.cleaned_data)
+            return redirect('../list')
+    return redirect('cloth_create')
+
+class ClothListView(ListView):
+    template_name = 'cloth/photos.html'
+    queryset = Cloth.objects.all().filter(state = 1)
 
 
 """metodo que usa el CREATEVIEW de django para el registro de los alquileres en la base de datos"""
