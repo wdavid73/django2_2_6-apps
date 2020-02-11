@@ -1,0 +1,54 @@
+{% extends 'layouts/base_loggin.html' %}
+
+{% block title%} Borrar un Cliente {% endblock%} 
+
+{% block name%}
+    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">delete</i>Borrar Cliente ? </h2>
+{% endblock %}
+
+
+
+{% block content %}
+<form action="" method="POST">
+	{% csrf_token %}
+	
+		<div class="col-sm-12 col-md-8 col-lg-9 container">
+			<div class="card">
+				<div class="card-header bg-dark text-white"> Cliente <span class="badge badge-primary badge-pill">#{{client.id}}</span> </div>
+				<div class="card-body bg-dark text-white">
+		    		<h5 class="card-title">Esta seguro que desea borrar este cliente : " {{client.name}} {{client.lastname}} "
+		    			<br>
+		    			<p class="mt-2 text-justify"> Estado : 
+			    			{% if client.state == 1%} 
+			    				<span class="badge badge-success badge-pill"> Activo </span> 
+			    			{%else%} 
+			    				 <span class="badge badge-danger badge-pill"> Inactivo </span>
+			    			{%endif%}
+		    			</p>
+		    		</h5>
+		    		<p class="card-text"> information :
+		    			<ul>
+			    			<li>Address: {{client.address}}</li>
+			    			<li>Phone: {{client.phone}}</li>
+			    			<li>Cellphone: {{client.cellphone}}</li>
+		    			</ul>
+		    		</p>
+		    		<div class="row">
+		    			<div class="col-6">
+		    				<input type="submit" class="btn btn-warning btn-block" value="Si">
+		    			</div>
+		    			<div class="col-6">
+		    				<a href="{% url 'confma:list_all_clients' %}" class="btn btn-success btn-block">No</a>
+		    			</div>
+		    		</div>
+					
+					
+		  		</div>
+			</div>
+		</div>
+
+	{{form.as_p}}
+
+</form>
+
+{% endblock %}

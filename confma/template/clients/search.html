@@ -12,7 +12,7 @@
             </div>
             <div class="card-body">
                 <div class="form-group">
-                    <form action="{% url 'client_search' %}" method="POST">
+                    <form action="{% url 'confma:find_client' %}" method="POST">
                         {% csrf_token %}
                         <div>
                             <select  name="client_id" class="form-control" required>

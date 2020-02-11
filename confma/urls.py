@@ -1,16 +1,17 @@
 from django.urls import path, include
 from django.contrib.auth.decorators import login_required
-from .views import clients, general, cotizacion, client_coti, registration
-from .views.clients import (ClientCreateView, ClientUpdateView, ClientDeleteView)
-from .views.cotizacion import (CotiCreateView, CotiUpdateView, CotiListView, CotiDeleteView)
-from .views.general import (ClothCreateView, ClothListView ,AlquilerCreateView, AlquilerListView)
-from .views.client_coti import (CCListView)
+from .views import clients, general, cotizacion, client_coti
+from .views.clients import (CreateClient, UpdateClient)
+from .views.cotizacion import (CreateCotizacion, UpdateCotizacionById, ListAllCotizacionByCloth)
+from .views.general import (ClothCreate, ListOfAllCloth, CreateRental, ListOfAllRental)
+from .views.client_coti import (ListOfAllClientsAndCotizacion)
 from .views.registration import (SignUp)
 
 api = 'api/v1/'
+app_name = "confma"
 urlpatterns = [
     # ROUTES GENERAL
-    path('', general.home, name="home"),
+    path('', general.HomePage, name="homepage"),
     # LOGIN AND LOGOUT
 
     path('', include('django.contrib.auth.urls')),
@@ -23,39 +24,43 @@ urlpatterns = [
     # confma/ reset/<uidb64>/<token>/ [name='password_reset_confirm']
     # confma/ reset/done/ [name='password_reset_complete']
 
-    path('signup/', SignUp.as_view(), name="signup"),
+    path('signup/', SignUp.as_view(), name='signup'),
 
     # ROUTES API
     # ROUTES USERS
-    path(api + 'clients/', login_required(clients.home), name="clients_home"),
-    # path(api + 'clients/details/'             , login_required(ClientListView.as_view()), name = "client_details"),
-    path(api + 'clients/create/', login_required(ClientCreateView.as_view()), name="client_create"),
-    path(api + 'clients/<int:id>/update/', login_required(ClientUpdateView.as_view()), name="client_update"),
-    path(api + 'clients/<int:id>/delete/', login_required(clients.deletelog), name="client_deletelog"),
-    path(api + 'clients/restore', login_required(clients.restoreview), name="client_restore"),
-    path(api + 'clients/restored/<int:id>/', login_required(clients.restore), name="client_restored"),
-    path(api + 'clients/search/', login_required(clients.search), name="client_search"),
+    path(api + 'clients/', login_required(clients.ListAllClients), name="list_all_clients"),
+    path(api + 'clients/create/', login_required(CreateClient.as_view()), name="create_clients"),
+    path(api + 'clients/<int:id>/update/', login_required(UpdateClient.as_view()), name="update_clients"),
+    path(api + 'clients/<int:id>/delete/', login_required(clients.DeleteClient), name="delete_clients"),
+    path(api + 'clients/restore', login_required(clients.RestoreClientView), name="restore_clients_view"),
+    path(api + 'clients/restored/<int:id>/', login_required(clients.RestoreClient), name="client_restored"),
+    path(api + 'clients/search/', login_required(clients.FindClient), name="find_client"),
     # ROUTES COTIZACION
-    path(api + 'cotizacion/', login_required(CotiListView.as_view()), name="coti_list"),
-    path(api + 'cotizacion/create/', login_required(CotiCreateView.as_view()), name="coti_create"),
-    path(api + 'cotizacion/<int:id>/update/', login_required(CotiUpdateView.as_view()), name="coti_update"),
-    path(api + 'cotizacion/<int:id>/delete/', login_required(cotizacion.deletelog), name="coti_deletelog"),
-    path(api + 'cotizacion/restore', login_required(cotizacion.restoreview), name="coti_restore"),
-    path(api + 'cotizacion/restored/<int:id>/', login_required(cotizacion.restore), name="coti_restored"),
+    path(api + 'cotizacion/', login_required(ListAllCotizacionByCloth.as_view()), name="list_of_all_cotizaciones"),
+    path(api + 'cotizacion/create/', login_required(CreateCotizacion.as_view()), name="create_cotizaciones"),
+    path(api + 'cotizacion/<int:id>/update/', login_required(UpdateCotizacionById.as_view()), name="update_cotizaciones"),
+    path(api + 'cotizacion/<int:id>/delete/', login_required(cotizacion.DeleteCotizacion), name="delete_cotizaciones"),
+    path(api + 'cotizacion/restore', login_required(cotizacion.RestoreCotizacionView), name="restore_cotizaciones_view"),
+    path(api + 'cotizacion/restored/<int:id>/', login_required(cotizacion.RestoreCotizacionById),
+         name="cotizacion_restored"),
     # ROUTES COTIZACION-CLIENT
-    path(api + 'cotizacion-client/<int:id>/', login_required(client_coti.create_view), name="coti_user_create"),
-    path(api + 'cotizacion-client/', login_required(client_coti.create), name="cc_create"),
-    path(api + 'cotizacion-client/list/', login_required(CCListView.as_view()), name="coti_client_list"),
-    path(api + 'cotizacion-client/delete/', login_required(client_coti.deletelog), name="cu_deletelog"),
-    # path(api + 'cotizacion-client/delete/temp', login_required(client_coti.temp), name = "cu_deletelog_temp"),
-    path(api + 'cotizacion-client/restore', login_required(client_coti.restore_view), name="cu_restore_view"),
-    path(api + 'cotizacion-client/restored', login_required(client_coti.restore), name="cu_restore"),
+    path(api + 'cotizacion-client/<int:id>/', login_required(client_coti.ClientCotizacionView),
+         name="create_client_cotizacion_view"),
+    path(api + 'cotizacion-client/', login_required(client_coti.create), name="create_client_cotizacion"),
+    path(api + 'cotizacion-client/list/', login_required(ListOfAllClientsAndCotizacion.as_view()),
+         name="list_of_all_cotizacion_client"),
+    path(api + 'cotizacion-client/delete/', login_required(client_coti.DeleteClientCotizacion),
+         name="delete_cotizacion_client"),
+    path(api + 'cotizacion-client/restore', login_required(client_coti.RestoreClientCotizacionView),
+         name="restore_client_cotizacion_view"),
+    path(api + 'cotizacion-client/restored', login_required(client_coti.RestoreClientCotizacion),
+         name="client_cotizacion_restored"),
     # ROUTES CLOTH
-    path(api + 'cloth/create/', login_required(ClothCreateView.as_view()), name="cloth_create"),
-    path(api + 'cloth/image/', login_required(general.upload_pic), name="cloth_image"),
-    path(api + 'cloth/list/', login_required(ClothListView.as_view()), name="cloth_list"),
-    
-    # ROUTES ALQUILER
-    path(api + 'alquiler/create/', login_required(AlquilerCreateView.as_view()), name="alquiler_create"),
-    path(api + 'alquiler/details/all', login_required(AlquilerListView.as_view()), name="alquiler_details_all"),
+    path(api + 'cloth/create/', login_required(ClothCreate.as_view()), name="create_cloth"),
+    path(api + 'cloth/photo/', login_required(general.UploadPhotoFashion), name="upload_photo_to_cloth"),
+    path(api + 'cloth/list/', login_required(ListOfAllCloth.as_view()), name="list_all_cloth"),
+
+    # ROUTES RENTAL
+    path(api + 'rental/create/', login_required(CreateRental.as_view()), name="create_rental"),
+    path(api + 'rental/details/all', login_required(ListOfAllRental.as_view()), name="list_of_all_rental"),
 ]

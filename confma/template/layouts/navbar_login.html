@@ -20,11 +20,12 @@
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           Clientes
         </a>
+
         <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a href='/{{api}}/clients/create/'  class="dropdown-item bg-dark text-white">Registrar</a>
-          <a href="/{{api}}/clients/search/" class="dropdown-item  bg-dark text-white">Buscar</a>
+          <a href="{% url 'confma:create_clients' %}"  class="dropdown-item bg-dark text-white">Registrar</a>
+          <a href="{% url 'confma:find_client' %}" class="dropdown-item  bg-dark text-white">Buscar</a>
           <div class="dropdown-divider bg-dark"></div>
-          <a href="/{{api}}/clients/" class="dropdown-item  bg-dark text-white">Todos los Clientes</a>
+          <a href="{% url 'confma:list_all_clients' %}" class="dropdown-item  bg-dark text-white">Todos los Clientes</a>
         </div>
       </li>
       <li class="nav-item dropdown">
@@ -32,9 +33,9 @@
           Cloth
         </a>
         <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a href="/{{api}}/cloth/create/" class="dropdown-item bg-dark text-white">Registrar Prendas</a>
+          <a href="{% url 'confma:create_cloth' %}" class="dropdown-item bg-dark text-white">Registrar Prendas</a>
           <div class="dropdown-divider bg-dark"></div>
-          <a href="/{{api}}/cloth/list/" class="dropdown-item bg-dark text-white">
+          <a href="{% url 'confma:list_all_cloth' %}"class="dropdown-item bg-dark text-white">
           Prendas Registradas</a>
         </div>        
       </li>
@@ -44,11 +45,11 @@
           Cotizaciones
         </a>
         <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a href="/{{api}}/cotizacion/create/" class="dropdown-item bg-dark text-white">Registrar</a>
+          <a href="{% url 'confma:create_cotizaciones'%}" class="dropdown-item bg-dark text-white">Registrar</a>
           <div class="dropdown-divider bg-dark"></div>
-          <a href="/{{api}}/cotizacion/" class="dropdown-item  bg-dark text-white">Registradas</a>
+          <a href="{% url 'confma:list_of_all_cotizaciones' %}" class="dropdown-item  bg-dark text-white">Registradas</a>
           <div class="dropdown-divider bg-dark"></div>
-          <a href="/{{api}}/cotizacion-client/list/" class="dropdown-item  bg-dark text-white">Cliente - Cotizacion Registrados</a>
+          <a href="{% url 'confma:list_of_all_cotizacion_client' %}" class="dropdown-item  bg-dark text-white">Cliente - Cotizacion Registrados</a>
         </div>
       </li>
 
@@ -57,9 +58,9 @@
           Alquiler
         </a>
         <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a href="/{{api}}/alquiler/create/" class="dropdown-item bg-dark text-white">Registrar</a>
+          <a href="{% url 'confma:create_rental' %}" class="dropdown-item bg-dark text-white">Registrar</a>
           <div class="dropdown-divider bg-dark"></div>
-          <a href="/{{api}}/alquiler/details/all" class="dropdown-item  bg-dark text-white">Todos los Alquileres</a>
+          <a href="{% url 'confma:list_of_all_rental' %}" class="dropdown-item  bg-dark text-white">Todos los Alquileres</a>
         </div>
       </li>
     </ul>
@@ -71,7 +72,7 @@
           <div class="dropdown-menu dropdown-menu-right bg-dark">
             <p class="dropdown-item bg-primary" type="button">Hola {{user.username}}!</p>
             <button class="dropdown-item bg-secondary" type="button">Perfil</button>
-            <a href="{% url 'logout'%}" class="dropdown-item bg-warning">Cerrar Sesion</a>
+
           </div>
       </div>
     {% endif %}

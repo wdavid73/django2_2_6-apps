@@ -1,8 +1,5 @@
-from django.forms import ModelForm , TextInput
 from django import forms
-from django.utils.translation import gettext_lazy as _
-
-from ..models import Cotizacion , Cloth
+from ..models import Cotizacion
 
 
 class CotizacionFormModel(forms.ModelForm):
@@ -17,58 +14,10 @@ class CotizacionFormModel(forms.ModelForm):
             'value_necks',
             'value_embroidery',
             'value_prints',
-         ]
+        ]
 
-        #cloth = forms.ChoiceField(widget = forms.Select(attrs={'class' : 'form-control'})),
         widgets = {
 
-            'cloth'            : forms.Select(
-                attrs={'class ' : 'form-control bg-dark text-white'}),
-
-        #     'value_cloth'      : forms.NumberInput(
-        #         attrs = {
-        #             'placeholder' : 'Valor de la tela , Ejemplo : 150.00',
-        #             'class' : 'form-control bg-dark text-white mb-3'}),
-
-        #     'value_work'       : forms.NumberInput(
-        #         attrs = {
-        #             'placeholder' : 'Valor del Trabajo , Ejemplo : 150.00',
-        #             'class' : 'form-control bg-dark text-white mb-3'}),
-
-        #     'value_threads'    : forms.NumberInput(
-        #         attrs = {
-        #             'placeholder' : 'Valor de los Hilos  , Ejemplo : 150.00',
-        #             'class' : 'form-control bg-dark text-white mb-3'}),
-
-        #     'value_buttons'    : forms.NumberInput(
-        #         attrs = {
-        #             'placeholder' : 'Valor de los botones  , Ejemplo : 150.00',
-        #             'class' : 'form-control bg-dark text-white mb-3'}),
-
-        #     'value_necks'      : forms.NumberInput(
-        #         attrs = {
-        #             'placeholder' : 'Valor de los cuello , Ejemplo : 150.00',
-        #             'class' : 'form-control bg-dark text-white mb-3'}),
-
-        #     'value_embroidery' : forms.NumberInput(
-        #         attrs = {
-        #             'placeholder' : 'Valor del bordado  , Ejemplo : 150.00',
-        #             'class' : 'form-control bg-dark text-white mb-3'}),
-
-        #     'value_prints'     : forms.NumberInput(
-        #         attrs = {
-        #             'placeholder' : 'Valor del estanpado  , Ejemplo : 150.00',
-        #             'class' : 'form-control bg-dark text-white mb-3'}),
-            
+            'cloth': forms.Select(
+                attrs={'class ': 'form-control bg-dark text-white'}),
         }
-
-        # labels = {
-        #     "cloth"             : _("Seleccione una Prenda"),
-        #     "value_cloth"       : _("Valor de la Tela"),
-        #     "value_work"        : _("Valor del Trabajo"),
-        #     "value_threads"     : _("Valor de los Hilos"),
-        #     "value_buttons"     : _("Valor de los Botones"),
-        #     "value_necks"       : _("Valor de los cuellos"),
-        #     "value_embroidery"  : _("Valor del bordado"),
-        #     "value_print"       : _("Valor del estampado"),
-        # }

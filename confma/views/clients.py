@@ -1,19 +1,16 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import Http404, HttpResponse
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import (CreateView, UpdateView, ListView, DeleteView)
 # Models
 from ..models import Client, Cloth, CotizacionClient, Cotizacion, Alquiler
 # Forms
-from ..forms.client import ClientFormModel
+from ..forms.client import ClientForm
+
 
 # Create your views here.
 
-""" metodo que carga una vista con todos los clientes registrados filtrando
-a los que tengan estado 0 para que no se muestren"""
-
-
-def home(request, *args, **kwargs):
+def ListAllClients(request, *args, **kwargs):
     obj = Client.objects.all().filter(state=1)
     context = {
         "clients": obj,
@@ -22,15 +19,10 @@ def home(request, *args, **kwargs):
     return render(request, "clients/details.html", context)
 
 
-"""metodo que usa el CREATEVIEW de django para el registro de los
-clientes en la base de datos"""
-
-
-class ClientCreateView(CreateView):
+class CreateClient(CreateView):
+    model = Client
     template_name = "clients/create.html"
-    form_class = ClientFormModel
-
-    # queryset = Client.objects.all()
+    form_class = ClientForm
 
     def form_valid(self, form):
         print(form.cleaned_data)
@@ -40,20 +32,12 @@ class ClientCreateView(CreateView):
         return '../'
 
 
-"""metodo que usa el LISTVIEW de django para mostrar una lista de los clientes
-registrados , Actualmente no se usa"""
-
-
-class ClientListView(ListView):
+class ListOfClients(ListView):
     template_name = 'clients/details.html'
     queryset = Client.objects.all().filter(state=1)
 
 
-"""metodo que usa el DELETEVIEW de django para borrar permanente un cliente en particular
-actualmente no se Usa"""
-
-
-class ClientDeleteView(DeleteView):
+class DeleteClientPermanent(DeleteView):
     template_name = 'clients/delete.html'
 
     def get_object(self):
@@ -64,12 +48,9 @@ class ClientDeleteView(DeleteView):
         return reverse('clients:clients_home')
 
 
-"""metodo que usa el UPDATEVIEW de django para hacer actualizcion a los de los clientes"""
-
-
-class ClientUpdateView(UpdateView):
+class UpdateClient(UpdateView):
     template_name = "clients/update.html"
-    form_class = ClientFormModel
+    form_class = ClientForm
 
     def get_object(self):
         id_ = self.kwargs.get("id")
@@ -83,49 +64,36 @@ class ClientUpdateView(UpdateView):
         return '../../'
 
 
-"""
-Metodo para el borrado logico del registro , cambia el estado del
-registro de 1 a 0 
-"""
-
-
-def deletelog(request, id):
-    obj = get_object_or_404(Client, id=id)
-
+def DeleteClient(request, id):
+    client = get_object_or_404(Client, id=id)
     if request.method == 'POST':
-        obj.state = 0
-        obj.save()
-        return redirect('clients_home')
+        client.state = 0
+        client.save()
+        return redirect('confma:list_all_clients')
+    context = {'client': client}
 
-    context = {
-        'client': obj
-    }
-    return render(request, 'clients/deletel.html', context)
+    return render(request, 'clients/delete.html', context)
 
 
-"""metodo que genera la vista para restaurar registro borrados logicamente"""
-
-
-def restoreview(request):
+def RestoreClientView(request):
     obj = Client.objects.all().filter(state=0)
     return render(request, 'clients/restore.html', {'clients': obj})
 
 
-"""metodo que restaura los modelos borrados logicamente cambiando el estado de 0 a 1"""
-
-
-def restore(request, id):
+def RestoreClient(request, id):
     obj = get_object_or_404(Client, id=id)
     if request.method == 'POST':
         obj.state = 1
         obj.save()
-        return redirect('/confma')
+        return redirect('confma:homepage')
+
+    # TODO : Cambiar el Response por una vista Predeterminada
 
     response = 'I Dont Know <a href = "/confma/clients/"> BACK </a>'
     return HttpResponse(response)
 
 
-def search(request):
+def FindClient(request):
     ##tratar de implementar un formulario por django
     clients = Client.objects.all().filter(state=1)
 
@@ -135,7 +103,7 @@ def search(request):
         # query que trate los alquileres de un cliente en especifico
         alquiler_cliente = Alquiler.objects.filter(client=obj_client)
         count_alquiler = alquiler_cliente.count()
-        cloth = list(Cloth.objects.all().filter(state = 1))  # array con los registro de todas las prendas
+        cloth = list(Cloth.objects.all().filter(state=1))  # array con los registro de todas las prendas
         # trae las cotizacion que ya tiene una prenda asignada
         cotizacion = list(Cotizacion.objects.all().filter(state=1, cloth__in=cloth))
         # trae los registro de los clientes que tienen asignado una cotizacion con su respectiva prenda
@@ -152,61 +120,3 @@ def search(request):
         return render(request, 'clients/search.html', context)
 
     return render(request, 'clients/search.html', {'all_client': clients})
-
-
-def alqu_client_cloth(client, cloth):
-    alquileres = Alquiler.objects.all().filter(state=1)
-    array_alquiler = []
-    obj_new = {}
-    for alq in alquileres:
-        for cli in client:
-            for clo in cloth:
-                if alq.client_id == cli.id and alq.cloth_id == clo.id:
-                    obj_new = {
-                        'alquiler_id': alq.id,
-                        'alquiler_date_return': alq.date_return,
-                        'alquiler_date_now': alq.date_now,
-                        'alquiler_price': alq.price,
-                        'client_name': cli.name,
-                        'client_lastname': cli.lastname,
-                        'cloth_name': clo.name,
-                        'cloth_color': clo.color,
-                        'cloth_size': clo.size,
-                        'cloth_fashion': clo.fashion,
-                    }
-                    array_alquiler.append(obj_new)
-    return array_alquiler
-
-
-def tupla_coti_total(cotizacion, client):
-    coti_client = CotizacionClient.objects.all().filter(state=1)
-    COTI = []
-    for cli in client:
-        for coti in cotizacion:
-            for cc in coti_client:
-                if coti.id == cc.cotizacion_id and cc.client_id == cli.id:
-                    COTI.append((coti.id, cc.total))
-    return COTI
-
-
-def coti_cloth():
-    obj_coti = Cotizacion.objects.all().filter(state=1)
-    obj_cloth = Cloth.objects.all()
-    cloth = []
-    for coti in obj_coti:
-        for clo in obj_cloth:
-            if coti.cloth_id == clo.id:
-                cloth.append(clo)
-    return cloth
-
-
-def coti_client(client):
-    obj_client_coti = CotizacionClient.objects.all().filter(state=1)
-    obj_coti = Cotizacion.objects.all().filter(state=1)
-    cotizacion = []
-    for cli in client:
-        for cc in obj_client_coti:
-            for coti in obj_coti:
-                if cli.id == cc.client_id and coti.id == cc.cotizacion_id:
-                    cotizacion.append(coti)
-    return cotizacion

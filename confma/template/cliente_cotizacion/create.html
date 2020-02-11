@@ -9,7 +9,7 @@
 
 {% block content %}
 	<div class="container">
-		<form action = "{% url 'cc_create' %}" method = "POST">
+		<form action = "{% url 'confma:create_client_cotizacion' %}" method = "POST">
 			{% csrf_token %}
 			<div class="form-group" id="formOwn">
 				<div class="card text-white bg-dark border-info mt-2 mb-2" style=" margin : 0 auto">

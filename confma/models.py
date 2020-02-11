@@ -23,9 +23,6 @@ class Client(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def get_absolute_url(self):
-        return reverse("clients:clients_home", kwargs={"id": self.id})
-
     def __str__(self):
         return self.name + " " + self.lastname + " - " + self.address
 
@@ -35,7 +32,6 @@ class Cloth(models.Model):
     color = models.CharField(max_length=100, null=False)
     size = models.CharField(max_length=10, null=False, blank=False, choices=list_size, default=1)
     fashion = models.CharField(max_length=50, null=False)
-    # image       = models.ImageField(upload_to = 'fashion' , default = 'notfound.jpg')
     image = models.ImageField(upload_to='fashion/%Y/%m/%d/')
     #####################
     state = models.SmallIntegerField(default=1, null=False)
@@ -54,7 +50,6 @@ class Cotizacion(models.Model):
     value_necks = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=False)
     value_embroidery = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=False)
     value_prints = models.DecimalField(max_digits=8, decimal_places=2, null=True, blank=False)
-    # fashion             = models.CharField(max_length = 50 , null = False) # quitar field
     cloth = models.ForeignKey(Cloth, on_delete=models.CASCADE, blank=False, null=False)
     client = models.ManyToManyField(Client, through="CotizacionClient")
     #####################
@@ -62,8 +57,6 @@ class Cotizacion(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def get_absolute_url(self):
-        return reverse("cotizacion:coti_home", kwargs={"id": self.id})
 
     # def __str__(self):
     #     return self.cloth
@@ -94,6 +87,3 @@ class Alquiler(models.Model):
         return ("Fecha De Registro " + str(self.date_now) + " " + ", Fecha de Retorno : " + str(
             self.date_return) + ", Valor : " + str(self.price) + " " + ", Cliente : " + str(
             self.client) + " " + ", Prenda : " + str(self.cloth))
-
-    def get_absolute_url(self):
-        return reverse("alquiler:alquiler_details_all")

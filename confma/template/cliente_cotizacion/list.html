@@ -1,0 +1,48 @@
+ {% extends 'layouts/base_loggin.html' %}
+{% block title%} Lista Detallada de las Cotizaciones con Clientes {% endblock%} 
+{% block principal_options%}{% endblock%}
+
+{% block name%}
+    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">account_circle</i> Cliente - Cotizacion</h2>
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	{% for cc in object_list %}	
+		<div class="col-lg-6 col-md-12 col-sm-12 ">
+	            <div class="card m-3 bg-dark">
+	                <div class="row no-gutters">
+	                    <div class="col-lg-4 col-md-5 p-1 d-flex align-items-center justify-content-center">
+	                        <img src="{{cc.cotizacion.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
+	                    </div>
+	                    <div class="col-lg-8 col-md-7">
+	                    	<div class="card-header text-center text-white"><strong>Cliente : {{cc.client}}</strong></div>
+	                        <div class="card-body">
+	                            <p class="card-title text-center text-white"> <strong>Prenda : {{cc.cotizacion.cloth}}</strong> </p>
+	                            <p class="card-text">
+	                                <ul class="list-group list-group-flush">
+	                                    <div class="row"> 
+	                                        <div class="col-sm-6">
+	                                            <li class="list-group-item text-white bg-dark">Valor de la Tela : $ {{cc.cotizacion.value_cloth}}</li>
+	                                            <li class="list-group-item text-white bg-dark">Valor del Trabajo : $ {{cc.cotizacion.value_work}}</li>
+	                                            <li class="list-group-item text-white bg-dark">Valor de los Hilos : $ {{cc.cotizacion.value_threads}}</li>
+	                                            <li class="list-group-item text-white bg-dark">Valor de los Botones : $ {{cc.cotizacion.value_buttons}}</li>
+	                                        </div>
+	                                        <div class="col-sm-6">
+	                                            <li class="list-group-item text-white bg-dark">Valor de los Cuellos : $ {{cc.cotizacion.value_necks}}</li>
+	                                            <li class="list-group-item text-white bg-dark">Valor de los Bordados : $ {{cc.cotizacion.value_embroidery}}</li>
+	                                            <li class="list-group-item text-white bg-dark">Valor del Estampado : $ {{cc.cotizacion.value_prints}}</li>
+	                                            <li class="list-group-item text-white bg-dark">Total : $ {{cc.total}}</li>
+	                                        </div>
+	                                    </div>
+	                                </ul>  
+	                            </p>
+	                            <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
+	                        </div>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	{%endfor%}
+</div>
+{%endblock%}
