@@ -1,10 +1,10 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import (CreateView, UpdateView, ListView, DeleteView)
 
 from ..forms.client import ClientForm
 from ..models import Client, Cloth, CotizacionClient, Cotizacion, Alquiler
+from ..views.general import PossibleError
 
 
 def ListAllClients(request):
@@ -84,10 +84,9 @@ def RestoreClient(request, id):
         obj.save()
         return redirect('confma:list_all_clients')
 
-    # TODO : Cambiar el Response por una vista Predeterminada
-
-    response = 'I Dont Know <a href = "/confma/clients/"> BACK </a>'
-    return HttpResponse(response)
+    message: "Error Restaurando Cliente"
+    situation: "Restauracion de Usuario"
+    return PossibleError(request, message, situation)
 
 
 def FindClient(request):

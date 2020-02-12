@@ -1,97 +1,71 @@
 {% extends 'layouts/base_loggin.html' %}
 
-{% block title%} Restaurar CC {% endblock%} 
+{% block title%} Restaurar Cotizacion Cliente {% endblock%}
 {% block principal_options%}{% endblock%}
 
 {% block name%}
-    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">account_circle</i> Restaurancion Cliente - Cotizacion</h2>
+<h2 class="text-center mt-2 mb-4"><i class="material-icons">account_circle</i> Restaurancion de Cliente con Cotizacion
+</h2>
 {% endblock %}
 
 {% block content %}
-	<div class="row" id="main">
-		{%for cc in cotizacion_client%}
-		
-			<div class="col-md-4 col-lg-2">
-				<div class="card bg-dark text-white ml-2 mt-2 mb-2">
+
+<div class="row">
+	{% for client_cotizacion in cotizacion_client %}
+	<div class="col-lg-6 col-md-6 col-sm-12 m-3">
+		<div class="card">
+			<div class="row no-gutters">
+				<div class="col-md-5 p-2 d-flex align-items-center justify-content-center">
+					<img src="{{client_cotizacion.cotizacion.cloth.image.url}}" class="card-img"
+						 alt="moda_de_referencia">
+				</div>
+				<div class="col-md-7">
 					<div class="card-body">
-								<p>Cliente : {{ cc.client.name }} {{cc.client.lastname}} </p>						
-									<button type="button" class="btn btn-primary mb-4" data-toggle="modal" data-target="#userModalLong">
-										Details Client
-									</button>
-
-									<div class="modal fade" id="userModalLong" tabindex="-1" role="dialog" aria-labelledby="userModalLongTitle" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content bg-dark">
-										      <div class="modal-header">
-										        <h5 class="modal-title" id="userModalLongTitle">{{u.name}} {{u.lastname}}</h5>
-										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										          <span aria-hidden="true">&times;</span>
-										        </button>
-										      </div>
-										      <div class="modal-body">
-										      	<p>
-			                                    	Direccion : {{cc.client.address}} <br>
-			                                    	Telefono : {{cc.client.phone}} <br>
-			                                    	Celular : {{cc.client.cellphone}} <br>
-										      	</p>
-										      </div>
-										      <div class="modal-footer">
-										        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										      </div>
-										    </div>
-										  </div>
-										</div>
-
-
-									<p>Cotizacion de : {{cc.cotizacion.cloth}}</p>
-
-										<button type="button" class="btn btn-success mb-4" data-toggle="modal" data-target="#cotizacionModalLong">
-										  Details Cotizacion
-										</button>
-
-										<!-- Modal -->
-										<div class="modal fade" id="cotizacionModalLong" tabindex="-1" role="dialog" aria-labelledby="cotizacionModalLong" aria-hidden="true">
-										  <div class="modal-dialog" role="document">
-										    <div class="modal-content bg-dark">
-										      <div class="modal-header">
-										        <h5 class="modal-title" id="cotizacionModalLongTitle"> INFOMACION DE LA COTIZACION </h5>
-										        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										          <span aria-hidden="true">&times;</span>
-										        </button>
-										      </div>
-										      <div class="modal-body">
-										      	<div class="row"> 
-						                            <div class="col-sm-6">
-						                                <li class="list-group-item bg-dark">Valor de la Tela : ${{cc.cotizacion.value_cloth}}</li>
-						                                <li class="list-group-item bg-dark">Valor del Trabajo : ${{cc.cotizacion.value_work}}</li>
-						                                <li class="list-group-item bg-dark">Valor de los Hilos : ${{cc.cotizacion.value_threads}}</li>
-						                                <li class="list-group-item bg-dark">Valor de los Botones : ${{cc.cotizacion.value_buttons}}</li>
-						                            </div>
-						                            <div class="col-sm-6">
-						                               <li class="list-group-item bg-dark">Valor de los Cuellos : ${{cc.cotizacion.value_necks}}</li>
-						                               <li class="list-group-item bg-dark">Valor de los Bordados : ${{cc.cotizacion.value_embroidery}}</li>
-						                               <li class="list-group-item bg-dark">Valor del Estampado : ${{cc.cotizacion.value_prints}}</li>
-						                           </div>
-						                       </div>
-										     </div>
-										     <div class="modal-footer">
-										       <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-										     </div>
-										   </div>
-										 </div>
-									</div>
-							<form action="{% url 'cu_restore' %}" method="POST">
-								{%csrf_token%}
-								<input type="number" name="coti_user_id" value="{{cc.id}}"hidden>
-								<input type="submit" value="Restore" class="btn btn-info btn-block">
-							</form>
-						</div>
+						<h5 class="card-title text-center"><strong>Prenda :
+							{{client_cotizacion.cotizacion.cloth}}</strong></h5>
+						<h5 class="card-title text-center"><strong>Prenda : {{client_cotizacion.client}}</strong></h5>
+						<p class="card-text">
+						<ul class="list-group list-group-flush">
+							<div class="row">
+								<div class="col-sm-6">
+									<li class="list-group-item ">Valor de la Tela :
+										{{client_cotizacion.cotizacion.value_cloth}}
+									</li>
+									<li class="list-group-item ">Valor del Trabajo :
+										{{client_cotizacion.cotizacion.value_work}}
+									</li>
+									<li class="list-group-item ">Valor de los Hilos :
+										{{client_cotizacion.cotizacion.value_threads}}
+									</li>
+									<li class="list-group-item ">Valor de los Botones :
+										{{client_cotizacion.cotizacion.value_buttons}}
+									</li>
+								</div>
+								<div class="col-sm-6">
+									<li class="list-group-item ">Valor de los Cuellos :
+										{{client_cotizacion.cotizacion.value_necks}}
+									</li>
+									<li class="list-group-item ">Valor de los Bordados :
+										{{client_cotizacion.cotizacion.value_embroidery}}
+									</li>
+									<li class="list-group-item ">Valor del Estampado :
+										{{client_cotizacion.cotizacion.value_prints}}
+									</li>
+								</div>
+							</div>
+						</ul>
+						</p>
+						<form action="{% url 'confma:client_cotizacion_restored' %}" method="POST">
+							{%csrf_token%}
+							<input type="number" name="coti_user_id" value="{{cc.id}}" hidden>
+							<input type="submit" value="Restore" class="btn btn-info btn-block">
+						</form>
+						<p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
 					</div>
 				</div>
-			
-		{%endfor%}
+			</div>
+		</div>
 	</div>
-
-	
-	
+	{% endfor %}
+</div>
 {%endblock%}

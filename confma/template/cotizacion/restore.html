@@ -1,51 +1,69 @@
 {% extends 'layouts/base_loggin.html' %}
 
-{% block title%} Restaurar Cotizacion {% endblock%} 
+{% block title%} Restaurar Cotizacion {% endblock%}
 
 {% block name%}
-    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">account_circle</i> Cotizacion Restoration</h2>
+<h2 class="text-center mt-2 mb-4"><i class="material-icons">account_circle</i> Cotizacion Restoration</h2>
 {% endblock %}
 
-{% block content %}    
+{% block content %}
 
-<div class="row">       
-    {% for c in coti%}
-            <div class="col-md-4 col-lg-2">
-                <div class="card text-white bg-dark border-info mt-2 mb-2" style="width: 28rem;">
-                  <div class="card-body">
-                    <h5 class="card-title">Cotizacion <span class="badge badge-primary badge-pill float-right"># {{forloop.counter}}</span> 
-                    </h5>
-                    <p class="card-text">
-                    <ul class="list-group list-group-flush">
-                        <div class="row"> 
-                            <div class="col-sm-6">
-                                <li class="list-group-item bg-dark">Valor de la Tela : {{c.value_cloth}}</li>
-                                <li class="list-group-item bg-dark">Valor del Trabajo : {{c.value_work}}</li>
-                                <li class="list-group-item bg-dark">Valor de los Hilos : {{c.value_threads}}</li>
-                                <li class="list-group-item bg-dark">Valor de los Botones : {{c.value_buttons}}</li>
+<div class="row">
+    {% for cotizacion in cotizaciones %}
+    <div class="col-lg-4 col-md-12 col-sm-12 m-2">
+        <div class="card bg-dark text-white">
+            <div class="row no-gutters">
+                <div class="col-md-5 p-2 d-flex align-items-center justify-content-center">
+                    <img src="{{cotizacion.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title text-center"><strong>Cotizacion para Prenda :
+                            {{cotizacion.cloth}}</strong></h5>
+                        <p class="card-text">
+                        <ul class="list-group list-group-flush">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <li class="list-group-item bg-dark">Valor de la Tela : {{cotizacion.value_cloth}}
+                                    </li>
+                                    <li class="list-group-item bg-dark">Valor del Trabajo : {{cotizacion.value_work}}
+                                    </li>
+                                    <li class="list-group-item bg-dark">Valor de los Hilos :
+                                        {{cotizacion.value_threads}}
+                                    </li>
+                                    <li class="list-group-item bg-dark">Valor de los Botones :
+                                        {{cotizacion.value_buttons}}
+                                    </li>
+                                </div>
+                                <div class="col-sm-6">
+                                    <li class="list-group-item bg-dark">Valor de los Cuellos :
+                                        {{cotizacion.value_necks}}
+                                    </li>
+                                    <li class="list-group-item bg-dark">Valor de los Bordados :
+                                        {{cotizacion.value_embroidery}}
+                                    </li>
+                                    <li class="list-group-item bg-dark">Valor del Estampado :
+                                        {{cotizacion.value_prints}}
+                                    </li>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <li class="list-group-item bg-dark">Valor de los Cuellos : {{c.value_necks}}</li>
-                                <li class="list-group-item bg-dark">Valor de los Bordados : {{c.value_embroidery}}</li>
-                                <li class="list-group-item bg-dark">Valor del Estampado : {{c.value_prints}}</li>
-                            </div>
+
+                        </ul>
+                        </p>
+                        <div class="container">
+                            <form action="{% url 'confma:cotizacion_restored' cotizacion.id %}" method="POST">
+                                {% csrf_token %}
+                                <input type="submit" value="Restore" class="btn btn-primary btn-block">
+                            </form>
                         </div>
-
-                    </ul>         
-                    </p>
-                    <div class="container">    
-                        <form action="/confma/cotizacion/restored/{{c.id}}/" method = "POST">
-                            {% csrf_token %}
-                            <input type="submit"  value = "Restore" class="btn btn-primary btn-block">
-                        </form>
+                        <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
                     </div>
-                  </div>
                 </div>
             </div>
-    {% empty %}
-    
-        <p> NO HAY COTIZACIONES BORRADAS </p>
+        </div>
+    </div>
 
-    {%endfor%}
+    {% endfor%}
 </div>
+
 {% endblock %}

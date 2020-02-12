@@ -75,6 +75,12 @@ def HomePage(request, *args, **kwargs):
         return render(request, "home.html", {})
 
 
+# def PossibleError(request):
+#     return render(request, 'Error.html', {})
+def PossibleError(request, message, situation):
+    return render(request, 'Error.html', {'message': message, 'situation': situation})
+
+
 def handler404(request, *args, **argv):
     response = render_to_response(
         '404.html', {})

@@ -61,7 +61,7 @@
           <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Client</h5>
           <ul class="list-unstyled">
             <li>
-              <a href="/confma/api/v1/clients/restore">Restore</a>
+              <a href="{% url 'confma:restore_clients_view' %}">Restore</a>
             </li>
             <li>
               <a href="#!">Link 2</a>
@@ -79,10 +79,10 @@
           <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Cotizacion</h5>
           <ul class="list-unstyled">
             <li>
-              <a href="/confma/api/v1/cotizacion/restore">Restore</a>
+              <a href="{% url 'confma:restore_cotizaciones_view' %}">Restore</a>
             </li>
             <li>
-              <a href="/confma/api/v1/cotizacion-client/restore">Restore Cliente - Cotizacion</a>
+              <a href="{% url 'confma:restore_client_cotizacion_view' %}">Restore Cliente - Cotizacion</a>
             </li>
             <li>
               <a href="#!">Link 3</a>

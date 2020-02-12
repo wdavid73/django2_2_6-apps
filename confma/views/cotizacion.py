@@ -1,7 +1,7 @@
-from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic import (CreateView, ListView, DeleteView, UpdateView)
 
+from .general import PossibleError
 from ..forms.cotizacion import CotizacionFormModel
 from ..models import Cotizacion, Cloth
 
@@ -84,5 +84,6 @@ def RestoreCotizacionById(request, id):
         obj.save()
         return redirect('confma:list_of_all_cotizaciones')
 
-    response = 'I Dont Know <a href = "/confma/users/"> BACK </a>'
-    return HttpResponse(response)
+    message: "Error Restaurando el registro de una Cotizacion sin Cliente"
+    situation: "Restauracion de Cotizacion"
+    return PossibleError(request, message, situation)

@@ -1,6 +1,7 @@
 <component name="ProjectDictionaryState">
   <dictionary name="guicho">
     <words>
+      <w>acurrido</w>
       <w>alquiler</w>
       <w>alquileres</w>
       <w>buscar</w>
@@ -12,18 +13,25 @@
       <w>dropdown</w>
       <w>foto</w>
       <w>hola</w>
+      <w>junto</w>
       <w>lastname</w>
       <w>moda</w>
       <w>navbar</w>
       <w>nombre</w>
+      <w>ocurrido</w>
       <w>perfil</w>
+      <w>posible</w>
       <w>prenda</w>
       <w>prendas</w>
       <w>registradas</w>
       <w>registrados</w>
+      <w>registro</w>
+      <w>restauracion</w>
+      <w>restaurando</w>
       <w>talla</w>
       <w>todos</w>
       <w>toggler</w>
+      <w>usuario</w>
     </words>
   </dictionary>
 </component>

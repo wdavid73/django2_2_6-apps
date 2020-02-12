@@ -1,10 +1,11 @@
-from django.urls import path, include
 from django.contrib.auth.decorators import login_required
+from django.urls import path, include
+
 from .views import clients, general, cotizacion, client_coti
+from .views.client_coti import (ListOfAllClientsAndCotizacion)
 from .views.clients import (CreateClient, UpdateClient)
 from .views.cotizacion import (CreateCotizacion, UpdateCotizacionById, ListAllCotizacionByCloth)
 from .views.general import (ClothCreate, ListOfAllCloth, CreateRental, ListOfAllRental)
-from .views.client_coti import (ListOfAllClientsAndCotizacion)
 from .views.registration import (SignUp)
 
 api = 'api/v1/'
@@ -63,4 +64,6 @@ urlpatterns = [
     # ROUTES RENTAL
     path(api + 'rental/create/', login_required(CreateRental.as_view()), name="create_rental"),
     path(api + 'rental/details/all', login_required(ListOfAllRental.as_view()), name="list_of_all_rental"),
+
+    path(api + 'error', general.PossibleError, name="posible_error"),
 ]

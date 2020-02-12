@@ -97,3 +97,7 @@ def RestoreClientCotizacion(request):
         cotizacion_client_obj.state = 1
         cotizacion_client_obj.save()
         return redirect('confma:list_of_all_cotizacion_client')
+
+    message: "Error Restaurando el registro de un Cliente junto con su Cotizacion"
+    situation: "Restauracion de Cliente Cotizacion"
+    return PossibleError(request, message, situation)

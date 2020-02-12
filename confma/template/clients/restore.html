@@ -9,9 +9,9 @@
 {% block content %}    
 
 <div class="row">
-    {% for cli in clients%}
-        
-            <div class="col-md-4 col-lg-2">
+    {% for cli in clients %}
+
+    <div class="col-md-4 col-lg-2">
                 <div class="card text-white mt-2 mb-2  bg-dark">
                     <div class="card-body">
                         <p class="card-text">
@@ -28,7 +28,8 @@
                             </ul>
                         </p>
                         <div class="container">
-                            <form action="/confma/api/v1/clients/restored/{{cli.id}}/" method="POST">
+                            <!--                            <form action="/confma/api/v1/clients/restored/{{cli.id}}/" method="POST">-->
+                            <form action="{% url 'confma:client_restored' cli.id %}" method="POST">
                                 {% csrf_token %}
                                 <input type="submit" class="btn btn-primary btn-block" value="Restore">
                             </form>
