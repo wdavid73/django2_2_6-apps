@@ -1,12 +1,10 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import Http404, HttpResponse
-# Models
-from ..models import Cotizacion, Cloth
-from ..forms.cotizacion import CotizacionFormModel
+from django.http import HttpResponse
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic import (CreateView, ListView, DeleteView, UpdateView)
 
+from ..forms.cotizacion import CotizacionFormModel
+from ..models import Cotizacion, Cloth
 
-# Create your views here.
 
 class ListAllCotizacionByCloth(ListView):
     template_name = 'cotizacion/home.html'
@@ -26,7 +24,7 @@ class CreateCotizacion(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return '../'
+        return reverse('confma:list_of_all_cotizaciones')
 
 
 class UpdateCotizacionById(UpdateView):
@@ -42,7 +40,7 @@ class UpdateCotizacionById(UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return '../../'
+        return reverse('confma:list_of_all_cotizaciones')
 
 
 class DeleteCotizacionPermanentById(DeleteView):
@@ -53,28 +51,27 @@ class DeleteCotizacionPermanentById(DeleteView):
         return get_object_or_404(Cotizacion, id=id_)
 
     def get_success_url(self):
-        return reverse('coti:coti_home')
+        return reverse('confma:list_of_all_cotizaciones')
 
 
 def DeleteCotizacion(request, id):
-    obj = get_object_or_404(Cotizacion, id=id)
+    cotizacion = get_object_or_404(Cotizacion, id=id)
 
     if request.method == 'POST':
-        obj.state = 0
-        obj.save()
-        return redirect('../../')
+        cotizacion.state = 0
+        cotizacion.save()
+        return redirect('confma:list_of_all_cotizaciones')
 
     context = {
-        'c': obj
+        'cotizacion': cotizacion
     }
     return render(request, 'cotizacion/delete.html', context)
 
 
 def RestoreCotizacionView(request):
-    cotizacion = Cotizacion.objects.all().filter(state=0)
+    cotizaciones = Cotizacion.objects.all().filter(state=0)
     context = {
-        "coti": cotizacion,
-        "model": "Cotizacion",
+        "cotizaciones": cotizaciones,
     }
 
     return render(request, "cotizacion/restore.html", context)
@@ -85,7 +82,7 @@ def RestoreCotizacionById(request, id):
     if request.method == 'POST':
         obj.state = 1
         obj.save()
-        return redirect('../../')
+        return redirect('confma:list_of_all_cotizaciones')
 
     response = 'I Dont Know <a href = "/confma/users/"> BACK </a>'
     return HttpResponse(response)

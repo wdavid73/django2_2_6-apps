@@ -23,7 +23,7 @@ class ClothCreate(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return '../../../../'
+        return reverse('confma:list_all_cloth')
 
 
 def UploadPhotoFashion(request):

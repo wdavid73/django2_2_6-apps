@@ -28,45 +28,45 @@ def ClientCotizacionView(request, id):
     return render(request, 'cliente_cotizacion/create.html', context)
 
 
-def get_cloth(coti_obj):
-    obj_cloth = Cloth.objects.all().filter(state=1)
-    for cloth in obj_cloth:
-        if cloth.id == coti_obj.cloth_id:
+def get_cloth(cotizacion):
+    cloth_obj = Cloth.objects.all().filter(state=1)
+    for cloth in cloth_obj:
+        if cloth.id == cotizacion.cloth_id:
             return cloth
 
 
 def create(request):
-    q = request.POST.get('client_s')
-    t = request.POST.get('total')
-    coti_id = request.POST.get('coti_id')
+    client_id = request.POST.get('client_s')
+    total_cotizacion = request.POST.get('total')
+    cotizacion_id = request.POST.get('coti_id')
     if request.method == "POST":
-        total = float(t)
-        if q != "":
-            u_id = q
-            CotizacionClient.objects.create(total=total, cotizacion_id=coti_id, client_id=u_id)
+        total = float(total_cotizacion)
+        if client_id != "":
+            _id_client = client_id
+            CotizacionClient.objects.create(total=total, cotizacion_id=cotizacion_id, client_id=_id_client)
             return redirect("confma:list_of_all_cotizacion_client")
         else:
-            u_id = 1
-            CotizacionClient.objects.create(total=total, cotizacion_id=coti_id, client_id=u_id)
+            _id_client = 1
+            CotizacionClient.objects.create(total=total, cotizacion_id=cotizacion_id, client_id=_id_client)
             return redirect("confma:list_of_all_cotizacion_client")
     else:
         return redirect("confma:list_of_all_cotizacion_client")
 
 
-def getTotal(coti_obj):
-    total1 = coti_obj.value_cloth + coti_obj.value_work
-    total2 = coti_obj.value_threads + coti_obj.value_buttons
-    total3 = coti_obj.value_necks + coti_obj.value_embroidery + coti_obj.value_prints
+def getTotal(cotizacion_obj):
+    total1 = cotizacion_obj.value_cloth + cotizacion_obj.value_work
+    total2 = cotizacion_obj.value_threads + cotizacion_obj.value_buttons
+    total3 = cotizacion_obj.value_necks + cotizacion_obj.value_embroidery + cotizacion_obj.value_prints
     total = total1 + total2 + total3
     return total
 
 
 def DeleteClientCotizacion(request):
-    id_ = request.POST.get('coti_client_id')
-    obj = get_object_or_404(CotizacionClient, id=id_)
+    _id = request.POST.get('coti_client_id')
+    client_cotizacion_obj = get_object_or_404(CotizacionClient, id=_id)
     if request.method == 'POST':
-        obj.state = 0
-        obj.save()
+        client_cotizacion_obj.state = 0
+        client_cotizacion_obj.save()
         return redirect('confma:list_of_all_cotizacion_client')
 
 
@@ -92,8 +92,8 @@ def RestoreClientCotizacionView(request):
 
 def RestoreClientCotizacion(request):
     _id = request.POST.get('coti_user_id')
-    obj = get_object_or_404(CotizacionClient, id=_id)
+    cotizacion_client_obj = get_object_or_404(CotizacionClient, id=_id)
     if request.method == 'POST':
-        obj.state = 1
-        obj.save()
+        cotizacion_client_obj.state = 1
+        cotizacion_client_obj.save()
         return redirect('confma:list_of_all_cotizacion_client')

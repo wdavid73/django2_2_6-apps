@@ -1,19 +1,16 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import Http404, HttpResponse
-from django.urls import reverse, reverse_lazy
+from django.urls import reverse
 from django.views.generic import (CreateView, UpdateView, ListView, DeleteView)
-# Models
-from ..models import Client, Cloth, CotizacionClient, Cotizacion, Alquiler
-# Forms
+
 from ..forms.client import ClientForm
+from ..models import Client, Cloth, CotizacionClient, Cotizacion, Alquiler
 
 
-# Create your views here.
-
-def ListAllClients(request, *args, **kwargs):
-    obj = Client.objects.all().filter(state=1)
+def ListAllClients(request):
+    clients = Client.objects.all().filter(state=1)
     context = {
-        "clients": obj,
+        "clients": clients,
         "model": "Client"
     }
     return render(request, "clients/details.html", context)
@@ -29,7 +26,7 @@ class CreateClient(CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return '../'
+        return reverse('confma:list_all_clients')
 
 
 class ListOfClients(ListView):
@@ -45,7 +42,7 @@ class DeleteClientPermanent(DeleteView):
         return get_object_or_404(Client, id=id_)
 
     def get_success_url(self):
-        return reverse('clients:clients_home')
+        return reverse('confma:list_all_clients')
 
 
 class UpdateClient(UpdateView):
@@ -61,7 +58,7 @@ class UpdateClient(UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return '../../'
+        return reverse('confma:list_all_clients')
 
 
 def DeleteClient(request, id):
@@ -76,8 +73,8 @@ def DeleteClient(request, id):
 
 
 def RestoreClientView(request):
-    obj = Client.objects.all().filter(state=0)
-    return render(request, 'clients/restore.html', {'clients': obj})
+    clients = Client.objects.all().filter(state=0)
+    return render(request, 'clients/restore.html', {'clients': clients})
 
 
 def RestoreClient(request, id):
@@ -85,7 +82,7 @@ def RestoreClient(request, id):
     if request.method == 'POST':
         obj.state = 1
         obj.save()
-        return redirect('confma:homepage')
+        return redirect('confma:list_all_clients')
 
     # TODO : Cambiar el Response por una vista Predeterminada
 
