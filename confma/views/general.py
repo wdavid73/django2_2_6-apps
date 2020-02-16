@@ -1,17 +1,12 @@
 from datetime import date
-from django.shortcuts import render, redirect, get_object_or_404
+
+from django.shortcuts import render, redirect, reverse
 from django.shortcuts import render_to_response
-from django.template import RequestContext
-from django.http import Http404, HttpResponse, HttpResponseForbidden, HttpResponseRedirect
-from django.conf import settings
-from django.core.files.storage import FileSystemStorage
-# Models
-from ..models import Cloth, Alquiler, Client
-# Form
+from django.views.generic import (CreateView, ListView)
+
 from ..forms.cloth import ClothFormModel
 from ..forms.rental import RentalForm
-# Create your views here.
-from django.views.generic import (CreateView, UpdateView, ListView, DeleteView)
+from ..models import Cloth, Alquiler, Client
 
 
 class ClothCreate(CreateView):
@@ -56,7 +51,7 @@ class CreateRental(CreateView):
             return redirect('confma:create_rental')
 
     def get_success_url(self):
-        return '../../../../'
+        return reverse('confma:list_of_all_rental')
 
 
 class ListOfAllRental(ListView):

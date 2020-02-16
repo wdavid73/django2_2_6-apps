@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 
 from .views import clients, general, cotizacion, client_coti
-from .views.client_coti import (ListOfAllClientsAndCotizacion)
+from .views.client_coti import (ListOfAllClientsAndCotizacion, CreateClientCotizacion)
 from .views.clients import (CreateClient, UpdateClient)
 from .views.cotizacion import (CreateCotizacion, UpdateCotizacionById, ListAllCotizacionByCloth)
 from .views.general import (ClothCreate, ListOfAllCloth, CreateRental, ListOfAllRental)
@@ -42,20 +42,28 @@ urlpatterns = [
     path(api + 'cotizacion/<int:id>/update/', login_required(UpdateCotizacionById.as_view()), name="update_cotizaciones"),
     path(api + 'cotizacion/<int:id>/delete/', login_required(cotizacion.DeleteCotizacion), name="delete_cotizaciones"),
     path(api + 'cotizacion/restore', login_required(cotizacion.RestoreCotizacionView), name="restore_cotizaciones_view"),
+
     path(api + 'cotizacion/restored/<int:id>/', login_required(cotizacion.RestoreCotizacionById),
          name="cotizacion_restored"),
+
     # ROUTES COTIZACION-CLIENT
-    path(api + 'cotizacion-client/<int:id>/', login_required(client_coti.ClientCotizacionView),
+    path(api + 'cotizacion-client/<int:id_>/', login_required(client_coti.ClientCotizacionView),
          name="create_client_cotizacion_view"),
-    path(api + 'cotizacion-client/', login_required(client_coti.create), name="create_client_cotizacion"),
+
+    path(api + 'cotizacion-client/', login_required(CreateClientCotizacion.as_view()), name="create_client_cotizacion"),
+
     path(api + 'cotizacion-client/list/', login_required(ListOfAllClientsAndCotizacion.as_view()),
          name="list_of_all_cotizacion_client"),
+
     path(api + 'cotizacion-client/delete/', login_required(client_coti.DeleteClientCotizacion),
          name="delete_cotizacion_client"),
+
     path(api + 'cotizacion-client/restore', login_required(client_coti.RestoreClientCotizacionView),
          name="restore_client_cotizacion_view"),
+
     path(api + 'cotizacion-client/restored', login_required(client_coti.RestoreClientCotizacion),
          name="client_cotizacion_restored"),
+
     # ROUTES CLOTH
     path(api + 'cloth/create/', login_required(ClothCreate.as_view()), name="create_cloth"),
     path(api + 'cloth/photo/', login_required(general.UploadPhotoFashion), name="upload_photo_to_cloth"),
