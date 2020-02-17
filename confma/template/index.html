@@ -1,80 +1,80 @@
 {% extends 'layouts/base_loggin.html' %}
 {% load staticfiles %}
 {% block title%}
-    Inicio
+Inicio
 {% endblock %}
 
 {% block principal_options%}
 {% endblock%}
 
 {% block content %}
-    {% if user.is_authenticated %}
-      <div class="container" id="main">
+{% if user.is_authenticated %}
+<div class="container" id="main">
 
-        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-          <strong>Hola {{user.username}}!</strong> Bienvenido.
-          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+        <strong>Hola {{user.username}}!</strong> Bienvenido.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-
-
-        <img src="{% static 'logo.png' %}" alt="logo" class="img-fluid container">
-        <div class="row mt-2 mb-5">
-            <div class="col">
-                <h2 class="text-center">¿Quienes Somos?</h2>
-                <p class="text-justify">
-                    Lorem ipsum dolor sit amet 
-                    consectetur adipisicing elit. 
-                    Quis illum tempore esse ratione 
-                    repudiandae quidem ducimus quibusdam 
-                    repellendus blanditiis cum fugit ea vitae 
-                    atque repellat, saepe laudantium excepturi 
-                    odio asperiores.
-                </p>
-            </div>
-            <div class="col">
-                <h2 class="text-center">Que hacemos</h2>
-                <p class="text-justify">
-                    Lorem ipsum dolor sit amet 
-                    consectetur adipisicing elit. 
-                    Quis illum tempore esse ratione 
-                    repudiandae quidem ducimus quibusdam 
-                    repellendus blanditiis cum fugit ea vitae 
-                    atque repellat, saepe laudantium excepturi 
-                    odio asperiores.
-                </p>
-            </div>
-            <div class="col">
-                <h2 class="text-center">Donde Estamos</h2>
-                <p class="text-justify">
-                    Lorem ipsum dolor sit amet 
-                    consectetur adipisicing elit. 
-                    Quis illum tempore esse ratione 
-                    repudiandae quidem ducimus quibusdam 
-                    repellendus blanditiis cum fugit ea vitae 
-                    atque repellat, saepe laudantium excepturi 
-                    odio asperiores.
-                </p>
-            </div>
-        </div>
-        
+        </button>
     </div>
 
-    {% else %}
 
-  
-        <div class="row">
-            <div class="col-md-5  container">
-                <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-                    <p> 
-                        <strong>No as Iniciado Sesion</strong> , Inicia Sesion Porfavor 
-                        <a href="{% url 'confma:login' %}" class="btn btn-info btn-sm mr-2 ml-2"> LOGIN </a>
-                    </p>
-                </div>  
-            </div>
+    <img src="{% static 'logo.png' %}" alt="logo" class="img-fluid container">
+    <div class="row mt-2 mb-5">
+        <div class="col">
+            <h2 class="text-center">¿Quienes Somos?</h2>
+            <p class="text-justify">
+                Lorem ipsum dolor sit amet
+                consectetur adipisicing elit.
+                Quis illum tempore esse ratione
+                repudiandae quidem ducimus quibusdam
+                repellendus blanditiis cum fugit ea vitae
+                atque repellat, saepe laudantium excepturi
+                odio asperiores.
+            </p>
         </div>
+        <div class="col">
+            <h2 class="text-center">Que hacemos</h2>
+            <p class="text-justify">
+                Lorem ipsum dolor sit amet
+                consectetur adipisicing elit.
+                Quis illum tempore esse ratione
+                repudiandae quidem ducimus quibusdam
+                repellendus blanditiis cum fugit ea vitae
+                atque repellat, saepe laudantium excepturi
+                odio asperiores.
+            </p>
+        </div>
+        <div class="col">
+            <h2 class="text-center">Donde Estamos</h2>
+            <p class="text-justify">
+                Lorem ipsum dolor sit amet
+                consectetur adipisicing elit.
+                Quis illum tempore esse ratione
+                repudiandae quidem ducimus quibusdam
+                repellendus blanditiis cum fugit ea vitae
+                atque repellat, saepe laudantium excepturi
+                odio asperiores.
+            </p>
+        </div>
+    </div>
 
-    {% endif %}
+</div>
+
+{% else %}
+
+
+<div class="row">
+    <div class="col-md-5  container">
+        <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+            <p>
+                <strong>No as Iniciado Sesion</strong> , Inicia Sesion Porfavor
+                <a href="{% url 'confma:login' %}" class="btn btn-info btn-sm mr-2 ml-2"> LOGIN </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endif %}
 {% endblock %}
 

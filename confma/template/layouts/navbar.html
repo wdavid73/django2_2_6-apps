@@ -1,27 +1,26 @@
- 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/confma">Confma</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNav"
-    aria-controls="navbarNav"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav mr-auto"></ul>
+    <a class="navbar-brand" href="/confma">Confma</a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto"></ul>
 
-    <form action="{% url 'confma:login' %}">
-      <input type="submit" value="Login" class="btn btn-outline-secondary bg-dark">
-    </form>
+        <form action="{% url 'confma:login' %}">
+            <input type="submit" value="Login" class="btn btn-outline-secondary bg-dark">
+        </form>
 
-    <form action="{% url 'confma:signup' %}">
-      <input type="submit" value="Sign Up" class="btn btn-outline-success bg-dark">
-    </form>
-    
-  </div>
+        <form action="{% url 'confma:signup' %}">
+            <input type="submit" value="Sign Up" class="btn btn-outline-success bg-dark">
+        </form>
+
+    </div>
 </nav>

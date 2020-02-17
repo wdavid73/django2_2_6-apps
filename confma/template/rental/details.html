@@ -3,25 +3,25 @@
 
 {% block content %}
 <div class="row">
-	{%for alquiler in object_list%}
-			<div class="col-lg-4 col-md-6 col-sm-6  ">
-			<div class="card m-3">
-				<div class="row no-gutters">
-					<div class="col-md-5 p-2 d-flex align-items-center justify-content-center">
-					    <img src="{{alquiler.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
-					</div>
-					<div class="col-md-7">
-					  	<div class="card-body">
-						    <h5 class="card-title text-justify"> <strong>Prenda : {{alquiler.cloth}}</strong> </h5>
-						    <h5 class="card-title text-justify"> <strong>Cliente : {{alquiler.client}}</strong> </h5>
-						    <p class="card-text">Valor del Alquiler : ${{alquiler.price}}</p>
-						    <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
-					    </div>
-					</div>
-				</div>
-			</div>
-		</div>
-	{%endfor%}
+    {%for alquiler in object_list%}
+    <div class="col-lg-4 col-md-6 col-sm-6  ">
+        <div class="card m-3">
+            <div class="row no-gutters">
+                <div class="col-md-5 p-2 d-flex align-items-center justify-content-center">
+                    <img src="{{alquiler.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <h5 class="card-title text-justify"><strong>Prenda : {{alquiler.cloth}}</strong></h5>
+                        <h5 class="card-title text-justify"><strong>Cliente : {{alquiler.client}}</strong></h5>
+                        <p class="card-text">Valor del Alquiler : ${{alquiler.price}}</p>
+                        <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {%endfor%}
 </div>
 
 {% endblock %}

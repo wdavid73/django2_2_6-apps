@@ -1,43 +1,43 @@
 {% extends 'layouts/base_loggin.html' %}
 
-{% block title%} Restaurar Cliente {% endblock%} 
+{% block title%} Restaurar Cliente {% endblock%}
 
 {% block name%}
-    <h2 class="text-center mt-2 mb-4"> <i class="material-icons">account_circle</i> Client Restoration</h2>
+<h2 class="text-center mt-2 mb-4"><i class="material-icons">account_circle</i> Client Restoration</h2>
 {% endblock %}
 
-{% block content %}    
+{% block content %}
 
 <div class="row">
     {% for cli in clients %}
 
     <div class="col-md-4 col-lg-2">
-                <div class="card text-white mt-2 mb-2  bg-dark">
-                    <div class="card-body">
-                        <p class="card-text">
-                            <ul class="list-group list-group-flush">
-                                <div class="row">
-                                    <div class="col">
-                                        <li class="list-group-item bg-dark">Nombre: {{cli.name}}</li>
-                                <li class="list-group-item bg-dark">Apellido : {{cli.lastname}}</li>
-                                <li class="list-group-item bg-dark">Dirreccion : {{cli.address}}</li>
-                                <li class="list-group-item bg-dark">Telefono : {{cli.phone}}</li>
-                                <li class="list-group-item bg-dark">Celular : {{cli.cellphone}}</li>
-                                    </div>
-                                </div>
-                            </ul>
-                        </p>
-                        <div class="container">
-                            <!--                            <form action="/confma/api/v1/clients/restored/{{cli.id}}/" method="POST">-->
-                            <form action="{% url 'confma:client_restored' cli.id %}" method="POST">
-                                {% csrf_token %}
-                                <input type="submit" class="btn btn-primary btn-block" value="Restore">
-                            </form>
+        <div class="card text-white mt-2 mb-2  bg-dark">
+            <div class="card-body">
+                <p class="card-text">
+                <ul class="list-group list-group-flush">
+                    <div class="row">
+                        <div class="col">
+                            <li class="list-group-item bg-dark">Nombre: {{cli.name}}</li>
+                            <li class="list-group-item bg-dark">Apellido : {{cli.lastname}}</li>
+                            <li class="list-group-item bg-dark">Dirreccion : {{cli.address}}</li>
+                            <li class="list-group-item bg-dark">Telefono : {{cli.phone}}</li>
+                            <li class="list-group-item bg-dark">Celular : {{cli.cellphone}}</li>
                         </div>
                     </div>
+                </ul>
+                </p>
+                <div class="container">
+                    <!--                            <form action="/confma/api/v1/clients/restored/{{cli.id}}/" method="POST">-->
+                    <form action="{% url 'confma:client_restored' cli.id %}" method="POST">
+                        {% csrf_token %}
+                        <input type="submit" class="btn btn-primary btn-block" value="Restore">
+                    </form>
                 </div>
             </div>
-        
+        </div>
+    </div>
+
     {%endfor%}
 </div>
 

@@ -6,11 +6,16 @@ from ..forms.cotizacion import CotizacionFormModel
 from ..models import Cotizacion, Cloth
 
 
+def getCotizacionWithCloth(Cotizacion, Cloth):
+    cloth = list(Cloth.objects.all())
+    queryset = Cotizacion.objects.all().filter(state=1, cloth__in=cloth)
+    return queryset
+
+
 class ListAllCotizacionByCloth(ListView):
     template_name = 'cotizacion/home.html'
     if not Cloth.DoesNotExist:
-        cloth = list(Cloth.objects.all())
-        queryset = Cotizacion.objects.all().filter(state=1, cloth__in=cloth)
+        queryset = getCotizacionWithCloth(Cotizacion, Cloth)
     else:
         queryset = Cotizacion.objects.all().filter(state=1)
 

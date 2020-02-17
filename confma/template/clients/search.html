@@ -2,106 +2,125 @@
 {% block title%} Buscar Cliente {% endblock %}
 {% block content %}
 <div class="bg-dark text-white">
-    
-<div class="row">
-    <div class="col"></div>
-    <div class="col-sm-12 col-md-10 col-lg-6 m-2">
-        <div class="card text-white bg-dark border-info mt-2 mb-2">
-            <div class="card-header">
-                <p class="card-title text-center h1">Buscar Cliente </p>
-            </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <form action="{% url 'confma:find_client' %}" method="POST">
-                        {% csrf_token %}
-                        <div>
-                            <select  name="client_id" class="form-control" required>
-                                    <option value="" selected> Elegir Cliente : </option>
+
+    <div class="row">
+        <div class="col"></div>
+        <div class="col-sm-12 col-md-10 col-lg-6 m-2">
+            <div class="card text-white bg-dark border-info mt-2 mb-2">
+                <div class="card-header">
+                    <p class="card-title text-center h1">Buscar Cliente </p>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <form action="{% url 'confma:find_client' %}" method="POST">
+                            {% csrf_token %}
+                            <div>
+                                <select name="client_id" class="form-control" required>
+                                    <option value="" selected> Elegir Cliente :</option>
                                     {% for c in all_client %}
-                                            <option value="{{c.id}}" id="{{c.id}}" >
-                                                {{c.name}} - {{c.address}} - {{c.phone}} - {{c.cellphone}}
-                                            </option>
+                                    <option value="{{c.id}}" id="{{c.id}}">
+                                        {{c.name}} - {{c.address}} - {{c.phone}} - {{c.cellphone}}
+                                    </option>
                                     {% endfor %}
                                 </select>
-                        </div>
-                        <input type="submit" value="Buscar" class="btn btn-primary btn-block mt-2">
-                    </form>
+                            </div>
+                            <input type="submit" value="Buscar" class="btn btn-primary btn-block mt-2">
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
+        <div class="col"></div>
     </div>
-    <div class="col"></div>
-</div>
     {% if count_coti_cli > 0 or count_alquiler > 0%}
-        <p class="text-center display-4">{{client}}</p>
-        {% if count_coti_cli > 0 %}
-            <p class="text-center display-4 text-info"><strong>Cotizaciones</strong></p>
-            <div class="row">
-                {% for coti_cli in cotizacion_client%}
-                    <div class="col-lg-4 col-md-12 col-sm-6">
-                        <div class="card bg-info m-3">
-                            <div class="row no-gutters">
-                                <div class="col-lg-5 col-md-4 p-2 d-flex align-items-center justify-content-center">
-                                    <img src="{{coti_cli.cotizacion.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
-                                </div>
-                                <div class="col-lg-7 col-md-8">
-                                    <div class="card-body">
-                                        <p class="card-title text-center"> <strong>Prenda : {{coti_cli.cotizacion.cloth}}</strong> </p>
+    <p class="text-center display-4">{{client}}</p>
+    {% if count_coti_cli > 0 %}
+    <p class="text-center display-4 text-info"><strong>Cotizaciones</strong></p>
+    <div class="row">
+        {% for coti_cli in cotizacion_client%}
+        <div class="col-lg-4 col-md-12 col-sm-6">
+            <div class="card bg-info m-3">
+                <div class="row no-gutters">
+                    <div class="col-lg-5 col-md-4 p-2 d-flex align-items-center justify-content-center">
+                        <img src="{{coti_cli.cotizacion.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
+                    </div>
+                    <div class="col-lg-7 col-md-8">
+                        <div class="card-body">
+                            <p class="card-title text-center"><strong>Prenda : {{coti_cli.cotizacion.cloth}}</strong>
+                            </p>
 
-                                        <p class="card-text">
-                                            <ul class="list-group list-group-flush">
-                                                <div class="row"> 
-                                                    <div class="col-lg-12 col-md-9 col-sm-12">
-                                                        <li class="list-group-item list-group-item-dark">Valor de la Tela : $ {{coti_cli.cotizacion.value_cloth}}</li>
-                                                        <li class="list-group-item list-group-item-dark">Valor del Trabajo : $ {{coti_cli.cotizacion.value_work}}</li>
-                                                        <li class="list-group-item list-group-item-dark">Valor de los Hilos : $ {{coti_cli.cotizacion.value_threads}}</li>
-                                                        <li class="list-group-item list-group-item-dark">Valor de los Botones : $ {{coti_cli.cotizacion.value_buttons}}</li>
-                                                        <li class="list-group-item list-group-item-dark">Valor de los Cuellos : $ {{coti_cli.cotizacion.value_necks}}</li>
-                                                        <li class="list-group-item list-group-item-dark">Valor de los Bordados : $ {{coti_cli.cotizacion.value_embroidery}}</li>
-                                                        <li class="list-group-item list-group-item-dark">Valor del Estampado : $ {{coti_cli.cotizacion.value_prints}}</li>
-                                                    </div>
-                                                </div>
-                                            </ul>  
-                                        </p>
-                                        <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
+                            <p class="card-text">
+                            <ul class="list-group list-group-flush">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-9 col-sm-12">
+                                        <li class="list-group-item list-group-item-dark">Valor de la Tela : $
+                                            {{coti_cli.cotizacion.value_cloth}}
+                                        </li>
+                                        <li class="list-group-item list-group-item-dark">Valor del Trabajo : $
+                                            {{coti_cli.cotizacion.value_work}}
+                                        </li>
+                                        <li class="list-group-item list-group-item-dark">Valor de los Hilos : $
+                                            {{coti_cli.cotizacion.value_threads}}
+                                        </li>
+                                        <li class="list-group-item list-group-item-dark">Valor de los Botones : $
+                                            {{coti_cli.cotizacion.value_buttons}}
+                                        </li>
+                                        <li class="list-group-item list-group-item-dark">Valor de los Cuellos : $
+                                            {{coti_cli.cotizacion.value_necks}}
+                                        </li>
+                                        <li class="list-group-item list-group-item-dark">Valor de los Bordados : $
+                                            {{coti_cli.cotizacion.value_embroidery}}
+                                        </li>
+                                        <li class="list-group-item list-group-item-dark">Valor del Estampado : $
+                                            {{coti_cli.cotizacion.value_prints}}
+                                        </li>
                                     </div>
                                 </div>
-                            </div>
+                            </ul>
+                            </p>
+                            <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
                         </div>
                     </div>
-                {%endfor%}
-            </div> 
-        {%endif%}
-
-        {% if count_alquiler > 0%}
-            <p class="text-center text-success display-4"><strong>Alquileres</strong></p>
-            <div class="row">
-                {% for alq_cli in alquiler_cliente %}
-                    <div class="col-lg-4 col-md-6 col-sm-6">    
-                        <div class="card bg-success text-white m-2">
-                            <div class="row no-gutters">
-                                <div class="col-lg-4 col-md-5 p-2 d-flex align-items-center justify-content-center">
-                                    <img src="{{alq_cli.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
-                                </div>
-                                <div class="col-lg-8 col-md-7">
-                                    <div class="card-body">
-                                        <p class="card-text">
-                                            <ul class="list-group">
-                                                <li class="list-group-item list-group-item-dark">Prenda : {{alq_cli.cloth}}</li>
-                                                <li class="list-group-item list-group-item-dark">Fecha de Entrega : {{alq_cli.date_now}}</li>
-                                                <li class="list-group-item list-group-item-dark">Fecha de Devolucion : {{alq_cli.date_return}}</li>
-                                                <li class="list-group-item list-group-item-dark">Valor : ${{alq_cli.price}}</li>
-                                            </ul>
-                                        </p> 
-                                        <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endfor %}
+                </div>
             </div>
-        {%endif%}
+        </div>
+        {%endfor%}
+    </div>
+    {%endif%}
+
+    {% if count_alquiler > 0%}
+    <p class="text-center text-success display-4"><strong>Alquileres</strong></p>
+    <div class="row">
+        {% for alq_cli in alquiler_cliente %}
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card bg-success text-white m-2">
+                <div class="row no-gutters">
+                    <div class="col-lg-4 col-md-5 p-2 d-flex align-items-center justify-content-center">
+                        <img src="{{alq_cli.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
+                    </div>
+                    <div class="col-lg-8 col-md-7">
+                        <div class="card-body">
+                            <p class="card-text">
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-dark">Prenda : {{alq_cli.cloth}}</li>
+                                <li class="list-group-item list-group-item-dark">Fecha de Entrega :
+                                    {{alq_cli.date_now}}
+                                </li>
+                                <li class="list-group-item list-group-item-dark">Fecha de Devolucion :
+                                    {{alq_cli.date_return}}
+                                </li>
+                                <li class="list-group-item list-group-item-dark">Valor : ${{alq_cli.price}}</li>
+                            </ul>
+                            </p>
+                            <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {%endif%}
     {% endif %}
 </div>
 {% endblock %}

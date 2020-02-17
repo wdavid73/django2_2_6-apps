@@ -1,62 +1,66 @@
 {% extends 'layouts/base_loggin.html' %}
-{% block title%} Cotizaciones {% endblock%} 
+{% block title%} Cotizaciones {% endblock%}
 {% block name%}{% endblock %}
-{% block content %}    
-{% with api="confma/api/v1" %}    
- <div class="row">
+{% block content %}
+<div class="row">
+
     {% for instance in object_list%}
-        <div class="col-lg-6 col-md-12 col-sm-12  ">
-            <div class="card m-3">
-                <div class="row no-gutters">
-                    <div class="col-md-5 p-2 d-flex align-items-center justify-content-center">
-                        <img src="{{instance.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
-                    </div>
-                    <div class="col-md-7">
-                        <div class="card-body">
-                            <p class="card-title text-center"> <strong>Prenda : {{instance.cloth}}</strong> </p>
-                            <div class="row" style="margin : 0 auto">
-                                <div class="col mt-2 mb-2">
-                                    <a href="{{instance.id}}/update/" class="btn btn-info badge badge-info badge-pill">Update</a>
-                                    <a href="{{instance.id}}/delete/" class="btn btn-warning badge badge-warning badge-pill">Delete</a>
+
+    <div class="col-lg-6 col-md-12 col-sm-12  ">
+        <div class="card m-3">
+            <div class="row no-gutters">
+                <div class="col-md-5 p-2 d-flex align-items-center justify-content-center">
+                    <img src="{{instance.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
+                </div>
+                <div class="col-md-7">
+                    <div class="card-body">
+                        <p class="card-title text-center"><strong>Prenda : {{instance.cloth}}</strong></p>
+                        <div class="row" style="margin : 0 auto">
+                            <div class="col mt-2 mb-2">
+                                <a href="{{instance.id}}/update/" class="btn btn-info badge badge-info badge-pill">Update</a>
+                                <a href="{{instance.id}}/delete/"
+                                   class="btn btn-warning badge badge-warning badge-pill">Delete</a>
+                            </div>
+                        </div>
+
+                        <p class="card-text">
+                        <ul class="list-group list-group-flush">
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <li class="list-group-item ">Valor de la Tela : $ {{instance.value_cloth}}</li>
+                                    <li class="list-group-item ">Valor del Trabajo : $ {{instance.value_work}}</li>
+                                    <li class="list-group-item ">Valor de los Hilos : $ {{instance.value_threads}}</li>
+                                    <li class="list-group-item ">Valor de los Botones : $ {{instance.value_buttons}}
+                                    </li>
+                                </div>
+                                <div class="col-sm-6">
+                                    <li class="list-group-item ">Valor de los Cuellos : $ {{instance.value_necks}}</li>
+                                    <li class="list-group-item ">Valor de los Bordados : $
+                                        {{instance.value_embroidery}}
+                                    </li>
+                                    <li class="list-group-item ">Valor del Estampado : $ {{instance.value_prints}}</li>
                                 </div>
                             </div>
-
-                            <p class="card-text">
-                                <ul class="list-group list-group-flush">
-                                    <div class="row"> 
-                                        <div class="col-sm-6">
-                                            <li class="list-group-item ">Valor de la Tela : $ {{instance.value_cloth}}</li>
-                                            <li class="list-group-item ">Valor del Trabajo : $ {{instance.value_work}}</li>
-                                            <li class="list-group-item ">Valor de los Hilos : $ {{instance.value_threads}}</li>
-                                            <li class="list-group-item ">Valor de los Botones : $ {{instance.value_buttons}}</li>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <li class="list-group-item ">Valor de los Cuellos : $ {{instance.value_necks}}</li>
-                                            <li class="list-group-item ">Valor de los Bordados : $ {{instance.value_embroidery}}</li>
-                                            <li class="list-group-item ">Valor del Estampado : $ {{instance.value_prints}}</li>
-                                        </div>
-                                    </div>
-                                </ul>  
-                            </p>
-                            <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
-                        </div>
-                        <form action="{% url 'confma:create_client_cotizacion_view' instance.id %}" method='POST'>
-                            {% csrf_token %}
-                            <input type="submit" value='Cotizar para Cliente' class='card-link btn btn-info btn-block'>
-                        </form>
+                        </ul>
+                        </p>
+                        <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
                     </div>
+                    <form action="{% url 'confma:create_client_cotizacion_view' instance.id %}" method='POST'>
+                        {% csrf_token %}
+                        <input type="submit" value='Cotizar para Cliente' class='card-link btn btn-info btn-block'>
+                    </form>
                 </div>
             </div>
         </div>
-        {% empty %}
-            <div class="container"  style="height: 650px">
-                <div class="alert alert-info mt-3" role="alert">
-                    No hay Cotizacion Registradas 
-                    <a href="create/" class="btn btn-info badge badge-primary badge-pill float-right">Registrar Cotizacion</a> 
-                </div>
-            </div>
+    </div>
+    {% empty %}
+    <div class="container" style="height: 650px">
+        <div class="alert alert-info mt-3" role="alert">
+            No hay Cotizacion Registradas
+            <a href="create/" class="btn btn-info badge badge-primary badge-pill float-right">Registrar Cotizacion</a>
+        </div>
+    </div>
     {%endfor%}
-</div> 
-{%endwith%}
+</div>
 
 {% endblock %}

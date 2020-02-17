@@ -39,9 +39,11 @@ urlpatterns = [
     # ROUTES COTIZACION
     path(api + 'cotizacion/', login_required(ListAllCotizacionByCloth.as_view()), name="list_of_all_cotizaciones"),
     path(api + 'cotizacion/create/', login_required(CreateCotizacion.as_view()), name="create_cotizaciones"),
-    path(api + 'cotizacion/<int:id>/update/', login_required(UpdateCotizacionById.as_view()), name="update_cotizaciones"),
+    path(api + 'cotizacion/<int:id>/update/', login_required(UpdateCotizacionById.as_view()),
+         name="update_cotizaciones"),
     path(api + 'cotizacion/<int:id>/delete/', login_required(cotizacion.DeleteCotizacion), name="delete_cotizaciones"),
-    path(api + 'cotizacion/restore', login_required(cotizacion.RestoreCotizacionView), name="restore_cotizaciones_view"),
+    path(api + 'cotizacion/restore', login_required(cotizacion.RestoreCotizacionView),
+         name="restore_cotizaciones_view"),
 
     path(api + 'cotizacion/restored/<int:id>/', login_required(cotizacion.RestoreCotizacionById),
          name="cotizacion_restored"),

@@ -1,5 +1,6 @@
 from django import forms
-from ..models import CotizacionClient , Client , Cotizacion
+
+from ..models import CotizacionClient, Client, Cotizacion
 
 
 class CotizacionClientForm(forms.ModelForm):
@@ -18,4 +19,4 @@ class CotizacionClientForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(CotizacionClientForm, self).__init__(*args, **kwargs)
         self.fields['client'].queryset = Client.objects.filter(state=1)
-        self.fields['cotizacion'].queryset = Cotizacion.objects.filter(state = 1)
+        self.fields['cotizacion'].queryset = Cotizacion.objects.filter(state=1)

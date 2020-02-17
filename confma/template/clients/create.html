@@ -1,77 +1,70 @@
 {% extends 'layouts/base_loggin.html' %}
 {% load staticfiles %}
 {% block title%}
-    Registrar Clientes
+Registrar Clientes
 {% endblock %}
 
 
 {% block content %}
-
-    <div class="container mt-4">
-    <div class="row justify-content-center align-items-center">
-        <div class="col-sm-12 col-md-8 col-lg-9">
-            <div class="card p-3">
-                <div class="card-body">
-                    <p class="card-title">
-                        <div class="container">
-                            <div class="row justify-content-center align-items-center">
-                                <div class="col-sm-12 col-md-8 col-lg-9 my-2">
-                                    <p class="display-4">
-                                        Registrio de Clientes
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <form method="POST" autocomplete="off">
-
-                    {% csrf_token %}
-                    <div class="form-group">
-                        <label for=""> Nombre :</label>
-                        <input type="text" name="{{form.name.html_name}}" class="form-control bg-dark text-white" placeholder="Ingrese su Nombre o Nombres">
-                    </div>
-
-                    <div class="form-group">
-                        <label for=""> Apellido :</label>
-                        <input type="text" name="{{form.lastname.html_name}}" class="form-control bg-dark text-white" placeholder = "Ingrese su Apellido o Apellidos">
-                    </div>
-
-                    <div class="form-group">
-                        <label for=""> Direccion :</label>
-                        <input type="text" name="{{form.address.html_name}}" class="form-control bg-dark text-white" placeholder="Ingrese su Direccion">
-                    </div>
-
-                    <div class="form-group">
-                        <label for=""> Telefono :</label>
-                        <input type="number" name="{{form.phone.html_name}}" class="form-control bg-dark text-white" placeholder="Ingrese su Telefono">
-                    </div>
-
-                    <div class="form-group">
-                        <label for=""> Celular :</label>
-                        <input type="number" name="{{form.cellphone.html_name}}" class="form-control bg-dark text-white" placeholder = "Ingrese su telefono celular">
-                    </div>
-                    <input type="submit" value="Registrar Cliente" class="btn btn-warning container my-1">
-                </form>
+<div class="row justify-content-center align-items-center">
+    <div class="col-sm-12 col-md-8 col-lg-9">
+        <div class="card p-3">
+            <div class="card-body">
+                <p class="card-title">
+                <p class="h1 text-center">Registrio de Clientes</p>
             </div>
+            <form method="POST" autocomplete="off">
+
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for=""> Nombre :</label>
+                    <input type="text" name="{{form.name.html_name}}" class="form-control bg-dark text-white"
+                           placeholder="Ingrese su Nombre o Nombres">
+                </div>
+
+                <div class="form-group">
+                    <label for=""> Apellido :</label>
+                    <input type="text" name="{{form.lastname.html_name}}" class="form-control bg-dark text-white"
+                           placeholder="Ingrese su Apellido o Apellidos">
+                </div>
+
+                <div class="form-group">
+                    <label for=""> Direccion :</label>
+                    <input type="text" name="{{form.address.html_name}}" class="form-control bg-dark text-white"
+                           placeholder="Ingrese su Direccion">
+                </div>
+
+                <div class="form-group">
+                    <label for=""> Telefono :</label>
+                    <input type="number" name="{{form.phone.html_name}}" class="form-control bg-dark text-white"
+                           placeholder="Ingrese su Telefono">
+                </div>
+
+                <div class="form-group">
+                    <label for=""> Celular :</label>
+                    <input type="number" name="{{form.cellphone.html_name}}" class="form-control bg-dark text-white"
+                           placeholder="Ingrese su telefono celular">
+                </div>
+                <input type="submit" value="Registrar Cliente" class="btn btn-warning container my-1">
+            </form>
         </div>
-        {% if form.errors %}
-            <div class="col">
-                <div class="row">
-                        <div class="col-sm col-md col-lg">
-                             {% for key,value in form.errors.items %}
-                                <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                                    <strong>{{ key|escape }} : {{ value|escape }}</strong>
-                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                            {% endfor %}
-                        </div>
-                </div>
-            </div>
-        {% endif %}         
     </div>
 </div>
-
+{% if form.errors %}
+<div class="col">
+    <div class="row">
+        {% for key,value in form.errors.items %}
+        <div class="col-sm-6 col-md-4 col-lg-4">
+            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                <strong>{{ key|escape }} : {{ value|escape }}</strong>
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
 
 {% endblock%}

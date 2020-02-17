@@ -1,10 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from django.views.generic import (ListView , CreateView)
-from .general import PossibleError
-from ..models import CotizacionClient, Cotizacion, Client, Cloth
-from ..forms.clientcotizacion import CotizacionClientForm
+from django.views.generic import (ListView, CreateView)
 
+from .general import PossibleError
+from ..forms.clientcotizacion import CotizacionClientForm
+from ..models import CotizacionClient, Cotizacion, Client, Cloth
 
 
 class ListOfAllClientsAndCotizacion(ListView):
@@ -18,7 +18,7 @@ def ClientCotizacionView(request, id_):
     client = Client.objects.all().filter(state=1)
     total = getTotal(cotizacion)
     context = {
-        'form' : form,
+        'form': form,
         'cliente': client,
         'cotizacion': cotizacion,
         'total': total
@@ -73,7 +73,7 @@ def getTotal(cotizacion):
     total1 = cotizacion.value_cloth + cotizacion.value_work
     total2 = cotizacion.value_threads + cotizacion.value_buttons
     total3 = cotizacion.value_necks + cotizacion.value_embroidery + cotizacion.value_prints
-    total  = total1 + total2 + total3
+    total = total1 + total2 + total3
     return total
 
 
@@ -87,6 +87,7 @@ def getCotizacion(cotizacion, obj):
     for coti in cotizacion:
         if coti.id == obj.cotizacion_id:
             return coti
+
 
 def get_cloth(cotizacion):
     cloth_obj = Cloth.objects.all().filter(state=1)

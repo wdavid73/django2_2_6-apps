@@ -1,7 +1,6 @@
-from django.forms import ModelForm, TextInput
 from django import forms
 from django.utils.translation import gettext_lazy as _
-from django.contrib.admin.widgets import AdminDateWidget
+
 from ..models import Alquiler, Client
 
 

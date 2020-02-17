@@ -1,83 +1,94 @@
 {% with api="confma/api/v1" %}
-{% load staticfiles %}     
+{% load staticfiles %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a class="navbar-brand" href="/confma">Confma Api</a>
-  <button
-    class="navbar-toggler"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarNav"
-    aria-controls="navbarNav"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav mr-auto">
+    <a class="navbar-brand" href="/confma">Confma Api</a>
+    <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarNav"
+            aria-controls="navbarNav"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mr-auto">
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Clientes
-        </a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Clientes
+                </a>
 
-        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a href="{% url 'confma:create_clients' %}"  class="dropdown-item bg-dark text-white">Registrar</a>
-          <a href="{% url 'confma:find_client' %}" class="dropdown-item  bg-dark text-white">Buscar</a>
-          <div class="dropdown-divider bg-dark"></div>
-          <a href="{% url 'confma:list_all_clients' %}" class="dropdown-item  bg-dark text-white">Todos los Clientes</a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <a href="{% url 'confma:create_clients' %}" class="dropdown-item bg-dark text-white">Registrar</a>
+                    <a href="{% url 'confma:find_client' %}" class="dropdown-item  bg-dark text-white">Buscar</a>
+                    <div class="dropdown-divider bg-dark"></div>
+                    <a href="{% url 'confma:list_all_clients' %}" class="dropdown-item  bg-dark text-white">Todos los
+                        Clientes</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Cloth
+                </a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <a href="{% url 'confma:create_cloth' %}" class="dropdown-item bg-dark text-white">Registrar
+                        Prendas</a>
+                    <div class="dropdown-divider bg-dark"></div>
+                    <a href="{% url 'confma:list_all_cloth' %}" class="dropdown-item bg-dark text-white">
+                        Prendas Registradas</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Cotizaciones
+                </a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <a href="{% url 'confma:create_cotizaciones'%}"
+                       class="dropdown-item bg-dark text-white">Registrar</a>
+                    <div class="dropdown-divider bg-dark"></div>
+                    <a href="{% url 'confma:list_of_all_cotizaciones' %}" class="dropdown-item  bg-dark text-white">Registradas</a>
+                    <div class="dropdown-divider bg-dark"></div>
+                    <a href="{% url 'confma:list_of_all_cotizacion_client' %}"
+                       class="dropdown-item  bg-dark text-white">Cliente - Cotizacion Registrados</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    Alquiler
+                </a>
+                <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
+                    <a href="{% url 'confma:create_rental' %}" class="dropdown-item bg-dark text-white">Registrar</a>
+                    <div class="dropdown-divider bg-dark"></div>
+                    <a href="{% url 'confma:list_of_all_rental' %}" class="dropdown-item  bg-dark text-white">Todos los
+                        Alquileres</a>
+                </div>
+            </li>
+        </ul>
+        {% if user.is_authenticated %}
+        <div class="btn-group">
+            <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                <img src="{% static 'img_user.jpg' %}" alt="img-user" class="img-fluid" width="50px"
+                     style="border-radius: 50%">
+            </button>
+            <div class="dropdown-menu dropdown-menu-right bg-dark">
+                <p class="dropdown-item bg-primary" type="button">Hola {{user.username}}!</p>
+                <button class="dropdown-item bg-secondary" type="button">Perfil</button>
+
+            </div>
         </div>
-      </li>
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Cloth
-        </a>
-        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a href="{% url 'confma:create_cloth' %}" class="dropdown-item bg-dark text-white">Registrar Prendas</a>
-          <div class="dropdown-divider bg-dark"></div>
-          <a href="{% url 'confma:list_all_cloth' %}"class="dropdown-item bg-dark text-white">
-          Prendas Registradas</a>
-        </div>        
-      </li>
+        {% endif %}
 
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Cotizaciones
-        </a>
-        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a href="{% url 'confma:create_cotizaciones'%}" class="dropdown-item bg-dark text-white">Registrar</a>
-          <div class="dropdown-divider bg-dark"></div>
-          <a href="{% url 'confma:list_of_all_cotizaciones' %}" class="dropdown-item  bg-dark text-white">Registradas</a>
-          <div class="dropdown-divider bg-dark"></div>
-          <a href="{% url 'confma:list_of_all_cotizacion_client' %}" class="dropdown-item  bg-dark text-white">Cliente - Cotizacion Registrados</a>
-        </div>
-      </li>
-
-      <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Alquiler
-        </a>
-        <div class="dropdown-menu bg-dark" aria-labelledby="navbarDropdown">
-          <a href="{% url 'confma:create_rental' %}" class="dropdown-item bg-dark text-white">Registrar</a>
-          <div class="dropdown-divider bg-dark"></div>
-          <a href="{% url 'confma:list_of_all_rental' %}" class="dropdown-item  bg-dark text-white">Todos los Alquileres</a>
-        </div>
-      </li>
-    </ul>
-    {% if user.is_authenticated %}
-       <div class="btn-group">
-          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <img src="{% static 'img_user.jpg' %}" alt="img-user" class="img-fluid" width="50px" style="border-radius: 50%">
-          </button>
-          <div class="dropdown-menu dropdown-menu-right bg-dark">
-            <p class="dropdown-item bg-primary" type="button">Hola {{user.username}}!</p>
-            <button class="dropdown-item bg-secondary" type="button">Perfil</button>
-
-          </div>
-      </div>
-    {% endif %}
-    
-  </div>
+    </div>
 </nav>
 
 {% endwith %}
