@@ -3,8 +3,7 @@
 {% block content %}
 <div class="bg-dark text-white">
 
-    <div class="row">
-        <div class="col"></div>
+    <div class="row justify-content-center align-items-center">
         <div class="col-sm-12 col-md-10 col-lg-6 m-2">
             <div class="card text-white bg-dark border-info mt-2 mb-2">
                 <div class="card-header">
@@ -14,35 +13,25 @@
                     <div class="form-group">
                         <form action="{% url 'confma:find_client' %}" method="POST">
                             {% csrf_token %}
-                            <div>
-                                <select name="client_id" class="form-control" required>
-                                    <option value="" selected> Elegir Cliente :</option>
-                                    {% for c in all_client %}
-                                    <option value="{{c.id}}" id="{{c.id}}">
-                                        {{c.name}} - {{c.address}} - {{c.phone}} - {{c.cellphone}}
-                                    </option>
-                                    {% endfor %}
-                                </select>
-                            </div>
+                            {{form}}
                             <input type="submit" value="Buscar" class="btn btn-primary btn-block mt-2">
                         </form>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col"></div>
     </div>
-    {% if count_coti_cli > 0 or count_alquiler > 0%}
+    {% if count_coti_cli > 0 or count_rental > 0%}
     <p class="text-center display-4">{{client}}</p>
-    {% if count_coti_cli > 0 %}
+    {% if count_coti > 0 %}
     <p class="text-center display-4 text-info"><strong>Cotizaciones</strong></p>
     <div class="row">
-        {% for coti_cli in cotizacion_client%}
+        {% for cotizacion in cotizaciones%}
         <div class="col-lg-4 col-md-12 col-sm-6">
             <div class="card bg-info m-3">
                 <div class="row no-gutters">
                     <div class="col-lg-5 col-md-4 p-2 d-flex align-items-center justify-content-center">
-                        <img src="{{coti_cli.cotizacion.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
+                        <img src="{{cotizacion.cotizacion.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
                     </div>
                     <div class="col-lg-7 col-md-8">
                         <div class="card-body">
@@ -88,15 +77,15 @@
     </div>
     {%endif%}
 
-    {% if count_alquiler > 0%}
+    {% if count_rental > 0%}
     <p class="text-center text-success display-4"><strong>Alquileres</strong></p>
     <div class="row">
-        {% for alq_cli in alquiler_cliente %}
+        {% for rental in rentals %}
         <div class="col-lg-4 col-md-6 col-sm-6">
             <div class="card bg-success text-white m-2">
                 <div class="row no-gutters">
                     <div class="col-lg-4 col-md-5 p-2 d-flex align-items-center justify-content-center">
-                        <img src="{{alq_cli.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
+                        <img src="{{rental.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
                     </div>
                     <div class="col-lg-8 col-md-7">
                         <div class="card-body">

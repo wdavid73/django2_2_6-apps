@@ -1,9 +1,10 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import (CreateView, UpdateView, ListView, DeleteView)
 
-from ..forms.client import ClientForm
-from ..models import Client, Cloth, CotizacionClient, Cotizacion, Alquiler
+from ..forms.client import ClientForm, FindForm
+from ..models import Client, CotizacionClient, Alquiler
 from ..views.general import PossibleError
 
 
@@ -89,30 +90,34 @@ def RestoreClient(request, id):
     return PossibleError(request, message, situation)
 
 
+def getClientWithRental(Alquiler, _client):
+    rental = Alquiler.objects.all().filter(state=1, client=_client)
+    return rental
+
+
+def getClientWithCotizacion(CotizacionClient, client):
+    cotizacion_client = CotizacionClient.objects.all().filter(state=1, client=client)
+    return cotizacion_client
+
+
 def FindClient(request):
-    ##tratar de implementar un formulario por django
+    form = FindForm
     clients = Client.objects.all().filter(state=1)
 
     if request.method == 'POST':
-        id_ = request.POST.get('client_id')
-        obj_client = get_object_or_404(Client, id=id_)
-        # query que trate los alquileres de un cliente en especifico
-        alquiler_cliente = Alquiler.objects.filter(client=obj_client)
-        count_alquiler = alquiler_cliente.count()
-        cloth = list(Cloth.objects.all().filter(state=1))  # array con los registro de todas las prendas
-        # trae las cotizacion que ya tiene una prenda asignada
-        cotizacion = list(Cotizacion.objects.all().filter(state=1, cloth__in=cloth))
-        # trae los registro de los clientes que tienen asignado una cotizacion con su respectiva prenda
-        cotizacion_cliente = CotizacionClient.objects.filter(cotizacion__in=cotizacion, client=obj_client)
-        count_coti_cli = cotizacion_cliente.count()
-        context = {
-            'all_client': clients,
-            'alquiler_cliente': alquiler_cliente,
-            'count_alquiler': count_alquiler,
-            'cotizacion_client': cotizacion_cliente,
-            'count_coti_cli': count_coti_cli,
-            'client': obj_client
-        }
-        return render(request, 'clients/search.html', context)
+        form = FindForm(request.POST)
 
-    return render(request, 'clients/search.html', {'all_client': clients})
+        if form.is_valid():
+            client = form.cleaned_data['client']
+            rental = getClientWithRental(Alquiler, client)
+            cotizacion = getClientWithCotizacion(CotizacionClient, client)
+            context = {
+                'client': client,
+                'rentals': rental,
+                'cotizaciones': cotizacion,
+                'count_rental': rental.count(),
+                'count_coti': cotizacion.count(),
+                'form': form
+            }
+            return render(request, 'clients/find.html', context)
+    return render(request, 'clients/find.html', {'form': form})
