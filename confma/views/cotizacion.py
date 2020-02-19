@@ -25,11 +25,19 @@ class CreateCotizacion(CreateView):
     form_class = CotizacionFormModel
 
     def form_valid(self, form):
-        print(form.cleaned_data)
+        print(form.cleaned_data['cloth'])
+        if ClothDuplicated(form):
+            return redirect('confma:create_cotizaciones')
         return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('confma:list_of_all_cotizaciones')
+
+
+def ClothDuplicated(form):
+    cloth = Cloth.objects.filter(id=form.cleaned_data['cloth'].id)
+    if Cotizacion.objects.filter(cloth__in=list(cloth)):
+        return True
 
 
 class UpdateCotizacionById(UpdateView):
