@@ -1,0 +1,114 @@
+{% extends 'layouts/base_loggin.html' %}
+{% block title%} Detalles de Prendas {% endblock %}
+{% block content %}
+
+<div class="jumbotron">
+    <h1 class="text-center m-2">{{cloth}}</h1>
+    <div class="row ">
+        <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="list-group mt-2" id="list-tab" role="tablist">
+                <a class="list-group-item list-group-item-dark list-group-item-action active"
+                   id="list-cotizaciones-list" data-toggle="list"
+                   href="#list-cotizaciones" role="tab" aria-controls="cotizaciones">Cotizacion</a>
+                <a class="list-group-item list-group-item-dark list-group-item-action" id="list-alquiler-list"
+                   data-toggle="list"
+                   href="#list-alquiler" role="tab" aria-controls="alquiler">Alquileres</a>
+                <div class="col-lg-6 col-md-12 col-sm-12 container mt-3 mb-3">
+                    <img src="{{cloth.image.url}}" class="img-fluid" alt="prenda">
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="list-cotizaciones" role="tabpanel"
+                     aria-labelledby="list-cotizaciones-list">
+                    <div class="row mt-2 justify-content-md-center justify-content-sm-center">
+                        {% for cotiza in cotizacion %}
+                        <div class="col-lg-6 col-md-12 col-sm-12">
+                            <div class="card">
+                                <div class="row">
+                                    <div class="col">
+                                        <li class="list-group-item bg-dark text-white">Valor de la Tela : $
+                                            {{cotiza.value_cloth}}
+                                        </li>
+                                        <li class="list-group-item bg-dark text-white">Valor del Trabajo : $
+                                            {{cotiza.value_work}}
+                                        </li>
+                                        <li class="list-group-item bg-dark text-white">Valor de los Hilos : $
+                                            {{cotiza.value_threads}}
+                                        </li>
+                                        <li class="list-group-item bg-dark text-white">Valor de los Botones : $
+                                            {{cotiza.value_buttons}}
+                                        </li>
+                                        <li class="list-group-item bg-dark text-white">Valor de los Cuellos : $
+                                            {{cotiza.value_necks}}
+                                        </li>
+                                        <li class="list-group-item bg-dark text-white">Valor de los Bordados : $
+                                            {{cotiza.value_embroidery}}
+                                        </li>
+                                        <li class="list-group-item bg-dark text-white">Valor del Estampado : $
+                                            {{cotiza.value_prints}}
+                                        </li>
+                                        <li class="list-group-item bg-primary text-white">Total : $ {{total}}</li>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-danger"> NO HAY COTIZACIONES REGISTRADAS </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                </div>
+                <div class="tab-pane fade" id="list-alquiler" role="tabpanel" aria-labelledby="list-alquiler-list">
+                    <div class="row mt-2 justify-content-md-center justify-content-sm-center">
+                        {% for alquiler in rental %}
+                        <div class="col-lg-4 col-md-12 col-sm-12">
+                            <div class="card m-2 bg-dark text-white">
+                                <div class="card-header">
+                                    {% if alquiler.ifrental == 1%}
+                                    <h5 class="card-title">Alquiler #{{forloop.counter}}
+                                        <span class="btn btn-success badge badge-success badge-pill">En Alquiler</span>
+                                    </h5>
+                                    {% else %}
+                                    <h5 class="card-title">Alquiler #{{forloop.counter}}
+                                        <span class="btn btn-primary badge badge-primary badge-pill">Devuelta</span>
+                                    </h5>
+                                    {% endif %}
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                    <ul>
+                                        <li>Fecha de Entrega : {{alquiler.date_now}}</li>
+                                        <li>Fecha de Devolucion : {{alquiler.date_return}}</li>
+                                        <li>Valor : {{alquiler.price}}</li>
+                                        <li>{{alquiler.client}}</li>
+                                    </ul>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="row">
+                            <div class="col">
+                                <p class="text-danger"> NO HAY ALQUILERES REGISTRADOS </p>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
+</div>
+
+
+{% endblock%}

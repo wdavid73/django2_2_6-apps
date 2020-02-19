@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import (ListView, CreateView)
 
-from .general import PossibleError
+from .general import PossibleError, getTotal
 from ..forms.clientcotizacion import CotizacionClientForm
-from ..models import CotizacionClient, Cotizacion, Client, Cloth
+from ..models import CotizacionClient, Cotizacion, Client
 
 
 class ListOfAllClientsAndCotizacion(ListView):
@@ -67,30 +67,3 @@ def RestoreClientCotizacion(request):
     message: "Error Restaurando el registro de un Cliente junto con su Cotizacion"
     situation: "Restauracion de Cliente Cotizacion"
     return PossibleError(request, message, situation)
-
-
-def getTotal(cotizacion):
-    total1 = cotizacion.value_cloth + cotizacion.value_work
-    total2 = cotizacion.value_threads + cotizacion.value_buttons
-    total3 = cotizacion.value_necks + cotizacion.value_embroidery + cotizacion.value_prints
-    total = total1 + total2 + total3
-    return total
-
-
-def getClient(client, obj):
-    for cli in client:
-        if cli.id == obj.client_id:
-            return cli
-
-
-def getCotizacion(cotizacion, obj):
-    for coti in cotizacion:
-        if coti.id == obj.cotizacion_id:
-            return coti
-
-
-def get_cloth(cotizacion):
-    cloth_obj = Cloth.objects.all().filter(state=1)
-    for cloth in cloth_obj:
-        if cloth.id == cotizacion.cloth_id:
-            return cloth
