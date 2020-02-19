@@ -121,20 +121,14 @@ def DetailsCloth(request, _id):
     cloth = get_object_or_404(Cloth, id=_id)
     cotizacion = getClothWithCotizacion(cloth)
     rental = getClothWithRental(cloth)
+    total = getTotal(cotizacion)
     context = {
         'cloth': cloth,
         'cotizacion': cotizacion,
+        'total': total,
         'rental': rental
     }
-    return render(request, 'template/details.html', context)
-
-
-def getClothWithRental(cloth):
-    return Alquiler.objects.all().filter(state=1, cloth_id=cloth.id)
-
-
-def getClothWithCotizacion(cloth):
-    return Cotizacion.objects.all().filter(state=1, cloth_id=cloth.id)
+    return render(request, 'cloth/details.html', context)
 
 
 def RedirectFind(request):
@@ -175,3 +169,42 @@ def getClientWithRental(Alquiler, _client):
 def getClientWithCotizacion(CotizacionClient, client):
     cotizacion_client = CotizacionClient.objects.all().filter(state=1, client=client)
     return cotizacion_client
+
+
+def getClient(client, obj):
+    for cli in client:
+        if cli.id == obj.client_id:
+            return cli
+
+
+def getCotizacion(cotizacion, obj):
+    for coti in cotizacion:
+        if coti.id == obj.cotizacion_id:
+            return coti
+
+
+def get_cloth(cotizacion):
+    cloth_obj = Cloth.objects.all().filter(state=1)
+    for cloth in cloth_obj:
+        if cloth.id == cotizacion.cloth_id:
+            return cloth
+
+
+def getClothWithRental(cloth):
+    return Alquiler.objects.all().filter(state=1, cloth_id=cloth.id)
+
+
+def getClothWithCotizacion(cloth):
+    return Cotizacion.objects.all().filter(state=1, cloth_id=cloth.id)
+
+
+def getTotal(cotizaciones):
+    if not cotizaciones:
+        return 0
+    else:
+        cotizacion = cotizaciones[0]
+        total1 = cotizacion.value_cloth + cotizacion.value_work
+        total2 = cotizacion.value_threads + cotizacion.value_buttons
+        total3 = cotizacion.value_necks + cotizacion.value_embroidery + cotizacion.value_prints
+        total = total1 + total2 + total3
+        return total

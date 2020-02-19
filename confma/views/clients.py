@@ -87,6 +87,3 @@ def RestoreClient(request, id):
     message: "Error Restaurando Cliente"
     situation: "Restauracion de Usuario"
     return PossibleError(request, message, situation)
-
-
-
