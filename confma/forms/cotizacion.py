@@ -1,6 +1,7 @@
 from django import forms
 
 from ..models import Cotizacion
+from ..views.general import FormClothInCotizacion
 
 
 class CotizacionFormModel(forms.ModelForm):
@@ -22,3 +23,7 @@ class CotizacionFormModel(forms.ModelForm):
             'cloth': forms.Select(
                 attrs={'class ': 'form-control bg-dark text-white'}),
         }
+
+    def __init__(self, *args, **kwargs):
+        super(CotizacionFormModel, self).__init__(*args, **kwargs)
+        self.fields['cloth'].queryset = FormClothInCotizacion()

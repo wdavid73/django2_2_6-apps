@@ -1,5 +1,3 @@
-from datetime import date
-
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.shortcuts import render_to_response
@@ -7,7 +5,6 @@ from django.views.generic import (CreateView, ListView)
 
 from ..forms.client import FindForm
 from ..forms.cloth import ClothFormModel
-from ..forms.rental import RentalForm
 from ..models import Cloth, Alquiler, Client, CotizacionClient, Cotizacion
 
 
@@ -52,39 +49,6 @@ class ListOfAllCloth(ListView):
         return context
 
 
-def RentedClothes(form):
-    cloth = Cloth.objects.filter(id=form.cleaned_data['cloth'].id)
-    if Alquiler.objects.filter(cloth__in=list(cloth), ifrental=1):
-        return True
-
-
-class CreateRental(CreateView):
-    template_name = "rental/create.html"
-    form_class = RentalForm
-
-    def form_valid(self, form):
-        now = date.today()
-        if form.cleaned_data["date_return"] > now:
-            if form.cleaned_data["client"].state == 1:
-                if RentedClothes(form):
-                    return redirect('confma:create_rental')
-                return super().form_valid(form)
-            return redirect('confma:create_rental')
-        return redirect('confma:create_rental')
-
-    def get_success_url(self):
-        return reverse('confma:list_of_all_rental')
-
-
-class ListOfAllRental(ListView):
-    template_name = 'rental/details.html'
-    if not Client.DoesNotExist:
-        list_client = list(Client.objects.all().filter(state=1))
-        queryset = Alquiler.objects.filter(state=1, ifrental=1).filter(client__in=list_client)
-    else:
-        queryset = Alquiler.objects.filter(state=1, ifrental=1)
-
-
 def HomePage(request, *args, **kwargs):
     if request.user.is_authenticated:
         return render(request, "index.html", {})
@@ -107,14 +71,6 @@ def handler500(request, *args, **argv):
     response = render_to_response('500.html', {})
     response.status_code = 500
     return response
-
-
-def RefundRental(request, _id):
-    rental = get_object_or_404(Alquiler, id=_id)
-    if request.method == 'POST':
-        rental.ifrental = 0
-        rental.save()
-        return redirect('confma:list_of_all_rental')
 
 
 def DetailsCloth(request, _id):
@@ -208,3 +164,17 @@ def getTotal(cotizaciones):
         total3 = cotizacion.value_necks + cotizacion.value_embroidery + cotizacion.value_prints
         total = total1 + total2 + total3
         return total
+
+
+def FormClothInCotizacion():
+    cloth = Cloth.objects.filter(state=1)
+    cotizaciones = Cotizacion.objects.filter(state=1).values_list('cloth', flat=True)
+    cloth_cotizacion = Cloth.objects.exclude(id__in=cotizaciones)
+    return cloth_cotizacion
+
+
+def FormClothInRental():
+    cloth = Cloth.objects.filter(state=1)
+    rentals = Alquiler.objects.filter(ifrental=1).values_list('cloth', flat=True)
+    cloth_rental = Cloth.objects.exclude(id__in=rentals)
+    return cloth_rental

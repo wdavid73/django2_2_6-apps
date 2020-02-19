@@ -2,6 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from ..models import Alquiler, Client
+from ..views.general import FormClothInRental
 
 
 class RentalForm(forms.ModelForm):
@@ -35,4 +36,5 @@ class RentalForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(RentalForm, self).__init__(*args, **kwargs)
+        self.fields['cloth'].queryset = FormClothInRental()
         self.fields['client'].queryset = Client.objects.filter(state=1)

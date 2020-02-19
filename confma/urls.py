@@ -1,12 +1,13 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 
-from .views import clients, general, cotizacion, client_coti
+from .views import clients, general, cotizacion, client_coti, rental
 from .views.client_coti import (ListOfAllClientsAndCotizacion, CreateClientCotizacion)
 from .views.clients import (CreateClient, UpdateClient)
 from .views.cotizacion import (CreateCotizacion, UpdateCotizacionById, ListAllCotizacionByCloth)
-from .views.general import (ClothCreate, ListOfAllCloth, CreateRental, ListOfAllRental)
+from .views.general import (ClothCreate, ListOfAllCloth)
 from .views.registration import (SignUp)
+from .views.rental import (CreateRental, ListOfAllRental)
 
 api = 'api/v1/'
 app_name = "confma"
@@ -76,7 +77,7 @@ urlpatterns = [
     # ROUTES RENTAL
     path(api + 'rental/create/', login_required(CreateRental.as_view()), name="create_rental"),
     path(api + 'rental/details/all', login_required(ListOfAllRental.as_view()), name="list_of_all_rental"),
-    path(api + 'rental/refund/<int:_id>', login_required(general.RefundRental), name="rental_refund"),
+    path(api + 'rental/refund/<int:_id>', login_required(rental.RefundRental), name="rental_refund"),
 
     path(api + 'error', general.PossibleError, name="posible_error"),
 ]
