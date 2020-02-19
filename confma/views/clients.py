@@ -1,10 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import (CreateView, UpdateView, ListView, DeleteView)
 
-from ..forms.client import ClientForm, FindForm
-from ..models import Client, CotizacionClient, Alquiler
+from ..forms.client import ClientForm
+from ..models import Client
 from ..views.general import PossibleError
 
 
@@ -90,34 +89,4 @@ def RestoreClient(request, id):
     return PossibleError(request, message, situation)
 
 
-def getClientWithRental(Alquiler, _client):
-    rental = Alquiler.objects.all().filter(state=1, client=_client)
-    return rental
 
-
-def getClientWithCotizacion(CotizacionClient, client):
-    cotizacion_client = CotizacionClient.objects.all().filter(state=1, client=client)
-    return cotizacion_client
-
-
-def FindClient(request):
-    form = FindForm
-    clients = Client.objects.all().filter(state=1)
-
-    if request.method == 'POST':
-        form = FindForm(request.POST)
-
-        if form.is_valid():
-            client = form.cleaned_data['client']
-            rental = getClientWithRental(Alquiler, client)
-            cotizacion = getClientWithCotizacion(CotizacionClient, client)
-            context = {
-                'client': client,
-                'rentals': rental,
-                'cotizaciones': cotizacion,
-                'count_rental': rental.count(),
-                'count_coti': cotizacion.count(),
-                'form': form
-            }
-            return render(request, 'clients/find.html', context)
-    return render(request, 'clients/find.html', {'form': form})

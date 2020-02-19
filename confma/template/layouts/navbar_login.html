@@ -83,7 +83,7 @@
             <div class="dropdown-menu dropdown-menu-right bg-dark">
                 <p class="dropdown-item bg-primary" type="button">Hola {{user.username}}!</p>
                 <button class="dropdown-item bg-secondary" type="button">Perfil</button>
-
+                <a href="{% url 'confma:logout'%}" class="dropdown-item bg-warning">Cerrar Sesion</a>
             </div>
         </div>
         {% endif %}

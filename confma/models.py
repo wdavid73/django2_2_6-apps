@@ -76,6 +76,7 @@ class Alquiler(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, null=False, default=5000.00)
     cloth = models.ForeignKey(Cloth, on_delete=models.CASCADE, blank=False, null=False)
     client = models.ForeignKey(Client, on_delete=models.CASCADE, blank=False, null=False)
+    ifrental = models.SmallIntegerField(default=1, null=False, blank=False)
     #####################
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)

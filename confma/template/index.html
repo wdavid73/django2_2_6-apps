@@ -10,55 +10,49 @@ Inicio
 {% block content %}
 {% if user.is_authenticated %}
 <div class="container" id="main">
-
-    <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
-        <strong>Hola {{user.username}}!</strong> Bienvenido.
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-    </div>
-
-
     <img src="{% static 'logo.png' %}" alt="logo" class="img-fluid container">
-    <div class="row mt-2 mb-5">
-        <div class="col">
+
+    <div class="row mt-4 container">
+        <div class="col-lg-6 col-md-7 col-sm-12  align-middle">
             <h2 class="text-center">¿Quienes Somos?</h2>
             <p class="text-justify">
-                Lorem ipsum dolor sit amet
-                consectetur adipisicing elit.
-                Quis illum tempore esse ratione
-                repudiandae quidem ducimus quibusdam
-                repellendus blanditiis cum fugit ea vitae
-                atque repellat, saepe laudantium excepturi
-                odio asperiores.
+                Confecciones Maribel es una MicroEmpresa de confeccion de prendas
+                de vestir para todo tipo de persona , creada y mantenida por personas
+                que quieren salir adelante.
             </p>
         </div>
-        <div class="col">
-            <h2 class="text-center">Que hacemos</h2>
-            <p class="text-justify">
-                Lorem ipsum dolor sit amet
-                consectetur adipisicing elit.
-                Quis illum tempore esse ratione
-                repudiandae quidem ducimus quibusdam
-                repellendus blanditiis cum fugit ea vitae
-                atque repellat, saepe laudantium excepturi
-                odio asperiores.
-            </p>
-        </div>
-        <div class="col">
-            <h2 class="text-center">Donde Estamos</h2>
-            <p class="text-justify">
-                Lorem ipsum dolor sit amet
-                consectetur adipisicing elit.
-                Quis illum tempore esse ratione
-                repudiandae quidem ducimus quibusdam
-                repellendus blanditiis cum fugit ea vitae
-                atque repellat, saepe laudantium excepturi
-                odio asperiores.
-            </p>
+        <div class="col-lg-6 col-md-5 col-sm-12">
+            <img src="{% static 'confecciones2.jpg' %}" alt="logo" class="img-fluid ">
         </div>
     </div>
-
+    <div class="row mt-2 container">
+        <div class="col-lg-6 col-md-7 col-sm-12  align-middle">
+            <h2 class="text-center">Que hacemos?</h2>
+            <p class="text-justify">
+                Confecciones Maribel es una MicroEmpresa de confeccion
+                de prendas de vestir para tanto mujeres como hombres
+                en la cual tambien se pueden encontrar vestidos de boda,
+                de 15 como de primera comunion , estos se pueden confeccionar
+                a medida o tambien se puede alquilar uno de los ya hechos que se
+                encuentre disponible , esto tambien aplica para los trajes de hombres.
+            </p>
+        </div>
+        <div class="col-lg-6 col-md-5 col-sm-12">
+            <img src="{% static 'confecciones2.jpg' %}" alt="logo" class="img-fluid ">
+        </div>
+    </div>
+    <div class="row mt-2 ">
+        <div class="col-lg-6 col-md-7 col-sm-12 ">
+            <h2 class="text-center">Donde Estamos?</h2>
+            <p class="text-justify">
+                Confecciones Maribel su ubica en un barrio de la
+                cuidad de barranquilla en el atlantico
+            </p>
+        </div>
+        <div class="col-lg-6 col-md-5 col-sm-12">
+            <img src="{% static 'barranquilla.jpg' %}" alt="logo" class="img-fluid ">
+        </div>
+    </div>
 </div>
 
 {% else %}

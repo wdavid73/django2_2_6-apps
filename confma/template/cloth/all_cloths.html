@@ -1,4 +1,5 @@
 {% extends 'layouts/base_loggin.html' %}
+{% load staticfiles %}
 {% block title%} Listado de Prendas {% endblock%}
 {% block principal_options%}{% endblock%}
 
@@ -9,6 +10,7 @@
 {% endblock %}
 
 {% block content %}
+
 <div class="row">
     {% for clo in object_list %}
     <div class="col-lg-4 col-md-6 col-sm-6  ">
@@ -26,6 +28,9 @@
                             <li class="list-group-item list-group-item-info">Color : {{clo.color}}</li>
                             <li class="list-group-item list-group-item-info">Tipo de Moda: {{clo.fashion}}</li>
                         </ul>
+                        <form action="{% url 'confma:details_of_cloth' clo.id %}" method="GET">
+                            <input type="submit" value="Buscar" class="btn btn-primary btn-block mt-2">
+                        </form>
                         </p>
                         <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
                     </div>

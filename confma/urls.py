@@ -35,7 +35,7 @@ urlpatterns = [
     path(api + 'clients/<int:id>/delete/', login_required(clients.DeleteClient), name="delete_clients"),
     path(api + 'clients/restore', login_required(clients.RestoreClientView), name="restore_clients_view"),
     path(api + 'clients/restored/<int:id>/', login_required(clients.RestoreClient), name="client_restored"),
-    path(api + 'clients/search/', login_required(clients.FindClient), name="find_client"),
+    path(api + 'clients/search/', login_required(general.RedirectFind), name="find_client"),
     # ROUTES COTIZACION
     path(api + 'cotizacion/', login_required(ListAllCotizacionByCloth.as_view()), name="list_of_all_cotizaciones"),
     path(api + 'cotizacion/create/', login_required(CreateCotizacion.as_view()), name="create_cotizaciones"),
@@ -70,10 +70,13 @@ urlpatterns = [
     path(api + 'cloth/create/', login_required(ClothCreate.as_view()), name="create_cloth"),
     path(api + 'cloth/photo/', login_required(general.UploadPhotoFashion), name="upload_photo_to_cloth"),
     path(api + 'cloth/list/', login_required(ListOfAllCloth.as_view()), name="list_all_cloth"),
+    path(api + 'cloth/details/<int:_id>', login_required(general.DetailsCloth), name="details_of_cloth"),
+    # path(api + 'cloth/find/', login_required(general.RedirectFind), name="details_of_cloth"),
 
     # ROUTES RENTAL
     path(api + 'rental/create/', login_required(CreateRental.as_view()), name="create_rental"),
     path(api + 'rental/details/all', login_required(ListOfAllRental.as_view()), name="list_of_all_rental"),
+    path(api + 'rental/refund/<int:_id>', login_required(general.RefundRental), name="rental_refund"),
 
     path(api + 'error', general.PossibleError, name="posible_error"),
 ]

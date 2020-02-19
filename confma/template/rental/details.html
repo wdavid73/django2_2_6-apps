@@ -12,10 +12,21 @@
                 </div>
                 <div class="col-md-7">
                     <div class="card-body">
+                        {% if alquiler.ifrental == 1%}
+                        <span class="btn btn-success badge badge-success badge-pill">En Alquiler</span>
+                        {% else %}
+                        <span class="btn btn-primary badge badge-primary badge-pill">Devuelta</span>
+                        {% endif %}
                         <h5 class="card-title text-justify"><strong>Prenda : {{alquiler.cloth}}</strong></h5>
                         <h5 class="card-title text-justify"><strong>Cliente : {{alquiler.client}}</strong></h5>
                         <p class="card-text">Valor del Alquiler : ${{alquiler.price}}</p>
                         <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
+                        {% if alquiler.ifrental == 1 %}
+                        <form action="{% url 'confma:rental_refund' alquiler.id %}" method="post">
+                            {% csrf_token %}
+                            <input type="submit" value="Dar de Baja" class="btn btn-primary btn-block">
+                        </form>
+                        {% endif %}
                     </div>
                 </div>
             </div>
