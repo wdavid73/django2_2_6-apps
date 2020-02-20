@@ -72,10 +72,11 @@ urlpatterns = [
     path(api + 'cloth/photo/', login_required(general.UploadPhotoFashion), name="upload_photo_to_cloth"),
     path(api + 'cloth/list/', login_required(ListOfAllCloth.as_view()), name="list_all_cloth"),
     path(api + 'cloth/details/<int:_id>', login_required(general.DetailsCloth), name="details_of_cloth"),
-    # path(api + 'cloth/find/', login_required(general.RedirectFind), name="details_of_cloth"),
+    path(api + 'cloth/find/', login_required(rental.CreateRental2), name="find_of_cloth"),
 
     # ROUTES RENTAL
     path(api + 'rental/create/', login_required(CreateRental.as_view()), name="create_rental"),
+    path(api + 'rental/create2/', login_required(rental.CreateRental2), name="create2_rental"),
     path(api + 'rental/details/all', login_required(ListOfAllRental.as_view()), name="list_of_all_rental"),
     path(api + 'rental/refund/<int:_id>', login_required(rental.RefundRental), name="rental_refund"),
 

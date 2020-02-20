@@ -173,7 +173,7 @@ def FormClothInCotizacion():
     return cloth_cotizacion
 
 
-def FormClothInRental():
+def ClothWithOutRental():
     cloth = Cloth.objects.filter(state=1)
     rentals = Alquiler.objects.filter(ifrental=1).values_list('cloth', flat=True)
     cloth_rental = Cloth.objects.exclude(id__in=rentals)
