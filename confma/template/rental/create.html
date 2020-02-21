@@ -1,35 +1,29 @@
 {% extends 'layouts/base_loggin.html' %}
 {% block title%} Registrar Alquiler {% endblock %}
 {% block content %}
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12">
+<div class="row justify-content-md-center justify-content-sm-center">
+    <div class="col-lg-6 col-md-10 col-sm-10 m-2">
+
         <div class="form-group mt-3">
-            <div class="card bg-dark text-white mb-3 container p-3">
-                <div class="card-body">
-                    <h5 class="card-title text-center">Buscar Prenda a Alquilar</h5>
-                    <div class="form-group">
-                        <form action="{% url 'confma:find_of_cloth'%}" method="GET">
-                            <!--                            {% csrf_token %}-->
-                            <input type="text" placeholder="Ingrese el Nombre de la Prenda" class="form-control"
-                                   name="cloth_name">
-                            <input type="submit" value="Buscar" class="btn btn-info btn-block mt-2">
-                        </form>
+            <div class="card bg-dark text-white">
+                <div class="card-header">
+                    <p class="display-4 text-center">Registrar Alquiler</p>
+                </div>
+                <div class="form-group mt-3">
+                    <div class="container col-lg-9">
+                        <h5 class="card-title text-center">Buscar Prenda</h5>
+                        <div class="form-group">
+                            <form action="{% url 'confma:find_of_cloth_rental'%}" method="GET">
+                                <!--{% csrf_token %}-->
+                                <input type="text" placeholder="Ingrese el Nombre de la Prenda" class="form-control"
+                                       name="cloth_name">
+                                <input type="submit" value="Buscar" class="btn btn-info btn-block mt-2">
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>
-{% if display == True %}
-
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="form-group mt-3">
-            <div class="card bg-dark text-white mb-3 container p-3">
-                <div class="card-header">
-                    <p class="h1 text-center">Registrar Alquiler</p>
-                </div>
-                <form action="{% url 'confma:create2_rental' %}" method="POST">
+                {% if display == True %}
+                <form action="{% url 'confma:create_rental' %}" method="POST">
                     {% csrf_token %}
                     <div class="form-row m-2">
                         <div class="col-lg-8 col-md-8 col-sm-8">
@@ -76,27 +70,31 @@
                     <input type="submit" value="Realizar Alquiler" class="btn btn-primary btn-block mt-3" id="client"
                            name="submit_coti">
                 </form>
-            </div>
-        </div>
-    </div>
-    {% if form.errors %}
-    <div class="col">
-        <div class="row">
-            <div class="col-md-8">
-                {% for key,value in form.errors.items %}
-                <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
-                    <strong>{{ key|escape }} : {{ value|escape }}</strong>
-                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                {% if form.errors %}
+                <div class="col-6">
+                    <div class="row">
+                        <div class="col-md-8">
+                            {% for key,value in form.errors.items %}
+                            <div class="alert alert-danger alert-dismissible fade show mt-2" role="alert">
+                                <strong>{{ key|escape }} : {{ value|escape }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
-                {% endfor %}
+                {% endif %}
+                {% endif %}
+                {% if display == False %}
+                <div class="alert alert-warning text-center col-lg-8 container" role="alert">
+                    <strong>No hay {{cloth_name}} disponibles para alquilar</strong>
+                </div>
+                {% endif %}
+
             </div>
         </div>
     </div>
-    {% endif %}
 </div>
-
-{%endif%}
-
 {% endblock%}

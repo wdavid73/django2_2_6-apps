@@ -2,9 +2,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
 from django.views.generic import (ListView, CreateView)
 
-from .general import PossibleError, getTotal
 from ..forms.clientcotizacion import CotizacionClientForm
 from ..models import CotizacionClient, Cotizacion, Client
+from ..static_methods import getTotal, PossibleError
 
 
 class ListOfAllClientsAndCotizacion(ListView):

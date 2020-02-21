@@ -1,7 +1,7 @@
 from django import forms
 
 from ..models import Cotizacion
-from ..views.general import FormClothInCotizacion
+from ..static_methods import ClothWithOutCotizacion
 
 
 class CotizacionFormModel(forms.ModelForm):
@@ -26,4 +26,4 @@ class CotizacionFormModel(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
         super(CotizacionFormModel, self).__init__(*args, **kwargs)
-        self.fields['cloth'].queryset = FormClothInCotizacion()
+        self.fields['cloth'].queryset = ClothWithOutCotizacion()

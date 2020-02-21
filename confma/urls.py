@@ -1,19 +1,20 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import path, include
 
-from .views import clients, general, cotizacion, client_coti, rental
-from .views.client_coti import (ListOfAllClientsAndCotizacion, CreateClientCotizacion)
-from .views.clients import (CreateClient, UpdateClient)
-from .views.cotizacion import (CreateCotizacion, UpdateCotizacionById, ListAllCotizacionByCloth)
-from .views.general import (ClothCreate, ListOfAllCloth)
-from .views.registration import (SignUp)
-from .views.rental import (CreateRental, ListOfAllRental)
+from confma import static_methods
+from confma.views import clients, cotizacion, client_coti, cloth, rental
+from confma.views.client_coti import CreateClientCotizacion, ListOfAllClientsAndCotizacion
+from confma.views.clients import CreateClient, UpdateClient
+from confma.views.cloth import ClothCreate, ListOfAllCloth
+from confma.views.cotizacion import ListAllCotizacionByCloth, CreateCotizacion, UpdateCotizacionById
+from confma.views.registration import SignUp
+from confma.views.rental import CreateRental, ListOfAllRental
 
 api = 'api/v1/'
 app_name = "confma"
 urlpatterns = [
     # ROUTES GENERAL
-    path('', general.HomePage, name="homepage"),
+    path('', static_methods.HomePage, name="homepage"),
     # LOGIN AND LOGOUT
 
     path('', include('django.contrib.auth.urls')),
@@ -36,7 +37,7 @@ urlpatterns = [
     path(api + 'clients/<int:id>/delete/', login_required(clients.DeleteClient), name="delete_clients"),
     path(api + 'clients/restore', login_required(clients.RestoreClientView), name="restore_clients_view"),
     path(api + 'clients/restored/<int:id>/', login_required(clients.RestoreClient), name="client_restored"),
-    path(api + 'clients/search/', login_required(general.RedirectFind), name="find_client"),
+    path(api + 'clients/search/', login_required(clients.FindClient), name="find_client"),
     # ROUTES COTIZACION
     path(api + 'cotizacion/', login_required(ListAllCotizacionByCloth.as_view()), name="list_of_all_cotizaciones"),
     path(api + 'cotizacion/create/', login_required(CreateCotizacion.as_view()), name="create_cotizaciones"),
@@ -69,16 +70,17 @@ urlpatterns = [
 
     # ROUTES CLOTH
     path(api + 'cloth/create/', login_required(ClothCreate.as_view()), name="create_cloth"),
-    path(api + 'cloth/photo/', login_required(general.UploadPhotoFashion), name="upload_photo_to_cloth"),
+    path(api + 'cloth/photo/', login_required(cloth.UploadPhotoFashion), name="upload_photo_to_cloth"),
     path(api + 'cloth/list/', login_required(ListOfAllCloth.as_view()), name="list_all_cloth"),
-    path(api + 'cloth/details/<int:_id>', login_required(general.DetailsCloth), name="details_of_cloth"),
-    path(api + 'cloth/find/', login_required(rental.CreateRental2), name="find_of_cloth"),
+    path(api + 'cloth/details/<int:_id>', login_required(cloth.DetailsCloth), name="details_of_cloth"),
+    path(api + 'cloth-cotizacion/find/', login_required(cotizacion.FindClothCotizacion),
+         name="find_of_cloth_cotizacion"),
+    path(api + 'cloth-rental/find/', login_required(rental.FindClothRental), name="find_of_cloth_rental"),
 
     # ROUTES RENTAL
     path(api + 'rental/create/', login_required(CreateRental.as_view()), name="create_rental"),
-    path(api + 'rental/create2/', login_required(rental.CreateRental2), name="create2_rental"),
     path(api + 'rental/details/all', login_required(ListOfAllRental.as_view()), name="list_of_all_rental"),
     path(api + 'rental/refund/<int:_id>', login_required(rental.RefundRental), name="rental_refund"),
 
-    path(api + 'error', general.PossibleError, name="posible_error"),
+    path(api + 'error', static_methods.PossibleError, name="posible_error"),
 ]

@@ -2,7 +2,7 @@ from django import forms
 from django.utils.translation import gettext_lazy as _
 
 from ..models import Alquiler, Client, Cloth
-from ..views.general import ClothWithOutRental
+from ..static_methods import ClothWithOutRental
 
 
 class RentalForm(forms.ModelForm):
