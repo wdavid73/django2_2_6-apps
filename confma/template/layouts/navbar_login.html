@@ -1,7 +1,9 @@
 {% with api="confma/api/v1" %}
 {% load staticfiles %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/">Confma Api</a>
+    <a class="navbar-brand" href="/">
+        <img src="{% static 'logo_size.jpg' %}" width="30" alt="logo">
+  </a>
     <button
             class="navbar-toggler"
             type="button"
@@ -85,7 +87,7 @@
         <div class="btn-group">
             <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                <img src="{% static 'img_user.jpg' %}" alt="img-user" class="img-fluid" width="50px"
+                <img src="{% static 'logo_size_invert.jpg' %}" alt="img-user" class="img-fluid" width="30"
                      style="border-radius: 50%">
             </button>
             <div class="dropdown-menu dropdown-menu-right bg-dark">
