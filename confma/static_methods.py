@@ -118,7 +118,7 @@ def FindClothByNameCotizacion(request):
     return cloth
 
 
-def ClothIfRental(Cloth, Alquiler):
+def ClothIfRental():
     cloth = Cloth.objects.all().filter(state=1)
     for clo in cloth:
         rental = Alquiler.objects.all().get(cloth_id=clo.id)
