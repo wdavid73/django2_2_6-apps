@@ -10,7 +10,6 @@ list_size = [
 ]
 
 
-# Create your models here.
 class Client(models.Model):
     name = models.CharField(max_length=100, null=False)
     lastname = models.CharField(max_length=200, null=False)
@@ -23,7 +22,7 @@ class Client(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name + " " + self.lastname + " - " + self.address
+        return self.name + " " + self.lastname + " - " + str(self.cellphone)
 
 
 class Cloth(models.Model):
@@ -83,6 +82,4 @@ class Alquiler(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return ("Fecha De Registro " + str(self.date_now) + " " + ", Fecha de Retorno : " + str(
-            self.date_return) + ", Valor : " + str(self.price) + " " + ", Cliente : " + str(
-            self.client) + " " + ", Prenda : " + str(self.cloth))
+        return str(self.date_now) + "" + str(self.date_return) + "" + str(self.price)

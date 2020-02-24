@@ -1,7 +1,7 @@
 {% with api="confma/api/v1" %}
 {% load staticfiles %}
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="/confma">Confma Api</a>
+    <a class="navbar-brand" href="/">Confma Api</a>
     <button
             class="navbar-toggler"
             type="button"
@@ -17,7 +17,7 @@
         <ul class="navbar-nav mr-auto">
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="#" id="DropDownClients" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     Clientes
                 </a>
@@ -28,10 +28,12 @@
                     <div class="dropdown-divider bg-dark"></div>
                     <a href="{% url 'confma:list_all_clients' %}" class="dropdown-item  bg-dark text-white">Todos los
                         Clientes</a>
+                    <a href="{% url 'confma:restore_clients_view' %}" class="dropdown-item  bg-dark text-white">
+                        Restore</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="#" id="DropdownCloth" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     Cloth
                 </a>
@@ -45,7 +47,8 @@
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="#" id="DropdownCotizaciones" role="button"
+                   data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     Cotizaciones
                 </a>
@@ -57,11 +60,16 @@
                     <div class="dropdown-divider bg-dark"></div>
                     <a href="{% url 'confma:list_of_all_cotizacion_client' %}"
                        class="dropdown-item  bg-dark text-white">Cliente - Cotizacion Registrados</a>
+                    <a href="{% url 'confma:restore_cotizaciones_view' %}" class="dropdown-item  bg-dark text-white">
+                        Restore</a>
+                    <a href="{% url 'confma:restore_client_cotizacion_view' %}"
+                       class="dropdown-item  bg-dark text-white">
+                        Restore Cliente - Cotizacion</a>
                 </div>
             </li>
 
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                <a class="nav-link dropdown-toggle" href="#" id="DropdownRental" role="button" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false">
                     Alquiler
                 </a>

@@ -4,38 +4,43 @@
 {% block content %}
 <div class="row">
     {% for client in clients %}
-    <div class="col-lg-4 col-md-6 col-sm-12">
+    <div class="col-lg-3 col-md-6 col-sm-12">
         <div class="card bg-dark text-white m-2">
             <div class="card-body">
                 <p class="card-title">Cliente :
                     <span class="badge badge-primary badge-pill float-right">#{{forloop.counter}}</span>
                 </p>
-                <div class="col mt-2 mb-2">
-                    <a href="{{client.id}}/update/" class="btn btn-info badge badge-info badge-pill">Update</a>
-                    <a href="{{client.id}}/delete/" class="btn btn-warning badge badge-warning badge-pill">Delete</a>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6 mb-2">
+                        <form action="{% url 'confma:update_clients' client.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" class=" btn-block btn btn-info btn-sm" value="Update">
+                        </form>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-sm-6 mb-2">
+                        <form action="{% url 'confma:delete_clients' client.id %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" class=" btn-block btn btn-warning btn-sm" value="Delete">
+                        </form>
+                    </div>
                 </div>
                 <p class="card-text">
-                <ul class="list-group list-group-flush">
-                    <div class="row">
-                        <div class="col">
-                            <li class="list-group-item bg-dark">Nombre : {{client.name}}</li>
-                            <li class="list-group-item bg-dark">Apellido : {{client.lastname}}</li>
-                            <li class="list-group-item bg-dark">Direccion : {{client.address}}</li>
-                            <li class="list-group-item bg-dark">Telefono : {{client.phone}}</li>
-                            <li class="list-group-item bg-dark">Celular : {{client.cellphone}}</li>
-                        </div>
-                    </div>
-                </ul>
+                    Nombre : {{client.name}} {{client.lastname}} <br>
+                    Contacto : {{client.cellphone}} - {{client.phone}} <br>
+                    Dirrecion : {{client.address}}
                 </p>
             </div>
         </div>
 
     </div>
     {% empty %}
-    <p> NO HAY USUARIOS REGISTRADOS </p>
+    <div class="row">
+        <div class="col-md-5  container">
+            <div class="alert alert-success alert-dismissible fade show mt-2" role="alert">
+                <p>NO HAY USUARIOS REGISTRADOS</p>
+            </div>
+        </div>
+    </div>
     {% endfor %}
-</div>
-
-}
 </div>
 {% endblock %}

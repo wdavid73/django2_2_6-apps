@@ -19,6 +19,7 @@ def RentedClothes(form):
     cloth = Cloth.objects.filter(id=form.cleaned_data['cloth'].id)
     if Alquiler.objects.filter(cloth__in=list(cloth), ifrental=1):
         return True
+    return False
 
 
 def getCotizacionWithCloth(Cotizacion, Cloth):
@@ -95,15 +96,14 @@ def getClothWithCotizacion(cloth):
 
 
 def getTotal(cotizaciones):
-    if not cotizaciones:
-        return 0
-    else:
-        cotizacion = cotizaciones[0]
-        total1 = cotizacion.value_cloth + cotizacion.value_work
-        total2 = cotizacion.value_threads + cotizacion.value_buttons
-        total3 = cotizacion.value_necks + cotizacion.value_embroidery + cotizacion.value_prints
+    if cotizaciones:
+        total1 = cotizaciones.value_cloth + cotizaciones.value_work
+        total2 = cotizaciones.value_threads + cotizaciones.value_buttons
+        total3 = cotizaciones.value_necks + cotizaciones.value_embroidery + cotizaciones.value_prints
         total = total1 + total2 + total3
         return total
+    else:
+        return 0
 
 
 def FindClothByNameRental(request):

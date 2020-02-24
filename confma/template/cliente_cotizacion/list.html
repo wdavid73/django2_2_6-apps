@@ -12,14 +12,19 @@
     <div class="col-lg-6 col-md-12 col-sm-12 ">
         <div class="card m-3 bg-dark">
             <div class="row no-gutters">
-                <div class="col-lg-4 col-md-5 p-1 d-flex align-items-center justify-content-center">
-                    <img src="{{cc.cotizacion.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
+                <div class="col-lg-4 col-md-5 col-sm-6 p-1 d-flex align-items-center justify-content-center">
+                    <a href="{% url 'confma:details_of_cloth' cc.cotizacion.cloth.id %}">
+                        <img src="{{cc.cotizacion.cloth.image.url}}" class="card-img img-fluid "
+                             alt="moda_de_referencia">
+                    </a>
                 </div>
-                <div class="col-lg-8 col-md-7">
+                <div class="col-lg-8 col-md-7 col-sm-6">
                     <div class="card-header text-center text-white"><strong>Cliente : {{cc.client}}</strong></div>
                     <div class="card-body">
-                        <p class="card-title text-center text-white"><strong>Prenda : {{cc.cotizacion.cloth}}</strong>
-                        </p>
+                        <a href="{% url 'confma:details_of_cloth' cc.cotizacion.cloth.id %}">
+                            <p class="card-title text-center text-white"><strong>Prenda :
+                                {{cc.cotizacion.cloth}}</strong>
+                        </a>
                         <p class="card-text">
                         <ul class="list-group list-group-flush">
                             <div class="row">
