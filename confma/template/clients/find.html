@@ -3,130 +3,130 @@
 {% block content %}
 <div class="">
 
-	<div class="row justify-content-center align-items-center">
-		<div class="col-sm-12 col-md-10 col-lg-6 m-2">
-			<div class="card text-white bg-dark border-info mt-2 mb-2">
-				<div class="card-header">
-					<p class="card-title text-center h1">Buscar Cliente </p>
-				</div>
-				<div class="card-body">
-					<div class="form-group">
-						<form action="{% url 'confma:find_client' %}" method="POST">
-							{% csrf_token %}
-							{{form}}
-							<input type="submit" value="Buscar" class="btn btn-primary btn-block mt-2">
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-	{% if count_coti_cli > 0 or count_rental > 0%}
-	<p class="text-center h2">{{client}}</p>
-	{% if count_coti > 0 %}
-	<p class="text-center h2 text-info"><strong>Cotizaciones</strong></p>
-	<div class="row">
-		{% for cotizacion in cotizaciones%}
-		<div class="col-lg-6 col-md-12 col-sm-6">
-			<div class="card bg-dark  text-white m-3">
-				<div class="card-header">
-					<p class="card-title text-center">
-						<strong>Prenda : {{cotizacion.cotizacion.cloth}}</strong>
-					</p>
-				</div>
-				<div class="row no-gutters">
-					<div class="col-lg-5 col-md-4 p-2 d-flex align-items-center justify-content-center">
-						<img src="{{cotizacion.cotizacion.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
-					</div>
-					<div class="col-lg-7 col-md-8">
-						<div class="card-body">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-sm-12 col-md-10 col-lg-6 m-2">
+            <div class="card text-white bg-dark border-info mt-2 mb-2">
+                <div class="card-header">
+                    <p class="card-title text-center h1">Buscar Cliente </p>
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <form action="{% url 'confma:find_client' %}" method="POST">
+                            {% csrf_token %}
+                            {{form}}
+                            <input type="submit" value="Buscar" class="btn btn-primary btn-block mt-2">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% if count_coti_cli > 0 or count_rental > 0%}
+    <p class="text-center h2">{{client}}</p>
+    {% if count_coti > 0 %}
+    <p class="text-center h2 text-info"><strong>Cotizaciones</strong></p>
+    <div class="row">
+        {% for cotizacion in cotizaciones%}
+        <div class="col-lg-6 col-md-12 col-sm-6">
+            <div class="card bg-dark  text-white m-3">
+                <div class="card-header">
+                    <p class="card-title text-center">
+                        <strong>Prenda : {{cotizacion.cotizacion.cloth}}</strong>
+                    </p>
+                </div>
+                <div class="row no-gutters">
+                    <div class="col-lg-5 col-md-4 p-2 d-flex align-items-center justify-content-center">
+                        <img src="{{cotizacion.cotizacion.cloth.image.url}}" class="card-img" alt="moda_de_referencia">
+                    </div>
+                    <div class="col-lg-7 col-md-8">
+                        <div class="card-body">
 
-							<p class="card-text">
-							<ul class="list-group list-group-flush">
-								<div class="row">
-									<div class="col-lg-12 col-md-9 col-sm-12">
-										<li class="list-group-item list-group-item-dark">Valor de la Tela : $
-											{{cotizacion.cotizacion.value_cloth}}
-										</li>
-										<li class="list-group-item list-group-item-dark">Valor del Trabajo : $
-											{{cotizacion.cotizacion.value_work}}
-										</li>
-										<li class="list-group-item list-group-item-dark">Valor de los Hilos : $
-											{{cotizacion.cotizacion.value_threads}}
-										</li>
-										<li class="list-group-item list-group-item-dark">Valor de los Botones : $
-											{{cotizacion.cotizacion.value_buttons}}
-										</li>
-										<li class="list-group-item list-group-item-dark">Valor de los Cuellos : $
-											{{cotizacion.cotizacion.value_necks}}
-										</li>
-										<li class="list-group-item list-group-item-dark">Valor de los Bordados : $
-											{{cotizacion.cotizacion.value_embroidery}}
-										</li>
-										<li class="list-group-item list-group-item-dark">Valor del Estampado : $
-											{{cotizacion.cotizacion.value_prints}}
-										</li>
-										<li class="list-group-item list-group-item-dark">Total : $
-											{{cotizacion.total}}
-										</li>
+                            <p class="card-text">
+                            <ul class="list-group list-group-flush">
+                                <div class="row">
+                                    <div class="col-lg-12 col-md-9 col-sm-12">
+                                        <li class="list-group-item list-group-item-dark">Valor de la Tela : $
+                                            {{cotizacion.cotizacion.value_cloth}}
+                                        </li>
+                                        <li class="list-group-item list-group-item-dark">Valor del Trabajo : $
+                                            {{cotizacion.cotizacion.value_work}}
+                                        </li>
+                                        <li class="list-group-item list-group-item-dark">Valor de los Hilos : $
+                                            {{cotizacion.cotizacion.value_threads}}
+                                        </li>
+                                        <li class="list-group-item list-group-item-dark">Valor de los Botones : $
+                                            {{cotizacion.cotizacion.value_buttons}}
+                                        </li>
+                                        <li class="list-group-item list-group-item-dark">Valor de los Cuellos : $
+                                            {{cotizacion.cotizacion.value_necks}}
+                                        </li>
+                                        <li class="list-group-item list-group-item-dark">Valor de los Bordados : $
+                                            {{cotizacion.cotizacion.value_embroidery}}
+                                        </li>
+                                        <li class="list-group-item list-group-item-dark">Valor del Estampado : $
+                                            {{cotizacion.cotizacion.value_prints}}
+                                        </li>
+                                        <li class="list-group-item list-group-item-dark">Total : $
+                                            {{cotizacion.total}}
+                                        </li>
 
-									</div>
-								</div>
-							</ul>
-							</p>
-							<p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		{%endfor%}
-	</div>
-	{%endif%}
+                                    </div>
+                                </div>
+                            </ul>
+                            </p>
+                            <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {%endfor%}
+    </div>
+    {%endif%}
 
-	{% if count_rental > 0%}
-	<p class="text-center text-success h2"><strong>Alquileres</strong></p>
-	<div class="row">
-		{% for rental in rentals %}
-		<div class="col-lg-4 col-md-6 col-sm-6">
-			<div class="card bg-dark text-white m-2">
-				<div class="card-header">
-					<p class="card-title text-center">Prenda : {{rental.cloth}}</p>
-				</div>
-				<div class="row no-gutters">
-					<a href="{% url 'confma:details_of_cloth' rental.cloth.id %}">
-						<img src="{{rental.cloth.image.url}}" class="card-img img-fluid "
-							 alt="moda_de_referencia">
-					</a>
-					<div class="col-lg-8 col-md-7">
-						<div class="card-body">
-							<p class="card-text">
-							<ul class="list-group">
-								<li class="list-group-item list-group-item-dark">Estado :
-									{% if rental.ifrental == 1%}
-									<span class="btn btn-success badge badge-success badge-pill">En Alquiler</span>
-									{% else %}
-									<span class="btn btn-primary badge badge-primary badge-pill">Devuelta</span>
-									{% endif %}
-								</li>
-								<li class="list-group-item list-group-item-dark">Fecha de Entrega :
-									{{rental.date_now}}
-								</li>
-								<li class="list-group-item list-group-item-dark">Fecha de Devolucion :
-									{{rental.date_return}}
-								</li>
-								<li class="list-group-item list-group-item-dark">Valor : ${{rental.price}}</li>
-							</ul>
-							</p>
-							<p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		{% endfor %}
-	</div>
-	{%endif%}
-	{% endif %}
+    {% if count_rental > 0%}
+    <p class="text-center text-success h2"><strong>Alquileres</strong></p>
+    <div class="row">
+        {% for rental in rentals %}
+        <div class="col-lg-4 col-md-6 col-sm-6">
+            <div class="card bg-dark text-white m-2">
+                <div class="card-header">
+                    <p class="card-title text-center">Prenda : {{rental.cloth}}</p>
+                </div>
+                <div class="row no-gutters">
+                    <a href="{% url 'confma:details_of_cloth' rental.cloth.id %}">
+                        <img src="{{rental.cloth.image.url}}" class="card-img img-fluid "
+                             alt="moda_de_referencia">
+                    </a>
+                    <div class="col-lg-8 col-md-7">
+                        <div class="card-body">
+                            <p class="card-text">
+                            <ul class="list-group">
+                                <li class="list-group-item list-group-item-dark">Estado :
+                                    {% if rental.ifrental == 1%}
+                                    <span class="btn btn-success badge badge-success badge-pill">En Alquiler</span>
+                                    {% else %}
+                                    <span class="btn btn-primary badge badge-primary badge-pill">Devuelta</span>
+                                    {% endif %}
+                                </li>
+                                <li class="list-group-item list-group-item-dark">Fecha de Entrega :
+                                    {{rental.date_now}}
+                                </li>
+                                <li class="list-group-item list-group-item-dark">Fecha de Devolucion :
+                                    {{rental.date_return}}
+                                </li>
+                                <li class="list-group-item list-group-item-dark">Valor : ${{rental.price}}</li>
+                            </ul>
+                            </p>
+                            <p class="card-text"><small class="text-muted">Confecciones Maribel</small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {%endif%}
+    {% endif %}
 </div>
 {% endblock %}
