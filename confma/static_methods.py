@@ -1,4 +1,4 @@
-from django.shortcuts import render_to_response, render
+from django.shortcuts import render
 
 from confma.models import Cloth, Alquiler, Cotizacion
 
@@ -45,17 +45,17 @@ def PossibleError(request, message, situation):
     return render(request, 'Error.html', {'message': message, 'situation': situation})
 
 
-def handler404(request, *args, **argv):
-    response = render_to_response(
-        '404.html', {})
-    response.status_code = 404
-    return response
-
-
-def handler500(request, *args, **argv):
-    response = render_to_response('500.html', {})
-    response.status_code = 500
-    return response
+# def handler404(request, *args, **argv):
+#     response = render_to_response(
+#         '404.html', {})
+#     response.status_code = 404
+#     return response
+#
+#
+# def handler500(request, *args, **argv):
+#     response = render_to_response('500.html', {})
+#     response.status_code = 500
+#     return response
 
 
 def getClientWithRental(Alquiler, _client):

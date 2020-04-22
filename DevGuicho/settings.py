@@ -14,7 +14,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'confma'
+    'rest_framework',
+    'confma',
+    'confma_api'
 ]
 
 MIDDLEWARE = [
@@ -56,7 +58,7 @@ WSGI_APPLICATION = 'DevGuicho.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'test-django',
+        'NAME': 'confma',
         'USER': 'root',
         'PASSWORD': '',
         'HOST': '127.0.0.1',
@@ -104,3 +106,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 MEDIA_URL = '/media/'
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 10
+}

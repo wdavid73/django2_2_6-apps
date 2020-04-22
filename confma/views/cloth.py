@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.generic import (CreateView, ListView)
+from rest_framework import viewsets
 
 from ..forms.cloth import ClothFormModel
 from ..models import Cloth, Alquiler
 from ..static_methods import getTotal, getClothWithRental, getClothWithCotizacion
+
 
 
 class ClothCreate(CreateView):
@@ -21,6 +23,7 @@ class ClothCreate(CreateView):
 def UploadPhotoFashion(request):
     if request.method == 'POST':
         form = ClothFormModel(request.POST, request.FILES)
+        print(form['image'])
         if form.is_valid():
             print(form.cleaned_data)
             Cloth.objects.create(**form.cleaned_data)

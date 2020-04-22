@@ -1,9 +1,7 @@
 from datetime import date
-
 from django.shortcuts import redirect, get_object_or_404, render
 from django.urls import reverse
 from django.views.generic import CreateView, ListView
-
 from confma.forms.rental import RentalForm
 from confma.models import Alquiler, Client
 from confma.static_methods import RentedClothes, FindClothByNameRental

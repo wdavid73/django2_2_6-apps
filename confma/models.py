@@ -20,9 +20,13 @@ class Client(models.Model):
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    lookup_field = 'pk'
 
     def __str__(self):
         return self.name + " " + self.lastname + " - " + str(self.cellphone)
+
+    class Meta:
+        db_table = "Client"
 
 
 class Cloth(models.Model):
@@ -35,9 +39,13 @@ class Cloth(models.Model):
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    lookup_field = 'pk'
 
     def __str__(self):
         return self.name + " " + ", Talla : " + self.size + ", Color : " + self.color + ", Moda : " + self.fashion
+
+    class Meta:
+        db_table = "Cloth"
 
 
 class Cotizacion(models.Model):
@@ -54,9 +62,10 @@ class Cotizacion(models.Model):
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    lookup_field = 'pk'
 
-    # def __str__(self):
-    #     return self.cloth
+    class Meta:
+        db_table = "Cotizacion"
 
 
 class CotizacionClient(models.Model):
@@ -67,6 +76,10 @@ class CotizacionClient(models.Model):
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    lookup_field = 'pk'
+
+    class Meta:
+        db_table = "Cotizacion_Client"
 
 
 class Alquiler(models.Model):
@@ -80,6 +93,10 @@ class Alquiler(models.Model):
     state = models.SmallIntegerField(default=1, null=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    lookup_field = 'pk'
 
     def __str__(self):
         return str(self.date_now) + "" + str(self.date_return) + "" + str(self.price)
+
+    class Meta:
+        db_table = "Rental"

@@ -44,7 +44,7 @@
         </div>
         <input type="submit" value="Login" class="btn btn-warning container my-1">
     </form>
-</div>
+     <small class="form-text text-muted">No Tienes una cuenta ,<a href="{% url 'confma:signup' %}"> Registrate aqui </a></small>
 </div>
 {% if form.errors %}
 <div class="col-6">
